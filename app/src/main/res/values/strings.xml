@@ -12,7 +12,6 @@
     <string name="appAbout"> About Polish Landmarks</string>
     <string name="appWebsite">https://github.com/kacper97/PlApp</string>
     <string name="developer">Developed by Kacper Woloszyn</string>
-    <string name="appbar_scrolling_view_behavior">Scrolling</string>
     <!-- Landmark buttons. -->
     <string name="searchLandmarksLbl">Search Landmarks</string>
     <string name="saveLandmarkBtn">Save Landmark</string>
