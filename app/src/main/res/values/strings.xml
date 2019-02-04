@@ -1,3 +1,29 @@
 <resources>
-    <string name="app_name">Poland</string>
+    <string name="app_name">Polish Landmarks</string>
+    <string name="appHelp">This is the help screen for Polish Landmarks</string>
+    <string name="appHelpExtraAdd">-To add a place, please put in a new place</string>
+    <string name="appHelpExtraRemove">-To remove a place, please hold a place you want to delete and press confirm right corner</string>
+    <string name="appHelpExtraRate">-To rate a place, please put in a star rating for a specific place</string>
+    <string name="appDisplayName"> Polish Landmarks</string>
+    <string name="AppDesc">Polish Landmarks application provides the user to add a new place, that is worth while visiting in Poland.
+        Poland being one of the cheapest countries in Europe, attracts many tourists,so you can can contribute to this project</string>
+    <string name="AppMoreInfo">For more information about Polish Landmarks application or to provide feedback, visit github</string>
+    <string name="AppAbout"> About Polish Landmarks</string>
+    <string name="AppWebsite">https://github.com/kacper97/PlApp</string>
+    <string name="developer">Developed by Kacper Woloszyn</string>
+    <string name="searchLandmarks">Search Landmarks</string>
+    <string name="favouritePlaceLbl">Favourite Place\'s</string>
+    <string name="addALandmark"> Add a Landmark</string>
+    <string name="addALandmarkBtn">Add</string>
+    <string name="saveLandmarkBtn">Save Landmark</string>
+    <string name="recentlyViewedLbl">Recently Added Landmark\'s</string>
+    <string name="landmarkNameLbl">Landmark:</string>
+    <string name="landmarkDescriptionLbl">Description:</string>
+    <string name="landmarkLocation">Location:</string>
+    <string name="landmarkPrice">Price for an adult:</string>
+    <string name="landmarkRating">Star rating of landmark:</string>
+    <string name="transportRating">Star rating of transport to landmark:</string>
+    <string name="additionalComments">Additional Comments:</string>
+    <string name="informationLbl">Information</string>
+    <string name="emptyMessageLbl">You have no Landmarks\'s added!</string>
 </resources>
