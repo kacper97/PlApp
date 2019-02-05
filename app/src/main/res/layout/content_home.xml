@@ -25,6 +25,7 @@
         android:layout_width="93dp"
         android:layout_height="119dp"
         android:background="@color/colorFontOffWhite"
+        android:onClick="add"
         android:text="@string/addALandmarkBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

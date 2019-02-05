@@ -51,4 +51,8 @@ public class Home extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void add(View v){
+        startActivity(new Intent(this,AddPlacemark.class));
+    }
 }

@@ -23,15 +23,23 @@
     <string name="landmarkDescriptionLbl">Description:</string>
     <string name="informationLbl">Information</string>
     <string name="emptyMessageLbl">You have no Landmarks\'s added!</string>
-   <!-- Descriptors of actions -->
-    <string name="addALandmark"> Add a Landmark</string>
+    <!-- Descriptors of actions -->
+    <string name="addALandmark"> Add a Landmark:</string>
     <string name="landmarkLocation">Location:</string>
-    <string name="landmarkPrice">Price for an adult:</string>
-    <string name="landmarkRating">Star rating of landmark:</string>
-    <string name="transportRating">Star rating of transport to landmark:</string>
-    <string name="additionalComments">Additional Comments:</string>
+    <string name="landmarkPrice">Price per adult:</string>
+    <string name="landmarkRating">Rating of landmark:</string>
+    <string name="transportRating">Transport to landmark:</string>
+    <string name="additionalComments">Additional comments:</string>
+    <string name="facilityRating">Rating of facilities:</string>
+    <string name="dateVisited">Date Visited: </string>
     <!--Menu strings -->
     <string name="settings">Settings</string>
     <string name="info">Info</string>
     <string name="home">Home</string>
+    <!--Hints -->
+    <string name="hintAddName">Add a name</string>
+    <string name="hintAddDescription">Add a brief Description</string>
+    <string name="hintPrice">Enter Price</string>
+    <string name="hintLocation">Enter Location </string>
+    <string name="hintDate">Enter Date</string>
 </resources>
