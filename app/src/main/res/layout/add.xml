@@ -29,7 +29,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginBottom="25dp"
         android:paddingTop="10dp"
         android:text="@string/dateVisited"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -44,7 +44,7 @@
         android:layout_height="29dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="11dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="35dp"
         android:paddingTop="10dp"
         android:text="@string/facilityRating"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -71,7 +71,7 @@
         android:layout_height="34dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="25dp"
         android:paddingTop="10dp"
         android:text="@string/transportRating"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -86,7 +86,7 @@
         android:layout_height="36dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="18dp"
         android:paddingTop="10dp"
         android:text="@string/landmarkRating"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -125,7 +125,7 @@
         android:layout_width="127dp"
         android:layout_height="38dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="16dp"
         android:paddingTop="10dp"
@@ -135,8 +135,7 @@
         app:layout_constraintEnd_toStartOf="@+id/addLandmarkLocation"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addLandmarkPrice"
-        app:layout_constraintVertical_bias="0.746" />
+        app:layout_constraintTop_toBottomOf="@+id/addLandmarkPrice" />
 
     <TextView
         android:id="@+id/addfooter"
@@ -158,6 +157,7 @@
         android:layout_width="127dp"
         android:layout_height="35dp"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="2dp"
         android:paddingTop="10dp"
         android:text="@string/landmarkPrice"
@@ -181,6 +181,7 @@
         app:layout_constraintBottom_toTopOf="@+id/addLandmarkPrice"
         app:layout_constraintEnd_toStartOf="@+id/addDescription"
         app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addLandmarkName" />
 
