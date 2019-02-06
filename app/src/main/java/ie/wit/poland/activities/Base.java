@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Base extends AppCompatActivity {
 
-    public static ArrayList<Landmark> LandmarkList= new ArrayList<Landmark>();
+    public static ArrayList<Landmark> landmarkList= new ArrayList<Landmark>();
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_home, menu);

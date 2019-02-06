@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ie.wit.poland.activities.Home"
+    tools:context=".activities.Home"
     tools:showIn="@layout/home">
 
     <Button
@@ -54,6 +54,7 @@
         android:id="@+id/recentlyAddedList"
         android:layout_width="411dp"
         android:layout_height="375dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.481"
