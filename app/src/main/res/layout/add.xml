@@ -121,7 +121,7 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/addLocation"
-        app:layout_constraintTop_toBottomOf="@+id/addPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/addLandmarkPrice" />
 
     <TextView
         android:id="@+id/addLocation"
@@ -138,7 +138,7 @@
         app:layout_constraintEnd_toStartOf="@+id/addLandmarkLocation"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addLandmarkPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/addPrice" />
 
     <TextView
         android:id="@+id/addfooter"
@@ -156,7 +156,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/addLandmarkPrice"
+        android:id="@+id/addPrice"
         android:layout_width="127dp"
         android:layout_height="35dp"
         android:layout_marginStart="12dp"
@@ -165,7 +165,7 @@
         android:paddingTop="10dp"
         android:text="@string/landmarkPrice"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        app:layout_constraintEnd_toStartOf="@+id/addPrice"
+        app:layout_constraintEnd_toStartOf="@+id/addLandmarkPrice"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addDescription" />
@@ -181,15 +181,15 @@
         android:paddingTop="10dp"
         android:text="@string/landmarkDescriptionLbl"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        app:layout_constraintBottom_toTopOf="@+id/addLandmarkPrice"
+        app:layout_constraintBottom_toTopOf="@+id/addPrice"
         app:layout_constraintEnd_toStartOf="@+id/addDescription"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addLandmarkName" />
+        app:layout_constraintTop_toBottomOf="@+id/addName" />
 
     <TextView
-        android:id="@+id/addLandmarkName"
+        android:id="@+id/addName"
         android:layout_width="127dp"
         android:layout_height="36dp"
         android:layout_marginStart="12dp"
@@ -200,14 +200,14 @@
         android:text="@string/addALandmark"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toTopOf="@+id/addLandmarkDescription"
-        app:layout_constraintEnd_toStartOf="@+id/addName"
+        app:layout_constraintEnd_toStartOf="@+id/addLandmarkName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/addName"
+        android:id="@+id/addLandmarkName"
         android:layout_width="240dp"
         android:layout_height="40dp"
         android:layout_marginTop="4dp"
@@ -216,18 +216,18 @@
         android:hint="@string/hintAddName"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/addLandmarkName"
+        app:layout_constraintStart_toEndOf="@+id/addName"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/addPrice"
+        android:id="@+id/addLandmarkPrice"
         android:layout_width="240dp"
         android:layout_height="40dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="7dp"
         android:ems="10"
-        android:hint="Enter Price"
+        android:hint="@string/hintPrice"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -245,7 +245,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/addLandmarkDescription"
-        app:layout_constraintTop_toBottomOf="@+id/addName" />
+        app:layout_constraintTop_toBottomOf="@+id/addLandmarkName" />
 
     <RatingBar
         android:id="@+id/addRatingBarLandmark"
@@ -268,6 +268,7 @@
         android:layout_marginEnd="150dp"
         android:layout_marginBottom="4dp"
         android:background="@color/colorFontOffWhite"
+        android:onClick="addLandmark"
         android:text="@string/addALandmarkBtn"
         app:layout_constraintBottom_toTopOf="@+id/addfooter"
         app:layout_constraintEnd_toEndOf="parent"
