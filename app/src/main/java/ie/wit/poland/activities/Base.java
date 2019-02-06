@@ -1,6 +1,7 @@
 package ie.wit.poland.activities;
 
 import ie.wit.poland.R;
+import ie.wit.poland.models.Landmark;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,8 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 public class Base extends AppCompatActivity {
 
+    public static ArrayList<Landmark> LandmarkList= new ArrayList<Landmark>();
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_home, menu);

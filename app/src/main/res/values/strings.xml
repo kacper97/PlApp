@@ -13,12 +13,12 @@
     <string name="appWebsite">https://github.com/kacper97/PlApp</string>
     <string name="developer">Developed by Kacper Woloszyn</string>
     <!-- Landmark buttons. -->
-    <string name="searchLandmarksLbl">Search Landmarks</string>
     <string name="saveLandmarkBtn">Save Landmark</string>
     <string name="addALandmarkBtn">Add</string>
     <!-- Landmark labels -->
     <string name="favouriteLandmarkLbl">Favourites</string>
     <string name="recentlyViewedLbl">Recently Added Landmark\'s</string>
+    <string name="searchLandmarksLbl">Search</string>
     <string name="landmarkNameLbl">Landmark:</string>
     <string name="landmarkDescriptionLbl">Description:</string>
     <string name="informationLbl">Information</string>
