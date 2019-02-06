@@ -1,20 +1,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ie.wit.poland.Home">
+    tools:context="ie.cm.activities.Home">
 
-    <item android:id="@+id/action_settings"
-        android:title="@string/settings"
+    <item android:id="@+id/menu_help"
+        android:title="@string/help"
         android:orderInCategory="100"
+        android:onClick="menuHelp"
         app:showAsAction="never" />
 
     <item android:id="@+id/menu_info"
         android:title="@string/info"
         android:orderInCategory="100"
+        android:onClick="menuInfo"
         app:showAsAction="never" />
 
-    <item android:id="@+id/menu_home"
-        android:title="@string/home"
+    <item
+        android:id="@+id/menu_home"
+        android:onClick="menuHome"
         android:orderInCategory="100"
+        android:title="@string/home"
         app:showAsAction="ifRoom" />
 </menu>

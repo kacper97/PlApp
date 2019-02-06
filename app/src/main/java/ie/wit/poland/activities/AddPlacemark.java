@@ -1,9 +1,9 @@
-package ie.wit.poland;
-
-import android.support.v7.app.AppCompatActivity;
+package ie.wit.poland.activities;
 import android.os.Bundle;
 
-public class AddPlacemark extends AppCompatActivity {
+import ie.wit.poland.R;
+
+public class AddPlacemark extends Base {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
