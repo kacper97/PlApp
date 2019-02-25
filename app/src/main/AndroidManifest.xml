@@ -19,8 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.AddPlacemark"></activity>
-        <activity android:name=".activities.Help"></activity>
+        <activity android:name=".activities.AddPlacemark" />
+        <activity android:name=".activities.Help" />
+        <activity android:name=".activities.Edit"></activity>
     </application>
 
 </manifest>
