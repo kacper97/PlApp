@@ -15,6 +15,7 @@
     <!-- Landmark buttons. -->
     <string name="saveLandmarkBtn">Save Landmark</string>
     <string name="addALandmarkBtn">Add</string>
+    <string name="editALandmarkBtn">Edit</string>
     <!-- Landmark labels -->
     <string name="favouriteLandmarkLbl">Favourites</string>
     <string name="recentlyViewedLbl">Recently Added Landmark\'s</string>
@@ -23,7 +24,7 @@
     <string name="landmarkDescriptionLbl">Description:</string>
     <string name="informationLbl">Information</string>
     <string name="emptyMessageLbl">You have no Landmarks\'s added!</string>
-    <!-- Descriptors of actions -->
+    <!-- Descriptors of add -->
     <string name="addALandmark"> Add a Landmark:</string>
     <string name="landmarkLocation">Location:</string>
     <string name="landmarkPrice">Price for adult:</string>
@@ -37,10 +38,17 @@
     <string name="info">Info</string>
     <string name="home">Home</string>
     <string name="help">Help</string>
-    <!--Hints -->
+    <!--Hints Add-->
     <string name="hintAddName">Add a name</string>
     <string name="hintAddDescription">Add a brief Description</string>
     <string name="hintPrice">Enter Price</string>
     <string name="hintLocation">Enter Location </string>
     <string name="hintDate">Enter Date</string>
+    <!-- Hints edit -->
+    <string name="editALandmark">Edit a Landmark:</string>
+    <string name="hintEditName">New name</string>
+    <string name="hintEditDescription">Add New Description</string>
+    <string name="hintEditPrice">Enter New Price</string>
+    <string name="hintEditLocation">Enter New Location </string>
+    <string name="hintEditDate">Enter New Date</string>
 </resources>
