@@ -48,6 +48,6 @@ public class Home extends Base {
 
     public void add(View v)
     {
-        startActivity(new Intent(this,AddPlacemark.class));
+        startActivity(new Intent(this,Add.class));
     }
 }

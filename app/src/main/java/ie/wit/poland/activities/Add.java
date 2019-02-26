@@ -10,7 +10,7 @@ import android.widget.Toast;
 import ie.wit.poland.R;
 import ie.wit.poland.models.Landmark;
 
-public class AddPlacemark extends Base {
+public class Add extends Base {
     private String  landmarkName, landmarkDescription, location,dateVisited;
     private double price, ratingLandmark, ratingTransport, ratingFacility;
     private EditText name, description, priceAdult,date,locate;
