@@ -41,6 +41,7 @@ public class Home extends Base {
                         }).show();
             }
         });
+       // this.setupLandmarks();
     }
 
     @Override
@@ -64,7 +65,7 @@ public class Home extends Base {
         startActivity(new Intent(this,Add.class));
     }
 
-    /*
+/*
     public void setupLandmarks(){
         landmarkList.add(new Landmark("Sopot", "Beach",2.5,"North",1.99,4,5,"19/11/2013"));
         landmarkList.add(new Landmark("Malbork", "Old Castle",3.5,"North",2.99, 4,5,"19/11/2013"));

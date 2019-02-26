@@ -1,13 +1,16 @@
 package ie.wit.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.ListFragment;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ListView;
 
 import ie.wit.adapters.LandmarkListAdapter;
 import ie.wit.poland.activities.Base;
+import ie.wit.poland.models.Landmark;
 
 public class LandmarkFragment  extends ListFragment implements View.OnClickListener
 {
@@ -49,5 +52,34 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
     @Override
     public void onClick(View view)
     {
+        if (view.getTag() instanceof Landmark)
+        {
+            onLandmarkDelete ((Landmark) view.getTag());
+        }
+    }
+
+    private void onLandmarkDelete(final Landmark landmark) {
+        String stringName = landmark.landmarkName;
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setMessage("Are you sure you want to Delete the \'Landmark\' " + stringName + "?");
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                Base.landmarkList.remove(landmark); // remove from our list
+                listAdapter.landmarkList.remove(landmark); // update adapters data
+                listAdapter.notifyDataSetChanged(); // refresh adapter
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }
