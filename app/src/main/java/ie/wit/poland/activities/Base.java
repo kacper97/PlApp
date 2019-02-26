@@ -1,10 +1,12 @@
 package ie.wit.poland.activities;
 
+import ie.wit.fragments.LandmarkFragment;
 import ie.wit.poland.R;
 import ie.wit.poland.models.Landmark;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 public class Base extends AppCompatActivity {
 
     public static ArrayList<Landmark> landmarkList= new ArrayList<Landmark>();
+    public Bundle activityInfo; // Used for persistence (of sorts)
+    public LandmarkFragment landmarkFragment; // How we'll 'share' our List of Coffees between Activities
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_home, menu);
