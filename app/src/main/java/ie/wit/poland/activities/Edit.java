@@ -1,5 +1,6 @@
 package ie.wit.poland.activities;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.util.Log;
@@ -83,6 +84,8 @@ public class Edit extends Base {
             aLandmark.ratingFacility = ratingFacility;
             aLandmark.ratingTransport = ratingTransport;
             aLandmark.ratingLandmark= ratingLandmark;
+
+            startActivity(new Intent(this,Home.class));
             // Update coffee & return home
         } else
             Toast.makeText(this, "You must Enter Something for Name and Shop",Toast.LENGTH_SHORT).show();

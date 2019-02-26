@@ -56,7 +56,6 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
         getActivity().startActivity(goEdit); // Launch the Intent
         goEdit.putExtras(activityInfo);
         getActivity().startActivity(goEdit);
-
     }
 
     @Override
