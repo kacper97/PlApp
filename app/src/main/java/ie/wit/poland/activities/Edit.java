@@ -1,11 +1,12 @@
 package ie.wit.poland.activities;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ie.wit.poland.R;
@@ -14,13 +15,47 @@ import ie.wit.poland.models.Landmark;
 public class Edit extends Base {
     public Context context;
     public Landmark aLandmark;
+    public boolean isFavourite;
+    public ImageView editFavourite;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit);
         context = this;
+        activityInfo = getIntent().getExtras();
+        aLandmark = getLandmarkObject(activityInfo.getString("landmarkId"));
+
+        Log.v("landmark", "EDIT : " + aLandmark);
+
+        ((TextView)findViewById(R.id.editLandmarkName)).setText(aLandmark.landmarkName);
+        ((EditText)findViewById(R.id.editDescription)).setText(aLandmark.landmarkDescription);
+        ((TextView)findViewById(R.id.editLandmarkPrice)).setText(""+aLandmark.price);
+        ((EditText)findViewById(R.id.editLandmarkLocation)).setText(aLandmark.location);
+        ((RatingBar) findViewById(R.id.editRatingBarLandmark)).setRating((float)aLandmark.ratingLandmark);
+        ((RatingBar) findViewById(R.id.editRatingBarFacilities)).setRating((float)aLandmark.ratingFacility);
+        ((RatingBar) findViewById(R.id.editRatingBarTransport)).setRating((float)aLandmark.ratingTransport);
+        ((EditText)findViewById(R.id.editLandmarkDate)).setText(aLandmark.dateVisited);
+
+        editFavourite = findViewById(R.id.editFavourite);
+        if (aLandmark.favourite) {
+            editFavourite.setImageResource(R.drawable.favourites_72_on);
+            isFavourite = true;
+        } else {
+            editFavourite.setImageResource(R.drawable.favourites_72);
+            isFavourite = false;
+        }
     }
+
+    private Landmark getLandmarkObject(String id) {
+
+        for (Landmark l : landmarkList)
+            if (l.landmarkId.equalsIgnoreCase(id))
+                return l;
+        return null;
+    }
+
+
 
     public void editLandmark(View v) {
         String landmarkName = ((EditText) findViewById(R.id.editLandmarkName)).getText().toString();
@@ -52,4 +87,22 @@ public class Edit extends Base {
         } else
             Toast.makeText(this, "You must Enter Something for Name and Shop",Toast.LENGTH_SHORT).show();
     }
+
+    public void toggle (View view) {
+        // Bind to the editFavourite imageview and toggle its image
+        // depending on whether it's a 'favourite' coffee or not
+
+        if (isFavourite) {
+            aLandmark.favourite = false;
+            Toast.makeText(this,"Removed From Favourites",Toast.LENGTH_SHORT).show();
+            isFavourite = false;
+            editFavourite.setImageResource(R.drawable.favourites_72_on);
+        } else {
+            aLandmark.favourite = true;
+            Toast.makeText(this,"Added to Favourites !!",Toast.LENGTH_SHORT).show();
+            isFavourite = true;
+            editFavourite.setImageResource(R.drawable.favourites_72);
+        }
+    }
+
 }

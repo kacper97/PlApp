@@ -13,11 +13,12 @@ public class Landmark implements Serializable {
     public double ratingTransport;
     public double ratingFacility;
     public String dateVisited;
+    public boolean favourite;
 
     public Landmark(){}
 
     public Landmark(String landmarkName,String landmarkDescription, double price, String location,
-                    double ratingLandmark, double ratingTransport, double ratingFacility, String dateVisited){
+                    double ratingLandmark, double ratingTransport, double ratingFacility, String dateVisited,boolean fav){
         this.landmarkId=UUID.randomUUID().toString();
         this.landmarkName=landmarkName;
         this.landmarkDescription=landmarkDescription;
@@ -27,13 +28,14 @@ public class Landmark implements Serializable {
         this.ratingTransport=ratingTransport;
         this.ratingFacility=ratingFacility;
         this.dateVisited=dateVisited;
+        this.favourite = fav;
     }
 
     @Override
     public String toString(){
         return landmarkId+""+landmarkName+","+landmarkDescription+","+price
                 +","+location+","+ ratingLandmark+","+ratingTransport+
-                ","+ratingFacility+","+dateVisited;
+                ","+ratingFacility+","+dateVisited+","+favourite;
     }
 
 }

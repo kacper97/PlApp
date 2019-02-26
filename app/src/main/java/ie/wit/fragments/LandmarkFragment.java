@@ -2,6 +2,7 @@ package ie.wit.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.support.v7.app.AlertDialog;
@@ -10,6 +11,7 @@ import android.widget.ListView;
 
 import ie.wit.adapters.LandmarkListAdapter;
 import ie.wit.poland.activities.Base;
+import ie.wit.poland.activities.Edit;
 import ie.wit.poland.models.Landmark;
 
 public class LandmarkFragment  extends ListFragment implements View.OnClickListener
@@ -40,6 +42,20 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
         super.onCreate(savedInstanceState);
         listAdapter = new LandmarkListAdapter(activity, this, Base.landmarkList);
         setListAdapter (listAdapter);
+
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Bundle activityInfo = new Bundle(); // Creates a new Bundle object
+        activityInfo.putString("landmarkId", (String) v.getTag());
+
+        Intent goEdit = new Intent(getActivity(), Edit.class); // Creates a new Intent
+        /* Add the bundle to the intent here */
+        getActivity().startActivity(goEdit); // Launch the Intent
+        goEdit.putExtras(activityInfo);
+        getActivity().startActivity(goEdit);
 
     }
 

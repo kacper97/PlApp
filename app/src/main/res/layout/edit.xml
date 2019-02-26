@@ -82,6 +82,19 @@
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <RatingBar
+        android:id="@+id/editRatingBarTransport"
+        android:layout_width="240dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:rating="0"
+        android:stepSize="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editRatingTransport"
+        app:layout_constraintTop_toBottomOf="@+id/editRatingBarLandmark" />
+
     <TextView
         android:id="@+id/editRatingLandmark"
         android:layout_width="100dp"
@@ -96,19 +109,6 @@
         app:layout_constraintEnd_toStartOf="@+id/editRatingBarLandmark"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <RatingBar
-        android:id="@+id/editRatingBarTransport"
-        android:layout_width="240dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="-2dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
-        android:rating="0"
-        android:stepSize="0.5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editRatingTransport"
-        app:layout_constraintTop_toBottomOf="@+id/editRatingBarLandmark" />
 
     <EditText
         android:id="@+id/editLandmarkLocation"
@@ -237,7 +237,7 @@
     <EditText
         android:id="@+id/editDescription"
         android:layout_width="240dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="7dp"
         android:ems="10"
@@ -275,5 +275,22 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editLandmarkDate" />
+
+    <ImageView
+        android:id="@+id/editFavourite"
+        android:layout_width="64dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="toggle"
+        app:layout_constraintBottom_toTopOf="@+id/editfooter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editDate"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/favourites_72" />
 
 </android.support.constraint.ConstraintLayout>

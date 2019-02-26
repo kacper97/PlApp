@@ -49,7 +49,7 @@ public class Add extends Base {
         if ((landmarkName.length() > 0) && (landmarkDescription.length() > 0)
                 && (priceAdult.length() > 0)) {
             Landmark l = new Landmark(landmarkName, landmarkDescription, price,location,ratingLandmark,
-                    ratingTransport,ratingFacility, dateVisited);
+                    ratingTransport,ratingFacility, dateVisited,false);
 
             Log.v("Polish Landmark","Add : " + landmarkList);
             landmarkList.add(l);
