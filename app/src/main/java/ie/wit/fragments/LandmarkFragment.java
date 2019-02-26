@@ -2,7 +2,7 @@ package ie.wit.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
 
@@ -35,6 +35,8 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        listAdapter = new LandmarkListAdapter(activity, this, Base.landmarkList);
+        setListAdapter (listAdapter);
 
     }
 

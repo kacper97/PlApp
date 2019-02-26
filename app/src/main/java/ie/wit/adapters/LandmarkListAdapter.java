@@ -19,7 +19,6 @@ public class LandmarkListAdapter extends ArrayAdapter<Landmark>
     public LandmarkListAdapter(Context context, View.OnClickListener deleteListener, List<Landmark> landmarkList)
     {
         super(context, R.layout.landmarkrow, landmarkList);
-
         this.context = context;
         this.deleteListener = deleteListener;
         this.landmarkList = landmarkList;
@@ -28,12 +27,19 @@ public class LandmarkListAdapter extends ArrayAdapter<Landmark>
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        return null;
+        LandmarkItem item = new LandmarkItem(context,parent,
+                deleteListener, landmarkList.get(position));
+        return  item.view;
     }
 
     @Override
     public int getCount()
     {
-        return 0;
+        return landmarkList.size();
+    }
+
+    @Override
+    public Landmark getItem(int position) {
+        return landmarkList.get(position);
     }
 }

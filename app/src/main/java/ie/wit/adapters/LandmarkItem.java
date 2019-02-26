@@ -34,10 +34,6 @@ public class LandmarkItem {
         ((TextView) view.findViewById(R.id.rowLandmarkName)).setText(landmark.landmarkName);
         ((TextView) view.findViewById(R.id.rowLandmarkDescription)).setText(landmark.landmarkDescription);
         ((TextView) view.findViewById(R.id.rowRating)).setText(landmark.ratingLandmark + " *");
-        ((TextView) view.findViewById(R.id.rowPrice)).setText("€" +
-                new DecimalFormat("0.00").format(landmark.price));
-        // Do the same for shop, rating, price & the favourite image here
-        // and set the favourite on/off depending on the coffees favourite value
-
+        ((TextView) view.findViewById(R.id.rowPrice)).setText("€" + new DecimalFormat("0.00").format(landmark.price));
     }
 }
