@@ -16,6 +16,8 @@
     <string name="saveLandmarkBtn">Save Landmark</string>
     <string name="addALandmarkBtn">Add</string>
     <string name="editALandmarkBtn">Edit</string>
+    <string name="landmarkName">Landmark Name</string>
+    <string name="landmarkDescrtiption">LandmarkDescritpion</string>
     <!-- Landmark labels -->
     <string name="favouriteLandmarkLbl">Favourites</string>
     <string name="recentlyViewedLbl">Recently Added Landmark\'s</string>
