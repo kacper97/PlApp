@@ -21,7 +21,9 @@
         </activity>
         <activity android:name=".activities.Add" />
         <activity android:name=".activities.Help" />
-        <activity android:name=".activities.Edit"></activity>
+        <activity android:name=".activities.Edit" />
+        <activity android:name=".activities.Favourites" />
+        <activity android:name=".activities.Search"></activity>
     </application>
 
 </manifest>

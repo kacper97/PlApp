@@ -54,4 +54,5 @@
     <string name="hintEditPrice">Enter New Price</string>
     <string name="hintEditLocation">Enter New Location </string>
     <string name="hintEditDate">Enter New Date</string>
+    <string name="title_activity_search">Search</string>
 </resources>

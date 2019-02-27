@@ -31,7 +31,7 @@ public class Edit extends Base {
 
         ((TextView)findViewById(R.id.editLandmarkName)).setText(aLandmark.landmarkName);
         ((EditText)findViewById(R.id.editDescription)).setText(aLandmark.landmarkDescription);
-        ((TextView)findViewById(R.id.editLandmarkPrice)).setText(""aLandmark.price);
+        ((TextView)findViewById(R.id.editLandmarkPrice)).setText(""+aLandmark.price);
         ((EditText)findViewById(R.id.editLandmarkLocation)).setText(aLandmark.location);
         ((RatingBar) findViewById(R.id.editRatingBarLandmark)).setRating((float)aLandmark.ratingLandmark);
         ((RatingBar) findViewById(R.id.editRatingBarFacilities)).setRating((float)aLandmark.ratingFacility);

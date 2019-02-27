@@ -72,5 +72,13 @@ public class Home extends Base {
         landmarkList.add(new Landmark("Warsaw", "Capital City",4.5,"Centre",1.49, 4,5,"19/11/2013",true));
   }
 
+    public void search(View v) {
+        startActivity(new Intent(this, Search.class));
+    }
+
+    public void favourites(View v) {
+        startActivity(new Intent(this, Favourites.class));
+    }
+
 
 }
