@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,15 +15,12 @@ import ie.wit.poland.models.Landmark;
 
 public class Home extends Base {
 
-    TextView emptyList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,13 +41,8 @@ public class Home extends Base {
         super.onResume();
         landmarkFragment = LandmarkFragment.newInstance(); //get a new Fragment instance
         getFragmentManager().beginTransaction()
-                .add(R.id.fragment_container,landmarkFragment)
+                .replace(R.id.fragment_container, landmarkFragment)
                 .commit(); // add it to the current activity
-
-        if(app.landmarkList.isEmpty())
-            emptyList.setText(getString(R.string.emptyMessageLbl));
-        else
-            emptyList.setText("");
 
     }
 

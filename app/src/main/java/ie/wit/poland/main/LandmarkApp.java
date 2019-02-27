@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class LandmarkApp extends Application
 {
-    public List <Landmark>  landmarkList = new ArrayList<Landmark>();
+    public List <Landmark>  landmarkList = new ArrayList<>();
 
     @Override
     public void onCreate()
