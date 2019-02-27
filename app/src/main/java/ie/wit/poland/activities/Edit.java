@@ -51,7 +51,7 @@ public class Edit extends Base {
 
     private Landmark getLandmarkObject(String id) {
 
-        for (Landmark l : landmarkList)
+        for (Landmark l : app.landmarkList)
             if (l.landmarkId.equalsIgnoreCase(id))
                 return l;
 

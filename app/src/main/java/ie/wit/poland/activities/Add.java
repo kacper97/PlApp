@@ -51,8 +51,8 @@ public class Add extends Base {
             Landmark l = new Landmark(landmarkName, landmarkDescription, price,location,ratingLandmark,
                     ratingTransport,ratingFacility, dateVisited,false);
 
-            Log.v("Polish Landmark","Add : " + landmarkList);
-            landmarkList.add(l);
+            Log.v("Polish Landmark","Add : " + app.landmarkList);
+            app.landmarkList.add(l);
             startActivity(new Intent(this, Home.class));
         } else
             Toast.makeText(

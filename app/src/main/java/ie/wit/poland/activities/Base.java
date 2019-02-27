@@ -1,24 +1,31 @@
 package ie.wit.poland.activities;
 
-import ie.wit.fragments.LandmarkFragment;
-import ie.wit.poland.R;
-import ie.wit.poland.models.Landmark;
 
+import ie.wit.poland.R;
+import ie.wit.poland.fragments.LandmarkFragment;
+import ie.wit.poland.main.LandmarkApp;
+
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
 
-public class Base extends AppCompatActivity {
-
-    public static ArrayList<Landmark> landmarkList= new ArrayList<Landmark>();
+public class Base extends Activity {
+    public LandmarkApp app;
     public Bundle activityInfo; // Used for persistence (of sorts)
     public LandmarkFragment landmarkFragment; // How we'll 'share' our List of Coffees between Activities
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        app = (LandmarkApp) getApplication();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_home, menu);

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.app.ListFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.ActionMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,17 +16,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 import ie.wit.poland.adapters.LandmarkListAdapter;
 import ie.wit.poland.R;
 import ie.wit.poland.activities.Base;
 import ie.wit.poland.activities.Edit;
 import ie.wit.poland.models.Landmark;
+import ie.wit.poland.activities.Favourites;
+import ie.wit.poland.adapters.LandmarkFilter;
 
 public class LandmarkFragment  extends ListFragment implements View.OnClickListener, AbsListView.MultiChoiceModeListener {
     public Base activity;
     public static LandmarkListAdapter listAdapter;
     public ListView listView;
+    public LandmarkFilter landmarkFilter;
 
     public LandmarkFragment() {
         // Required empty public constructor
@@ -47,8 +56,16 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        listAdapter = new LandmarkListAdapter(activity, this, Base.landmarkList);
+        listAdapter = new LandmarkListAdapter(activity, this,activity.app.landmarkList);
+        landmarkFilter = new LandmarkFilter(activity.app.landmarkList,"all", listAdapter);
+        if (getActivity() instanceof Favourites) {
+            landmarkFilter.setFilter("favourites"); // Set the filter text field from 'all' to 'favourites'
+            landmarkFilter.filter(null); // Filter the data, but don't use any prefix
+            listAdapter.notifyDataSetChanged(); // Update the adapter
+        }
         setListAdapter (listAdapter);
+        setRandomLandmark();
+        checkEmptyList();
 
     }
 
@@ -101,9 +118,11 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                Base.landmarkList.remove(landmark); // remove from our list
-                listAdapter.landmarkList.remove(landmark); // update ie.wit.poland.adapters data
+                activity.app.landmarkList.remove(landmark); // remove from our list
+                listAdapter.landmarkList.remove(landmark); // update adapters data
+                setRandomLandmark();
                 listAdapter.notifyDataSetChanged(); // refresh adapter
+                checkEmptyList();
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener()
         {
@@ -146,21 +165,60 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
         }
     }
 
-    private void deleteLandmarks(ActionMode actionMode) {
+    public void deleteLandmarks(ActionMode actionMode) {
         for (int i = listAdapter.getCount() - 1; i >= 0; i--)
         {
             if (listView.isItemChecked(i))
             {
-                Base.landmarkList.remove(listAdapter.getItem(i));
+                activity.app.landmarkList.remove(listAdapter.getItem(i));
+                if (activity instanceof Favourites)
+                    listAdapter.landmarkList.remove(listAdapter.getItem(i));
             }
         }
+        setRandomLandmark();
+        listAdapter.notifyDataSetChanged();  // refresh adapter
+        checkEmptyList();
         actionMode.finish();
-        listAdapter.notifyDataSetChanged();
     }
-
 
     @Override
     public void onDestroyActionMode(ActionMode actionMode) {
 
+    }
+
+    public void setRandomLandmark() {
+
+        ArrayList<Landmark> landmarkList = new ArrayList<>();
+
+        for(Landmark l : activity.app.landmarkList)
+            if (l.favourite)
+                landmarkList.add(l);
+
+        if (activity instanceof Favourites)
+            if( !landmarkList.isEmpty()) {
+                Landmark randomLandmark = landmarkList.get(new Random()
+                        .nextInt(landmarkList.size()));
+
+                ((TextView) getActivity().findViewById(R.id.favouriteLandmarkName)).setText(randomLandmark.landmarkName);
+                ((TextView) getActivity().findViewById(R.id.favouriteLandmarkDescription)).setText(randomLandmark.landmarkDescription);
+                ((TextView) getActivity().findViewById(R.id.favouritePrice)).setText("€ " + randomLandmark.price);
+                ((TextView) getActivity().findViewById(R.id.favouriteLandmarkRating)).setText(randomLandmark.ratingLandmark + " *");
+            }
+            else {
+                ((TextView) getActivity().findViewById(R.id.favouriteLandmarkName)).setText("N/A");
+                ((TextView) getActivity().findViewById(R.id.favouriteLandmarkDescription)).setText("N/A");
+                ((TextView) getActivity().findViewById(R.id.favouritePrice)).setText("N/A");
+                ((TextView) getActivity().findViewById(R.id.favouriteLandmarkRating)).setText("N/A");
+            }
+    }
+
+    public void checkEmptyList()
+    {
+        TextView recentList = getActivity().findViewById(R.id.emptyList);
+
+        if(activity.app.landmarkList.isEmpty())
+            recentList.setText(getString(R.string.emptyMessageLbl));
+        else
+            recentList.setText("");
     }
 }
