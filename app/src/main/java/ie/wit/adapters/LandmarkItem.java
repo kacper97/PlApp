@@ -33,7 +33,9 @@ public class LandmarkItem {
     private void updateControls(Landmark landmark) {
         ((TextView) view.findViewById(R.id.rowLandmarkName)).setText(landmark.landmarkName);
         ((TextView) view.findViewById(R.id.rowLandmarkDescription)).setText(landmark.landmarkDescription);
+        ((TextView) view.findViewById(R.id.rowLandmarkLocation)).setText(landmark.location);
         ((TextView) view.findViewById(R.id.rowRating)).setText(landmark.ratingLandmark + " *");
+        ((TextView) view.findViewById(R.id.rowLocationDateVisited)).setText(landmark.dateVisited);
         ((TextView) view.findViewById(R.id.rowPrice)).setText("€" + new DecimalFormat("0.00").format(landmark.price));
     }
 }

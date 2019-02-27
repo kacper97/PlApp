@@ -39,6 +39,7 @@ public class Edit extends Base {
         ((EditText)findViewById(R.id.editLandmarkDate)).setText(aLandmark.dateVisited);
 
         editFavourite = findViewById(R.id.editFavourite);
+
         if (aLandmark.favourite) {
             editFavourite.setImageResource(R.drawable.favourites_72_on);
             isFavourite = true;
@@ -53,6 +54,7 @@ public class Edit extends Base {
         for (Landmark l : landmarkList)
             if (l.landmarkId.equalsIgnoreCase(id))
                 return l;
+
         return null;
     }
 
@@ -99,12 +101,12 @@ public class Edit extends Base {
             aLandmark.favourite = false;
             Toast.makeText(this,"Removed From Favourites",Toast.LENGTH_SHORT).show();
             isFavourite = false;
-            editFavourite.setImageResource(R.drawable.favourites_72_on);
+            editFavourite.setImageResource(R.drawable.favourites_72);
         } else {
             aLandmark.favourite = true;
             Toast.makeText(this,"Added to Favourites !!",Toast.LENGTH_SHORT).show();
             isFavourite = true;
-            editFavourite.setImageResource(R.drawable.favourites_72);
+            editFavourite.setImageResource(R.drawable.favourites_72_on);
         }
     }
 
