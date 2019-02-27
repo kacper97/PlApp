@@ -58,7 +58,9 @@ public class Edit extends Base {
         return null;
     }
 
-
+    public void editImage(View v){
+        Toast.makeText(this,"Not implemented in this version", Toast.LENGTH_SHORT).show();
+    }
 
     public void editLandmark(View v) {
         String landmarkName = ((EditText) findViewById(R.id.editLandmarkName)).getText().toString();

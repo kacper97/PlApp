@@ -7,6 +7,23 @@
     tools:context=".activities.Add"
     tools:layout_editor_absoluteY="81dp">
 
+    <Button
+        android:id="@+id/addAnImage"
+        android:layout_width="78dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorFontOffWhite"
+        android:onClick="addImage"
+        android:text="@string/addImageBtn"
+        app:layout_constraintBottom_toTopOf="@+id/addfooter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addALandmarkBtn"
+        app:layout_constraintTop_toBottomOf="@+id/addLandmarkDate"
+        app:layout_constraintVertical_bias="0.06999999" />
+
     <EditText
         android:id="@+id/addLandmarkDate"
         android:layout_width="240dp"
@@ -17,7 +34,7 @@
         android:ems="10"
         android:hint="@string/hintDate"
         android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/addALandmarkBtn"
+        app:layout_constraintBottom_toTopOf="@+id/addfooter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/addDate"
         app:layout_constraintTop_toBottomOf="@+id/addRatingBarFacilities"
@@ -263,16 +280,16 @@
         android:id="@+id/addALandmarkBtn"
         android:layout_width="78dp"
         android:layout_height="45dp"
-        android:layout_marginStart="150dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="150dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
         android:background="@color/colorFontOffWhite"
         android:onClick="addLandmark"
         android:text="@string/addALandmarkBtn"
         app:layout_constraintBottom_toTopOf="@+id/addfooter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.306"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addLandmarkDate" />
 

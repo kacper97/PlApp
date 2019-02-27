@@ -31,6 +31,10 @@ public class Add extends Base {
         locate=findViewById(R.id.addLandmarkLocation);
     }
 
+    public void addImage(View v){
+        Toast.makeText(this,"Not implemented in this version",Toast.LENGTH_SHORT).show();
+    }
+
     public void addLandmark(View v){
         landmarkName= name.getText().toString();
         landmarkDescription= description.getText().toString();

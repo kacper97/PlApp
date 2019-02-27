@@ -18,6 +18,8 @@
     <string name="saveLandmarkBtn">Save Landmark</string>
     <string name="addALandmarkBtn">Add</string>
     <string name="editALandmarkBtn">Save changes</string>
+    <string name="addImageBtn">Add Image</string>
+    <string name="editImageBtn">Edit Image</string>
     <string name="landmarkName">Landmark Name</string>
     <string name="landmarkDescrtiption">LandmarkDescritpion</string>
     <!-- Landmark labels -->
