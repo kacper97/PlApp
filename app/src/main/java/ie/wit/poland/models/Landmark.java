@@ -33,7 +33,7 @@ public class Landmark implements Serializable {
 
     @Override
     public String toString(){
-        return landmarkId+""+landmarkName+","+landmarkDescription+","+price
+        return landmarkId+" "+landmarkName+","+landmarkDescription+","+price
                 +","+location+","+ ratingLandmark+","+ratingTransport+
                 ","+ratingFacility+","+dateVisited+","+favourite;
     }

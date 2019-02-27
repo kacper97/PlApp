@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -72,14 +75,13 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+
         Bundle activityInfo = new Bundle(); // Creates a new Bundle object
         activityInfo.putString("landmarkId", (String) v.getTag());
-
         Intent goEdit = new Intent(getActivity(), Edit.class); // Creates a new Intent
         /* Add the bundle to the intent here */
-        getActivity().startActivity(goEdit); // Launch the Intent
         goEdit.putExtras(activityInfo);
-        getActivity().startActivity(goEdit);
+        getActivity().startActivity(goEdit); // Launch the Intent
     }
 
     @Override

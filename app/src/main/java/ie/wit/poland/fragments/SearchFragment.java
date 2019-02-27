@@ -16,9 +16,6 @@ import android.view.ActionMode;
 
 import ie.wit.poland.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class SearchFragment extends LandmarkFragment
         implements AdapterView.OnItemSelectedListener  {
 
