@@ -26,6 +26,7 @@
     <string name="landmarkDescriptionLbl">Description:</string>
     <string name="informationLbl">Information</string>
     <string name="emptyMessageLbl">You have no Landmarks\'s added!</string>
+    <string name="deleteLandmarksLbl">Delete Landmark</string>
     <!-- Descriptors of add -->
     <string name="addALandmark"> Add a Landmark:</string>
     <string name="landmarkLocation">Location:</string>

@@ -31,7 +31,7 @@ public class Edit extends Base {
 
         ((TextView)findViewById(R.id.editLandmarkName)).setText(aLandmark.landmarkName);
         ((EditText)findViewById(R.id.editDescription)).setText(aLandmark.landmarkDescription);
-        ((TextView)findViewById(R.id.editLandmarkPrice)).setText(""+aLandmark.price);
+        ((TextView)findViewById(R.id.editLandmarkPrice)).setText(""aLandmark.price);
         ((EditText)findViewById(R.id.editLandmarkLocation)).setText(aLandmark.location);
         ((RatingBar) findViewById(R.id.editRatingBarLandmark)).setRating((float)aLandmark.ratingLandmark);
         ((RatingBar) findViewById(R.id.editRatingBarFacilities)).setRating((float)aLandmark.ratingFacility);
@@ -77,7 +77,7 @@ public class Edit extends Base {
             price = 0.0;
         }
 
-        if ((landmarkName.length() > 0) && (landmarkDescription.length() > 0) && (priceAdult.length() > 0)) {
+        if ((landmarkName.length() > 0) && (landmarkDescription.length() > 0) && (priceAdult.length() > 0) && (location.length() >0) && (dateVisited.length()>0)) {
             aLandmark.landmarkName = landmarkName;
             aLandmark.landmarkDescription = landmarkDescription;
             aLandmark.price = price;
@@ -90,7 +90,7 @@ public class Edit extends Base {
             startActivity(new Intent(this,Home.class));
             // Update coffee & return home
         } else
-            Toast.makeText(this, "You must Enter Something for Name and Shop",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You must Enter Something for empty boxes",Toast.LENGTH_SHORT).show();
     }
 
     public void toggle (View view) {

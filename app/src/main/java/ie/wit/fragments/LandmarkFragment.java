@@ -6,16 +6,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.support.v7.app.AlertDialog;
+import android.view.ActionMode;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 import ie.wit.adapters.LandmarkListAdapter;
+import ie.wit.poland.R;
 import ie.wit.poland.activities.Base;
 import ie.wit.poland.activities.Edit;
 import ie.wit.poland.models.Landmark;
 
-public class LandmarkFragment  extends ListFragment implements View.OnClickListener
-{
+public class LandmarkFragment  extends ListFragment implements View.OnClickListener, AbsListView.MultiChoiceModeListener {
     public Base activity;
     public static LandmarkListAdapter listAdapter;
     public ListView listView;
@@ -59,6 +66,17 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        View v = super.onCreateView(inflater, parent, savedInstanceState);
+
+        listView = v.findViewById(android.R.id.list);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        listView.setMultiChoiceModeListener(this);
+
+        return v;
+    }
+
+    @Override
     public void onStart()
     {
         super.onStart();
@@ -96,5 +114,53 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
         });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    @Override
+    public void onItemCheckedStateChanged(ActionMode actionMode, int position, long id, boolean checked) {
+    }
+
+    @Override
+    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+        MenuInflater inflater = actionMode.getMenuInflater();
+        inflater.inflate(R.menu.delete_list_context,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+        return false;
+    }
+
+    @Override
+    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+        {
+            switch(menuItem.getItemId())
+            {
+                case R.id.menu_item_delete_landmark:
+                    deleteLandmarks(actionMode);
+                    return true;
+                default:
+                    return false;
+            }
+        }
+    }
+
+    private void deleteLandmarks(ActionMode actionMode) {
+        for (int i = listAdapter.getCount() - 1; i >= 0; i--)
+        {
+            if (listView.isItemChecked(i))
+            {
+                Base.landmarkList.remove(listAdapter.getItem(i));
+            }
+        }
+        actionMode.finish();
+        listAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onDestroyActionMode(ActionMode actionMode) {
+
     }
 }

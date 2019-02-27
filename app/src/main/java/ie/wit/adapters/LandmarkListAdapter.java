@@ -10,14 +10,12 @@ import java.util.List;
 import ie.wit.poland.R;
 import ie.wit.poland.models.Landmark;
 
-public class LandmarkListAdapter extends ArrayAdapter<Landmark>
-{
+public class LandmarkListAdapter extends ArrayAdapter<Landmark> {
     private Context context;
     private View.OnClickListener deleteListener;
     public List<Landmark> landmarkList;
 
-    public LandmarkListAdapter(Context context, View.OnClickListener deleteListener, List<Landmark> landmarkList)
-    {
+    public LandmarkListAdapter(Context context, View.OnClickListener deleteListener, List<Landmark> landmarkList) {
         super(context, R.layout.landmarkrow, landmarkList);
         this.context = context;
         this.deleteListener = deleteListener;
@@ -25,21 +23,14 @@ public class LandmarkListAdapter extends ArrayAdapter<Landmark>
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
-        LandmarkItem item = new LandmarkItem(context,parent,
+    public View getView(int position, View convertView, ViewGroup parent) {
+        LandmarkItem item = new LandmarkItem(context, parent,
                 deleteListener, landmarkList.get(position));
-        return  item.view;
+        return item.view;
     }
 
     @Override
-    public int getCount()
-    {
+    public int getCount() {
         return landmarkList.size();
-    }
-
-    @Override
-    public Landmark getItem(int position) {
-        return landmarkList.get(position);
     }
 }

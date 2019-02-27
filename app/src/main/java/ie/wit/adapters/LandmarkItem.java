@@ -37,5 +37,13 @@ public class LandmarkItem {
         ((TextView) view.findViewById(R.id.rowRating)).setText(landmark.ratingLandmark + " *");
         ((TextView) view.findViewById(R.id.rowLocationDateVisited)).setText(landmark.dateVisited);
         ((TextView) view.findViewById(R.id.rowPrice)).setText("€" + new DecimalFormat("0.00").format(landmark.price));
+        ImageView imgIcon = view.findViewById(R.id.rowFavouriteImg);
+
+        if (landmark.favourite)
+            imgIcon.setImageResource(R.drawable.favourites_72_on);
+        else
+            imgIcon.setImageResource(R.drawable.favourites_72);
+
+
     }
 }
