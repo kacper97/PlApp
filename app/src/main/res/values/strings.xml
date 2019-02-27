@@ -12,6 +12,7 @@
     <string name="appAbout"> About Polish Landmarks</string>
     <string name="appWebsite">https://github.com/kacper97/PlApp</string>
     <string name="developer">Developed by Kacper Woloszyn</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Landmark buttons. -->
     <string name="saveLandmarkBtn">Save Landmark</string>
     <string name="addALandmarkBtn">Add</string>

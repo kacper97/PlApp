@@ -1,4 +1,4 @@
-package ie.wit.fragments;
+package ie.wit.poland.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import ie.wit.adapters.LandmarkListAdapter;
+import ie.wit.poland.adapters.LandmarkListAdapter;
 import ie.wit.poland.R;
 import ie.wit.poland.activities.Base;
 import ie.wit.poland.activities.Edit;
@@ -102,7 +102,7 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
             public void onClick(DialogInterface dialog, int id)
             {
                 Base.landmarkList.remove(landmark); // remove from our list
-                listAdapter.landmarkList.remove(landmark); // update adapters data
+                listAdapter.landmarkList.remove(landmark); // update ie.wit.poland.adapters data
                 listAdapter.notifyDataSetChanged(); // refresh adapter
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener()

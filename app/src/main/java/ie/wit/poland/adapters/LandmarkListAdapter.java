@@ -1,4 +1,4 @@
-package ie.wit.adapters;
+package ie.wit.poland.adapters;
 
 import android.content.Context;
 import android.view.View;
