@@ -18,11 +18,11 @@
         android:background="@color/colorFontOffWhite"
         android:onClick="editImage"
         android:text="@string/addImageBtn"
-        app:layout_constraintBottom_toTopOf="@+id/editfooter"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/editALandmarkBtn"
         app:layout_constraintTop_toBottomOf="@+id/editLandmarkDate"
-        app:layout_constraintVertical_bias="0.791" />
+        app:layout_constraintVertical_bias="0.389" />
 
     <EditText
         android:id="@+id/editLandmarkDate"
@@ -160,7 +160,7 @@
     <TextView
         android:id="@+id/editfooter"
         android:layout_width="384dp"
-        android:layout_height="40dp"
+        android:layout_height="27dp"
         android:background="@color/colorPrimary"
         android:paddingTop="5dp"
         android:text="@string/appWebsite"
