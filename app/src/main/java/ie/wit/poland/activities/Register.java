@@ -47,23 +47,23 @@ public class Register extends AppCompatActivity {
         String password = registerpassword.getText().toString();
 
         if (email.isEmpty()) {
-            registeremail.setError("Please put in email");
+            registeremail.setError(" Please put in an email ");
             registeremail.requestFocus();
             return;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            registeremail.setError("Please enter a valid email");
+            registeremail.setError(" Please enter a valid email ");
             registeremail.requestFocus();
             return;
         }
         if (password.isEmpty()){
-            registerpassword.setError("Password is required");
+            registerpassword.setError(" Password is required ");
             registerpassword.requestFocus();
             return;
         }
         if (password.length()<6){
-            registerpassword.setError("Password must contain more than 6 characters");
+            registerpassword.setError(" Password must contain more than 6 characters ");
             registerpassword.requestFocus();
             return;
         }

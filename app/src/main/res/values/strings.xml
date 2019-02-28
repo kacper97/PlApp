@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Application basics -->
     <string name="app_name">Polish Landmarks</string>
     <string name="appHelp">This is the help screen for Polish Landmarks</string>
@@ -23,7 +23,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="registerBtn">Register</string>
-    <string name="regBtn">Don't have an account ? Sign up</string>
+    <string name="regBtn">Don\'t have an account ? Sign up</string>
     <string name="logBtn">Already have an account ? Log In</string>
     <string name="editImageBtn">Edit Image</string>
     <string name="landmarkName">Landmark Name</string>
