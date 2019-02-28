@@ -8,14 +8,14 @@
     tools:context=".activities.LogIn">
 
     <TextView
-        android:id="@+id/loginusername"
+        android:id="@+id/loginemail"
         android:layout_width="385dp"
         android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:background="@color/colorAccent"
-        android:text="username"
+        android:text="@string/email"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/colorFontWhite"
@@ -39,43 +39,45 @@
         android:textColor="@color/colorFontWhite"
         app:layout_constraintBottom_toTopOf="@+id/register"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="0.357"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginusername" />
+        app:layout_constraintTop_toBottomOf="@+id/loginemail"
+        app:layout_constraintVertical_bias="0.428" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="236dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="330dp"
+        android:layout_height="204dp"
+        android:layout_marginTop="16dp"
         android:background="@color/colorFontWhite"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logoapp" />
 
     <Button
-        android:id="@+id/regbutton"
-        android:layout_width="399dp"
-        android:layout_height="59dp"
-        android:background="@color/colorAccent"
-        android:text="@string/regBtn"
-        android:textColor="@color/colorFontWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/register"
         android:layout_width="399dp"
         android:layout_height="59dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         android:background="@color/colorAccent"
         android:text="@string/loginBtn"
         android:textColor="@color/colorFontWhite"
         app:layout_constraintBottom_toTopOf="@+id/regbutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/regbutton"
+        android:layout_width="399dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/colorAccent"
+        android:onClick="signUp"
+        android:text="@string/regBtn"
+        android:textColor="@color/colorFontWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent" />

@@ -7,15 +7,15 @@
     android:background="@color/colorAccent"
     tools:context=".activities.Register">
 
-    <TextView
-        android:id="@+id/registerusername"
+    <EditText
+        android:id="@+id/registeremail"
         android:layout_width="385dp"
         android:layout_height="47dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:background="@color/colorAccent"
-        android:text="username"
+        android:hint="@string/email"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/colorFontWhite"
@@ -25,7 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <TextView
+    <EditText
         android:id="@+id/registerpassword"
         android:layout_width="382dp"
         android:layout_height="48dp"
@@ -34,7 +34,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorAccent"
-        android:text="password"
+        android:hint="@string/password"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/colorFontWhite"
@@ -43,43 +43,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.357"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerusername" />
+        app:layout_constraintTop_toBottomOf="@+id/registeremail" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="236dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorFontWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.045"
         app:srcCompat="@drawable/logoapp" />
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="399dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorAccent"
+        android:onClick="register"
+        android:text="@string/registerBtn"
+        android:textColor="@color/colorFontWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.679" />
 
     <Button
         android:id="@+id/regbutton"
         android:layout_width="399dp"
         android:layout_height="59dp"
         android:background="@color/colorAccent"
+        android:onClick="goToLogin"
         android:text="@string/logBtn"
         android:textColor="@color/colorFontWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/register"
-        android:layout_width="399dp"
-        android:layout_height="59dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorAccent"
-        android:text="@string/registerBtn"
-        android:textColor="@color/colorFontWhite"
-        app:layout_constraintBottom_toTopOf="@+id/regbutton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
