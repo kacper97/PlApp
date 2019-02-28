@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,13 +15,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 import ie.wit.poland.R;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class Register extends AppCompatActivity {
 
     EditText registeremail, registerpassword;
     private FirebaseAuth mAuth;
+    ProgressBar  progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +35,11 @@ public class Register extends AppCompatActivity {
 
         registeremail = (EditText) findViewById(R.id.registeremail);
         registerpassword = (EditText) findViewById(R.id.registerpassword);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
 
         mAuth = FirebaseAuth.getInstance();
+
+
     }
 
     public void goToLogin(View v) {
@@ -47,11 +56,11 @@ public class Register extends AppCompatActivity {
         String password = registerpassword.getText().toString();
 
         if (email.isEmpty()) {
-            registeremail.setError(" Please put in an email ");
+            registeremail.setError(" Please enter an email ");
             registeremail.requestFocus();
             return;
         }
-
+        //matcher compares typical emails to email inputed
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             registeremail.setError(" Please enter a valid email ");
             registeremail.requestFocus();
@@ -67,13 +76,26 @@ public class Register extends AppCompatActivity {
             registerpassword.requestFocus();
             return;
         }
+        //progress bar
+        progressBar.setVisibility(VISIBLE);
 
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             //Annonymous class to see if reg is completed successfully
             public void onComplete(@NonNull Task<AuthResult> task) {
+                progressBar.setVisibility(GONE);
                 if(task.isSuccessful()){
-                    Toast.makeText(getApplicationContext(),"UserRegisteredSuccessfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"User Registered Successfully", Toast.LENGTH_SHORT).show();
+                  //goes back to login screen after completed
+                    startActivity(new Intent(Register.this,LogIn.class));
+                }
+                else{
+                  if(task.getException() instanceof FirebaseAuthUserCollisionException){
+                      Toast.makeText(getApplicationContext(),"You already registered", Toast.LENGTH_SHORT).show();
+                  }
+                  else{
+                      Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                  }
                 }
             }
         });
