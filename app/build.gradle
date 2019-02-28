@@ -28,3 +28,7 @@ android {
         androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     }
 }
+
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:+'
+}
