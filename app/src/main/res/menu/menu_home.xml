@@ -15,6 +15,12 @@
         android:onClick="menuInfo"
         app:showAsAction="never" />
 
+    <item android:id="@+id/menuSignOut"
+        android:title="@string/signOut"
+        android:orderInCategory="100"
+        android:onClick="menuInfo"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/menu_home"
         android:icon="?android:attr/actionModeCloseDrawable"

@@ -56,7 +56,7 @@ public class LogIn extends AppCompatActivity {
         String password = loginpassword.getText().toString();
 
         if (email.isEmpty()) {
-            loginemail.setError(" Please enter an email ");
+            loginemail.setError(" Please insert an email ");
             loginemail.requestFocus();
             return;
         }

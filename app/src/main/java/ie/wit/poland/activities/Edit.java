@@ -47,13 +47,16 @@ public class Edit extends Base {
             editFavourite.setImageResource(R.drawable.favourites_72);
             isFavourite = false;
         }
+
     }
 
     private Landmark getLandmarkObject(String id) {
 
         for (Landmark l : app.landmarkList)
+           // app.FirebaseDB.getALandmark();
             if (l.landmarkId.equalsIgnoreCase(id))
                 return l;
+
 
         return null;
     }
@@ -90,7 +93,8 @@ public class Edit extends Base {
             aLandmark.ratingLandmark= ratingLandmark;
 
             startActivity(new Intent(this,Home.class));
-            // Update coffee & return home
+            // Update landmark & return home
+
         } else
             Toast.makeText(this, "You must Enter Something for empty boxes",Toast.LENGTH_SHORT).show();
     }

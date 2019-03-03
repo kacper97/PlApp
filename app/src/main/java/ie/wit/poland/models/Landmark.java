@@ -1,6 +1,10 @@
 package ie.wit.poland.models;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class Landmark implements Serializable {
@@ -36,6 +40,23 @@ public class Landmark implements Serializable {
         return landmarkId+" "+landmarkName+","+landmarkDescription+","+price
                 +","+location+","+ ratingLandmark+","+ratingTransport+
                 ","+ratingFacility+","+dateVisited+","+favourite;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("uid", landmarkId);
+        result.put("landmarkname", landmarkName);
+        result.put("landmarkdescription", landmarkDescription);
+        result.put("price", price);
+        result.put("location", location);
+        result.put("ratinglandmark", ratingLandmark);
+        result.put("ratingtransport", ratingTransport);
+        result.put("ratingfacility", ratingFacility);
+        result.put("dateVisited", dateVisited);
+        result.put("fav", favourite);
+
+        return result;
     }
 
 }

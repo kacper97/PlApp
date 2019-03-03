@@ -52,7 +52,7 @@
         android:layout_width="433dp"
         android:layout_height="249dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/colorFontOffWhite"
+        android:background="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
