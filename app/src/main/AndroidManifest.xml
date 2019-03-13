@@ -25,7 +25,9 @@
         <activity android:name=".activities.Edit" />
         <activity android:name=".activities.Favourites" />
         <activity android:name=".activities.Search" />
-        <activity android:name=".activities.LogIn"></activity>
+        <activity android:name=".activities.LogIn" />
+        <activity android:name=".activities.ChangePassword" />
+        <activity android:name=".activities.Deactivate"></activity>
     </application>
 
 </manifest>

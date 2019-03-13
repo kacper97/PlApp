@@ -18,5 +18,7 @@ Polish landmarks is a mobile app connected to firebase, allowing users to do sev
 # Features Assignment 2
 
 - Splash Screen functionality
+- User can change password
+- User can delete account
 
 References : DDrohan.github.io/ 
