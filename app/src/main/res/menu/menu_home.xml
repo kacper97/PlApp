@@ -21,6 +21,12 @@
         android:onClick="menuInfo"
         app:showAsAction="never" />
 
+    <item android:id="@+id/changePassword"
+        android:title="@string/changePass"
+        android:orderInCategory="100"
+        android:onClick="menuChangePass"
+        app:showAsAction="never"/>
+
     <item
         android:id="@+id/menu_home"
         android:icon="?android:attr/actionModeCloseDrawable"

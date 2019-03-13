@@ -53,6 +53,10 @@ public class Base extends AppCompatActivity {
                 .show();
     }
 
+    public void menuChangePass(MenuItem m ){
+        startActivity(new Intent(this,ChangePassword.class));
+    }
+
     public void menuHelp(MenuItem m)
     {
         startActivity(new Intent(this,Help.class));
