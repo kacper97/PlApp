@@ -56,6 +56,7 @@
     <string name="home">Home</string>
     <string name="help">Help</string>
     <string name="changePass">Enter new Password</string>
+    <string name="changePassword">Change Password</string>
     <string name="menu_settings_save">Save</string>
     <!--Hints Add-->
     <string name="hintAddName">Add a name</string>
@@ -71,4 +72,11 @@
     <string name="hintEditLocation">Enter New Location </string>
     <string name="hintEditDate">Enter New Date</string>
     <string name="title_activity_search">Search</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>

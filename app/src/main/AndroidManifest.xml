@@ -27,7 +27,11 @@
         <activity android:name=".activities.Search" />
         <activity android:name=".activities.LogIn" />
         <activity android:name=".activities.ChangePassword" />
-        <activity android:name=".activities.Deactivate"></activity>
+        <activity android:name=".activities.Deactivate" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

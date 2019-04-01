@@ -22,7 +22,7 @@
         app:showAsAction="never" />
 
     <item android:id="@+id/changePassword"
-        android:title="@string/changePass"
+        android:title="@string/changePassword"
         android:orderInCategory="100"
         android:onClick="menuChangePass"
         app:showAsAction="never"/>
