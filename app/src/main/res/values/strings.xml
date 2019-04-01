@@ -55,7 +55,8 @@
     <string name="info">Info</string>
     <string name="home">Home</string>
     <string name="help">Help</string>
-    <string name="changePass">Change password</string>
+    <string name="changePass">Enter new Password</string>
+    <string name="menu_settings_save">Save</string>
     <!--Hints Add-->
     <string name="hintAddName">Add a name</string>
     <string name="hintAddDescription">Add a brief Description</string>

@@ -15,10 +15,10 @@
         android:onClick="menuInfo"
         app:showAsAction="never" />
 
-    <item android:id="@+id/menuSignOut"
-        android:title="@string/signOut"
+    <item android:id="@+id/menuDeactivate"
+        android:title="@string/deactivate"
         android:orderInCategory="100"
-        android:onClick="menuInfo"
+        android:onClick="menuDeactivate"
         app:showAsAction="never" />
 
     <item android:id="@+id/changePassword"

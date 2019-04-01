@@ -61,4 +61,11 @@ public class Base extends AppCompatActivity {
     {
         startActivity(new Intent(this,Help.class));
     }
+
+    public void menuDeactivate(MenuItem m)
+    {
+        startActivity(new Intent(this,Deactivate.class));
+    }
+
+
 }

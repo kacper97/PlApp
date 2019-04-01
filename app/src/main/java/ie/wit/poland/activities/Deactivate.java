@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import ie.wit.poland.R;
 
-public class Deactivate extends AppCompatActivity {
+public class Deactivate extends AppCompatActivity{
 
     TextView information;
 
