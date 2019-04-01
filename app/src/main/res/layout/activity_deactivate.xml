@@ -4,6 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.Deactivate">
+    android:background="@color/colorFontWhite"
+    tools:context=".activities.Deactivate" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:id="@+id/relativeLayout">
+
+    </RelativeLayout>
+    <TextView
+        android:text="TextView"
+        android:layout_width="245dp"
+        android:layout_height="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/info"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        android:layout_marginEnd="16dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6" tools:text="@string/welcome"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/info"
+        android:text="@string/welcome"/>
+    <Button
+        android:text="@string/deactivate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/buttonDeactivate"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/info"
+        android:onClick="deleteAcc"/>
 
 </android.support.constraint.ConstraintLayout>
