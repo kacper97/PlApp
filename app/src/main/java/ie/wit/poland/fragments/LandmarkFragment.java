@@ -226,7 +226,7 @@ public class LandmarkFragment  extends Fragment implements
 
     public void checkEmptyList(View v)
     {
-        TextView recentList = getActivity().findViewById(R.id.emptyList);
+        TextView recentList = v.findViewById(R.id.emptyList);
 
         if(activity.app.landmarkList.isEmpty())
             recentList.setText(getString(R.string.emptyMessageLbl));
