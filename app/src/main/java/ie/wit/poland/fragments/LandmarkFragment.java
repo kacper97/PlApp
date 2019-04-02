@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.ListFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.ActionMode;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,7 +35,10 @@ import ie.wit.poland.models.Landmark;
 import ie.wit.poland.activities.Favourites;
 import ie.wit.poland.adapters.LandmarkFilter;
 
-public class LandmarkFragment  extends ListFragment implements View.OnClickListener, AbsListView.MultiChoiceModeListener {
+public class LandmarkFragment  extends Fragment implements
+        AdapterView.OnItemClickListener,
+        View.OnClickListener,
+        AbsListView.MultiChoiceModeListener {
     public Base activity;
     public static LandmarkListAdapter listAdapter;
     public ListView listView;
@@ -42,6 +47,17 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
     public LandmarkFragment() {
         // Required empty public constructor
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Bundle activityInfo = new Bundle(); // Creates a new Bundle object
+        activityInfo.putString("landmarkId", (String) view.getTag());
+        Intent goEdit = new Intent(getActivity(), Edit.class); // Creates a new Intent
+        /* Add the bundle to the intent here */
+        goEdit.putExtras(activityInfo);
+        getActivity().startActivity(goEdit); // Launch the Intent
+    }
+
 
     public static LandmarkFragment newInstance() {
         LandmarkFragment fragment = new LandmarkFragment();
@@ -56,44 +72,39 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView (LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState)
+    {
+
+        View v = inflater.inflate(R.layout.fragment_home, parent, false);
+
         listAdapter = new LandmarkListAdapter(activity, this,activity.app.landmarkList);
         landmarkFilter = new LandmarkFilter(activity.app.landmarkList,"all", listAdapter);
+
         if (getActivity() instanceof Favourites) {
             landmarkFilter.setFilter("favourites"); // Set the filter text field from 'all' to 'favourites'
             landmarkFilter.filter(null); // Filter the data, but don't use any prefix
             listAdapter.notifyDataSetChanged(); // Update the adapter
         }
-        setListAdapter (listAdapter);
         setRandomLandmark();
-        checkEmptyList();
 
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-
-        Bundle activityInfo = new Bundle(); // Creates a new Bundle object
-        activityInfo.putString("landmarkId", (String) v.getTag());
-        Intent goEdit = new Intent(getActivity(), Edit.class); // Creates a new Intent
-        /* Add the bundle to the intent here */
-        goEdit.putExtras(activityInfo);
-        getActivity().startActivity(goEdit); // Launch the Intent
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        View v = super.onCreateView(inflater, parent, savedInstanceState);
-
-        listView = v.findViewById(android.R.id.list);
+        listView = v.findViewById(R.id.homeList);
+        listView.setAdapter (listAdapter);
+        listView.setOnItemClickListener(this);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(this);
 
+        checkEmptyList(v);
+
+
         return v;
+
     }
+
 
     @Override
     public void onStart()
@@ -124,7 +135,6 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
                 listAdapter.landmarkList.remove(landmark); // update adapters data
                 setRandomLandmark();
                 listAdapter.notifyDataSetChanged(); // refresh adapter
-                checkEmptyList();
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener()
         {
@@ -179,7 +189,7 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
         }
         setRandomLandmark();
         listAdapter.notifyDataSetChanged();  // refresh adapter
-        checkEmptyList();
+
         actionMode.finish();
     }
 
@@ -214,7 +224,7 @@ public class LandmarkFragment  extends ListFragment implements View.OnClickListe
             }
     }
 
-    public void checkEmptyList()
+    public void checkEmptyList(View v)
     {
         TextView recentList = getActivity().findViewById(R.id.emptyList);
 

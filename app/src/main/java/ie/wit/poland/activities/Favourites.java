@@ -29,7 +29,7 @@ public class Favourites extends Base {
             emptyList.setText("");
 
         landmarkFragment = LandmarkFragment.newInstance(); //get a new Fragment instance
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, landmarkFragment)
                 .commit(); // add it to the current activity
     }
