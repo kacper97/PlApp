@@ -2,13 +2,10 @@ package ie.wit.poland.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.app.ListFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.ActionMode;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,17 +17,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
 import ie.wit.poland.adapters.LandmarkListAdapter;
 import ie.wit.poland.R;
 import ie.wit.poland.activities.Base;
-import ie.wit.poland.activities.Edit;
 import ie.wit.poland.models.Landmark;
 import ie.wit.poland.activities.Favourites;
 import ie.wit.poland.adapters.LandmarkFilter;
@@ -38,7 +30,8 @@ import ie.wit.poland.adapters.LandmarkFilter;
 public class LandmarkFragment  extends Fragment implements
         AdapterView.OnItemClickListener,
         View.OnClickListener,
-        AbsListView.MultiChoiceModeListener {
+        AbsListView.MultiChoiceModeListener
+{
     public Base activity;
     public static LandmarkListAdapter listAdapter;
     public ListView listView;
@@ -53,10 +46,12 @@ public class LandmarkFragment  extends Fragment implements
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Bundle activityInfo = new Bundle(); // Creates a new Bundle object
         activityInfo.putString("landmarkId", (String) view.getTag());
-        Intent goEdit = new Intent(getActivity(), Edit.class); // Creates a new Intent
-        /* Add the bundle to the intent here */
-        goEdit.putExtras(activityInfo);
-        getActivity().startActivity(goEdit); // Launch the Intent
+        Fragment fragment = EditFragment.newInstance(activityInfo);
+        getActivity().setTitle(R.string.editALandmark);
+        getFragmentManager().beginTransaction()
+                .replace(R.id.homeFrame, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 
@@ -73,10 +68,8 @@ public class LandmarkFragment  extends Fragment implements
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listAdapter = new LandmarkListAdapter(activity, this,activity.app.landmarkList);
-        landmarkFilter = new LandmarkFilter(activity.app.landmarkList,"all", listAdapter);
     }
 
     @Override
@@ -84,24 +77,25 @@ public class LandmarkFragment  extends Fragment implements
     {
 
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
+        getActivity().setTitle(R.string.recentlyViewedLbl);
+        listAdapter = new LandmarkListAdapter(activity, this, activity.app.landmarkList);
+        landmarkFilter = new LandmarkFilter(activity.app.landmarkList,"all",listAdapter);
 
 
 
         if (favourites) {
+            getActivity().setTitle("Favourite Landmark's");
             landmarkFilter.setFilter("favourites"); // Set the filter text field from 'all' to 'favourites'
             landmarkFilter.filter(null); // Filter the data, but don't use any prefix
             listAdapter.notifyDataSetChanged(); // Update the adapter
         }
-        setRandomLandmark();
+        //setRandomLandmark();
 
         listView = v.findViewById(R.id.homeList);
-        listView.setAdapter (listAdapter);
-        listView.setOnItemClickListener(this);
-        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        listView.setMultiChoiceModeListener(this);
-        listView.setEmptyView(v.findViewById(R.id.emptyList));
+        setListView(v);
 
-        checkEmptyList(v);
+
+       // checkEmptyList(v);
 
 
         return v;
@@ -227,15 +221,6 @@ public class LandmarkFragment  extends Fragment implements
             }
     }
 
-    public void checkEmptyList(View v)
-    {
-        TextView recentList = v.findViewById(R.id.emptyList);
-
-        if(activity.app.landmarkList.isEmpty())
-            recentList.setText(getString(R.string.emptyMessageLbl));
-        else
-            recentList.setText("");
-    }
 
     public void setListView(View view)
     {

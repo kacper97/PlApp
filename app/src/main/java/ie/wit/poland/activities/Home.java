@@ -1,5 +1,6 @@
 package ie.wit.poland.activities;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -16,11 +17,14 @@ import android.view.View;
 
 import ie.wit.poland.R;
 import ie.wit.poland.fragments.AddFragment;
+import ie.wit.poland.fragments.EditFragment;
 import ie.wit.poland.fragments.LandmarkFragment;
+import ie.wit.poland.fragments.SearchFragment;
 import ie.wit.poland.models.Landmark;
 
 public class Home extends Base
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        EditFragment.OnFragmentInteractionListener {
 
 
     FragmentTransaction ft;
@@ -82,13 +86,13 @@ public class Home extends Base
         // http://stackoverflow.com/questions/32944798/switch-between-fragments-with-onnavigationitemselected-in-new-navigation-drawer
 
         int id = item.getItemId();
+
         ft = getSupportFragmentManager().beginTransaction();
 
         Fragment fragment;
         if (id == R.id.nav_home) {
-            ((LandmarkFragment)landmarkFragment).favourites=false;
-            this.setTitle(R.string.recentlyViewedLbl);
             fragment = LandmarkFragment.newInstance();
+            ((LandmarkFragment) landmarkFragment).favourites = false;
             ft.replace(R.id.homeFrame, fragment);
             ft.addToBackStack(null);
             ft.commit();
@@ -103,13 +107,18 @@ public class Home extends Base
         } else if (id == R.id.nav_favourites) {
             this.setTitle(R.string.favouriteLandmarkLbl);
             fragment = LandmarkFragment.newInstance();
-            ((LandmarkFragment)fragment).favourites = true;
+            ((LandmarkFragment) fragment).favourites = true;
             ft.replace(R.id.homeFrame, fragment);
             ft.addToBackStack(null);
             ft.commit();
 
         } else if (id == R.id.nav_search) {
 
+            fragment = SearchFragment.newInstance();
+            ((LandmarkFragment) fragment).favourites = false;
+            ft.replace(R.id.homeFrame, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_camera) {
@@ -122,9 +131,27 @@ public class Home extends Base
     }
 
 
-    public void setupLandmarks(){
-        app.landmarkList.add(new Landmark("Sopot", "Beach",2.5,"North",1.99,4,5,"19/11/2013",false));
-        app.landmarkList.add(new Landmark("Malbork", "Old Castle",3.5,"North",2.99, 4,5,"19/11/2013",false));
-        app.landmarkList.add(new Landmark("Warsaw", "Capital City",4.5,"Centre",1.49, 4,5,"19/11/2013",true));
-  }
+    public void setupLandmarks() {
+        app.landmarkList.add(new Landmark("Sopot", "Beach", 2.5, "North", 1.99, 4, 5, "19/11/2013", false));
+        app.landmarkList.add(new Landmark("Malbork", "Old Castle", 3.5, "North", 2.99, 4, 5, "19/11/2013", false));
+        app.landmarkList.add(new Landmark("Warsaw", "Capital City", 4.5, "Centre", 1.49, 4, 5, "19/11/2013", true));
+    }
+
+    @Override
+    public void toggle(View v) {
+        EditFragment editFrag = (EditFragment)
+                getSupportFragmentManager().findFragmentById(R.id.homeFrame);
+        if (editFrag != null) {
+            editFrag.toggle(v);
+        }
+    }
+
+    @Override
+    public void editLandmark(View v) {
+        EditFragment editFrag = (EditFragment)
+                getSupportFragmentManager().findFragmentById(R.id.homeFrame);
+        if (editFrag != null) {
+            editFrag.editLandmark(v);
+        }
+    }
 }

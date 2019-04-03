@@ -73,7 +73,7 @@ public class SearchFragment extends LandmarkFragment
 
         return v;
     }
-    }
+
 
     @Override
     public void onAttach(Context c) { super.onAttach(c); }

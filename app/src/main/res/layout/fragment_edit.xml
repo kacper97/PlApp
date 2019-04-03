@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.EditFragment">
+
+    <Button
+        android:id="@+id/editAnImage"
+        android:layout_width="78dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorFontOffWhite"
+        android:onClick="editImage"
+        android:text="@string/addImageBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editALandmarkBtn"
+        app:layout_constraintTop_toBottomOf="@+id/editLandmarkDate"
+        app:layout_constraintVertical_bias="0.389" />
+
+    <EditText
+        android:id="@+id/editLandmarkDate"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="13dp"
+        android:ems="10"
+        android:hint="@string/hintEditDate"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/editALandmarkBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editDate"
+        app:layout_constraintTop_toBottomOf="@+id/editRatingBarFacilities"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/editDate"
+        android:layout_width="127dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="60dp"
+        android:paddingTop="10dp"
+        android:text="@string/dateVisited"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toTopOf="@+id/editALandmarkBtn"
+        app:layout_constraintEnd_toStartOf="@+id/editLandmarkDate"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/editRatingFacilitiesLbl"
+        android:layout_width="100dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="48dp"
+        android:paddingTop="10dp"
+        android:text="@string/facilityRating"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toTopOf="@+id/editDate"
+        app:layout_constraintEnd_toStartOf="@+id/editRatingBarFacilities"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <RatingBar
+        android:id="@+id/editRatingBarFacilities"
+        android:layout_width="240dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:rating="0"
+        android:stepSize="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editRatingFacilitiesLbl"
+        app:layout_constraintTop_toBottomOf="@+id/editRatingBarTransport" />
+
+    <TextView
+        android:id="@+id/editRatingTransport"
+        android:layout_width="100dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="8dp"
+        android:paddingTop="10dp"
+        android:text="@string/transportRating"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toTopOf="@+id/editRatingFacilitiesLbl"
+        app:layout_constraintEnd_toStartOf="@+id/editRatingBarTransport"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <RatingBar
+        android:id="@+id/editRatingBarTransport"
+        android:layout_width="240dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:rating="0"
+        android:stepSize="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editRatingTransport"
+        app:layout_constraintTop_toBottomOf="@+id/editRatingBarLandmark" />
+
+    <TextView
+        android:id="@+id/editRatingLandmark"
+        android:layout_width="100dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="12dp"
+        android:paddingTop="10dp"
+        android:text="@string/landmarkRating"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toTopOf="@+id/editRatingTransport"
+        app:layout_constraintEnd_toStartOf="@+id/editRatingBarLandmark"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editLandmarkLocation"
+        android:layout_width="240dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="7dp"
+        android:ems="10"
+        android:hint="@string/hintEditLocation"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editLocation"
+        app:layout_constraintTop_toBottomOf="@+id/editLandmarkPrice" />
+
+    <TextView
+        android:id="@+id/editLocation"
+        android:layout_width="127dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="16dp"
+        android:paddingTop="10dp"
+        android:text="@string/landmarkLocation"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toTopOf="@+id/editRatingLandmark"
+        app:layout_constraintEnd_toStartOf="@+id/editLandmarkLocation"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPrice" />
+
+    <TextView
+        android:id="@+id/editfooter"
+        android:layout_width="384dp"
+        android:layout_height="27dp"
+        android:background="@color/colorPrimary"
+        android:paddingTop="5dp"
+        android:text="@string/appWebsite"
+        android:textAlignment="center"
+        android:textColor="@color/colorFontWhite"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/editPrice"
+        android:layout_width="127dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="2dp"
+        android:paddingTop="10dp"
+        android:text="@string/landmarkPrice"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintEnd_toStartOf="@+id/editLandmarkPrice"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editDescription" />
+
+    <TextView
+        android:id="@+id/editLandmarkDescription"
+        android:layout_width="127dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="23dp"
+        android:paddingTop="10dp"
+        android:text="@string/landmarkDescriptionLbl"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toTopOf="@+id/editPrice"
+        app:layout_constraintEnd_toStartOf="@+id/editDescription"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editName" />
+
+    <TextView
+        android:id="@+id/editName"
+        android:layout_width="127dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/editALandmark"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toTopOf="@+id/editLandmarkDescription"
+        app:layout_constraintEnd_toStartOf="@+id/editLandmarkName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editLandmarkName"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="7dp"
+        android:ems="10"
+        android:hint="@string/hintEditName"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editLandmarkPrice"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="7dp"
+        android:ems="10"
+        android:hint="@string/hintEditPrice"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/editLocation"
+        app:layout_constraintTop_toBottomOf="@+id/editDescription" />
+
+    <EditText
+        android:id="@+id/editDescription"
+        android:layout_width="240dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="7dp"
+        android:ems="10"
+        android:hint="@string/hintEditDescription"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editLandmarkDescription"
+        app:layout_constraintTop_toBottomOf="@+id/editLandmarkName" />
+
+    <RatingBar
+        android:id="@+id/editRatingBarLandmark"
+        android:layout_width="240dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="-2dp"
+        android:layout_marginEnd="4dp"
+        android:rating="0"
+        android:stepSize="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editRatingLandmark"
+        app:layout_constraintTop_toBottomOf="@+id/editLandmarkLocation" />
+
+    <Button
+        android:id="@+id/editALandmarkBtn"
+        android:layout_width="78dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/colorFontOffWhite"
+        android:onClick="editLandmark"
+        android:text="@string/editALandmarkBtn"
+        app:layout_constraintBottom_toTopOf="@+id/editfooter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editLandmarkDate" />
+
+    <ImageView
+        android:id="@+id/editFavourite"
+        android:layout_width="83dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="toggle"
+        app:layout_constraintBottom_toTopOf="@+id/editfooter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editDate"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/favourites_72" />
+
+</android.support.constraint.ConstraintLayout>
