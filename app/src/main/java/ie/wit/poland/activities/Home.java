@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,6 +15,7 @@ import android.view.View;
 
 
 import ie.wit.poland.R;
+import ie.wit.poland.fragments.AddFragment;
 import ie.wit.poland.fragments.LandmarkFragment;
 import ie.wit.poland.models.Landmark;
 
@@ -80,23 +82,28 @@ public class Home extends Base
         // http://stackoverflow.com/questions/32944798/switch-between-fragments-with-onnavigationitemselected-in-new-navigation-drawer
 
         int id = item.getItemId();
-        LandmarkFragment fragment;
         ft = getSupportFragmentManager().beginTransaction();
 
+        Fragment fragment;
         if (id == R.id.nav_home) {
+            ((LandmarkFragment)landmarkFragment).favourites=false;
             this.setTitle(R.string.recentlyViewedLbl);
             fragment = LandmarkFragment.newInstance();
-            //((CoffeeFragment)fragment).favourites = false;
             ft.replace(R.id.homeFrame, fragment);
             ft.addToBackStack(null);
             ft.commit();
 
         } else if (id == R.id.nav_add) {
+            this.setTitle(R.string.addALandmark);
+            fragment = AddFragment.newInstance();
+            ft.replace(R.id.homeFrame, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
 
         } else if (id == R.id.nav_favourites) {
             this.setTitle(R.string.favouriteLandmarkLbl);
             fragment = LandmarkFragment.newInstance();
-            //((CoffeeFragment)fragment).favourites = true;
+            ((LandmarkFragment)fragment).favourites = true;
             ft.replace(R.id.homeFrame, fragment);
             ft.addToBackStack(null);
             ft.commit();

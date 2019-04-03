@@ -43,6 +43,7 @@ public class LandmarkFragment  extends Fragment implements
     public static LandmarkListAdapter listAdapter;
     public ListView listView;
     public LandmarkFilter landmarkFilter;
+    public boolean favourites = false;
 
     public LandmarkFragment() {
         // Required empty public constructor
@@ -85,7 +86,7 @@ public class LandmarkFragment  extends Fragment implements
         listAdapter = new LandmarkListAdapter(activity, this,activity.app.landmarkList);
         landmarkFilter = new LandmarkFilter(activity.app.landmarkList,"all", listAdapter);
 
-        if (getActivity() instanceof Favourites) {
+        if (favourites) {
             landmarkFilter.setFilter("favourites"); // Set the filter text field from 'all' to 'favourites'
             landmarkFilter.filter(null); // Filter the data, but don't use any prefix
             listAdapter.notifyDataSetChanged(); // Update the adapter
@@ -97,6 +98,7 @@ public class LandmarkFragment  extends Fragment implements
         listView.setOnItemClickListener(this);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(this);
+        listView.setEmptyView(v.findViewById(R.id.emptyList));
 
         checkEmptyList(v);
 

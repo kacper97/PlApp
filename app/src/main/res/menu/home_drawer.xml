@@ -5,19 +5,19 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@android:drawable/ic_menu_revert"
-            android:title="Home" />
+            android:title="@string/home" />
         <item
             android:id="@+id/nav_add"
             android:icon="@android:drawable/ic_input_add"
-            android:title="Add a Coffee" />
+            android:title="@string/addALandmark" />
         <item
             android:id="@+id/nav_search"
             android:icon="@android:drawable/ic_menu_search"
-            android:title="Search" />
+            android:title="@string/searchLandmarksLbl" />
         <item
             android:id="@+id/nav_favourites"
             android:icon="@drawable/favourites_72"
-            android:title="View Favourites" />
+            android:title="@string/favouriteLandmarkLbl" />
         <item
             android:id="@+id/nav_camera"
             android:icon="@android:drawable/ic_menu_camera"
