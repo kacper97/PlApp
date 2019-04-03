@@ -15,6 +15,7 @@ import android.widget.Toast;
 import android.view.ActionMode;
 
 import ie.wit.poland.R;
+import ie.wit.poland.adapters.LandmarkFilter;
 
 public class SearchFragment extends LandmarkFragment
         implements AdapterView.OnItemSelectedListener  {
@@ -34,18 +35,25 @@ public class SearchFragment extends LandmarkFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        View v = inflater.inflate(R.layout.fragment_search,container,false);
+        listView = v.findViewById(R.id.searchList);
+        setListView(v);
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
-                .createFromResource(activity, R.array.landmarkTypes,android.R.layout.simple_spinner_item);
+                .createFromResource(getActivity(), R.array.landmarkTypes,
+                        android.R.layout.simple_spinner_item);
 
         spinnerAdapter
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        Spinner spinner = activity.findViewById(R.id.searchSpinner);
+        Spinner spinner = v.findViewById(R.id.searchSpinner);
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(this);
 
-        searchView = activity.findViewById(R.id.searchView);
+        searchView = v.findViewById(R.id.searchView);
         searchView.setQueryHint("Search your Landmarks Here");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -62,6 +70,9 @@ public class SearchFragment extends LandmarkFragment
                 return false;
             }
         });
+
+        return v;
+    }
     }
 
     @Override

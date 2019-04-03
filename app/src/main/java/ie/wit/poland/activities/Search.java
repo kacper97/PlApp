@@ -11,7 +11,7 @@ public class Search extends Base {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search);
+        setContentView(R.layout.fragment_search);
     }
 
     @Override

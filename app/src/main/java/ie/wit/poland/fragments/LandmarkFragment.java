@@ -75,6 +75,8 @@ public class LandmarkFragment  extends Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        listAdapter = new LandmarkListAdapter(activity, this,activity.app.landmarkList);
+        landmarkFilter = new LandmarkFilter(activity.app.landmarkList,"all", listAdapter);
     }
 
     @Override
@@ -83,8 +85,7 @@ public class LandmarkFragment  extends Fragment implements
 
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
-        listAdapter = new LandmarkListAdapter(activity, this,activity.app.landmarkList);
-        landmarkFilter = new LandmarkFilter(activity.app.landmarkList,"all", listAdapter);
+
 
         if (favourites) {
             landmarkFilter.setFilter("favourites"); // Set the filter text field from 'all' to 'favourites'
@@ -234,5 +235,14 @@ public class LandmarkFragment  extends Fragment implements
             recentList.setText(getString(R.string.emptyMessageLbl));
         else
             recentList.setText("");
+    }
+
+    public void setListView(View view)
+    {
+        listView.setAdapter (listAdapter);
+        listView.setOnItemClickListener(this);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        listView.setMultiChoiceModeListener(this);
+        listView.setEmptyView(view.findViewById(R.id.emptyList));
     }
 }
