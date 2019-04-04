@@ -86,6 +86,7 @@ public class EditFragment extends Fragment {
         editRatingBarTransport.setRating((float)aLandmark.ratingFacility);
         editRatingBarFacility.setRating((float)aLandmark.ratingTransport);
 
+        editFavourite = v.findViewById(R.id.editFavourite);
 
         if (aLandmark.favourite==true) {
             editFavourite.setImageResource(R.drawable.favourites_72_on);

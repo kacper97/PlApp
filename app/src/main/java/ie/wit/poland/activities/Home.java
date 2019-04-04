@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-
 import ie.wit.poland.R;
 import ie.wit.poland.fragments.AddFragment;
 import ie.wit.poland.fragments.EditFragment;
@@ -92,20 +91,18 @@ public class Home extends Base
         Fragment fragment;
         if (id == R.id.nav_home) {
             fragment = LandmarkFragment.newInstance();
-            ((LandmarkFragment) landmarkFragment).favourites = false;
+            ((LandmarkFragment) fragment).favourites = false;
             ft.replace(R.id.homeFrame, fragment);
             ft.addToBackStack(null);
             ft.commit();
 
         } else if (id == R.id.nav_add) {
-            this.setTitle(R.string.addALandmark);
             fragment = AddFragment.newInstance();
             ft.replace(R.id.homeFrame, fragment);
             ft.addToBackStack(null);
             ft.commit();
 
         } else if (id == R.id.nav_favourites) {
-            this.setTitle(R.string.favouriteLandmarkLbl);
             fragment = LandmarkFragment.newInstance();
             ((LandmarkFragment) fragment).favourites = true;
             ft.replace(R.id.homeFrame, fragment);
@@ -119,6 +116,7 @@ public class Home extends Base
             ft.replace(R.id.homeFrame, fragment);
             ft.addToBackStack(null);
             ft.commit();
+
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_camera) {
