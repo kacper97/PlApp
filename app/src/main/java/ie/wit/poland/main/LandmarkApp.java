@@ -7,6 +7,8 @@ import java.util.List;
 import android.app.Application;
 import android.util.Log;
 
+import com.google.firebase.FirebaseApp;
+
 public class LandmarkApp extends Application
 {
     public List <Landmark>  landmarkList = new ArrayList<>();
