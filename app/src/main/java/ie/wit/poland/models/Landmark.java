@@ -69,5 +69,27 @@ public class Landmark implements Serializable {
                 + " " + marker.coords.longitude + "]";
     }
 
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("uid", landmarkId);
+        result.put("landmarkname", landmarkName);
+        result.put("landmarkdescription", landmarkDescription);
+        result.put("price", price);
+        result.put("location", location);
+        result.put("ratinglandmark", ratingLandmark);
+        result.put("ratingtransport", ratingTransport);
+        result.put("ratingfacility", ratingFacility);
+        result.put("dateVisited", dateVisited);
+        result.put("fav", favourite);
+        result.put("usertoken", usertoken);
+        result.put("googlephoto", googlephoto);
+        result.put("address", address);
+        result.put("latitude",  marker.coords.latitude);
+        result.put("longitude",  marker.coords.longitude);
+
+        return result;
+    }
+
 
 }

@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.Query;
 
 import java.util.List;
 
@@ -230,8 +231,7 @@ public class MapsFragment extends SupportMapFragment implements
     public void onResume() {
         super.onResume();
         getMapAsync(this);
-        LandmarkApi.attachListener(this);
-        LandmarkApi.get("/coffees/" + app.googleToken);
+        Query query = app.FirebaseDB.getAllLandmarks();
         if (checkPermission()) {
             if (app.mCurrentLocation != null) {
                 Toast.makeText(getActivity(), "GPS location was found!", Toast.LENGTH_SHORT).show();
@@ -276,7 +276,7 @@ public class MapsFragment extends SupportMapFragment implements
         }
     }
 
-    public void addCoffees(List<Landmark> list){
+    public void addLandmarks(List<Landmark> list){
         for(Landmark l : list)
             mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(l.marker.coords.latitude, l.marker.coords.longitude))

@@ -85,6 +85,13 @@ public class SearchFragment extends LandmarkFragment
         super.onStart();
     }
 
+   // @Override
+  //  public void onResume(){
+    //    landmarkFilter = new LandmarkFilter(query, "all", listAdapter,listAdapter);
+  //  }
+
+
+
     private void checkSelected(String selected)
     {
         if (selected != null) {
@@ -116,7 +123,6 @@ public class SearchFragment extends LandmarkFragment
     @Override
     public void deleteLandmarks(ActionMode actionMode) {
         super.deleteLandmarks(actionMode);
-        checkSelected(selected);
-    }
+        checkSelected(selected);}
 
 }

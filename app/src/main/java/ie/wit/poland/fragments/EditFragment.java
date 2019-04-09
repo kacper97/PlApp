@@ -14,7 +14,16 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Attr;
+import org.xml.sax.helpers.AttributeListImpl;
+
+import java.security.KeyStore;
+import java.security.cert.Extension;
+import java.time.Month;
+import java.time.chrono.Era;
 import java.util.List;
+import java.util.Map;
+import java.util.zip.Checksum;
 
 import ie.wit.poland.R;
 import ie.wit.poland.activities.Home;
@@ -32,6 +41,7 @@ public class EditFragment extends Fragment {
     public View v;
     private OnFragmentInteractionListener mListener;
 
+
     public EditFragment() {
         // Required empty public constructor
     }
@@ -47,8 +57,8 @@ public class EditFragment extends Fragment {
         super.onCreate(savedInstanceState);
         app = (LandmarkApp) getActivity().getApplication();
         if(getArguments() != null)
-            LandmarkApi.get("/coffees/" + app.googleToken + "/" + getArguments().getString("coffeeId"));
-        }
+            app.FirebaseDB.getALandmark(aLandmark.landmarkId);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,8 +95,7 @@ public class EditFragment extends Fragment {
                 aLandmark.ratingFacility = ratingFacility;
                 aLandmark.ratingTransport = ratingTransport;
 
-                LandmarkApi.put("/coffees/" + app.googleToken + "/" + aLandmark._id, aLandmark,app.googleToken);
-
+                app.FirebaseDB.updateALandmark(aLandmark.landmarkId,aLandmark);
 
                 if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
                     getActivity().getSupportFragmentManager().popBackStack();
@@ -113,8 +122,6 @@ public class EditFragment extends Fragment {
         }
     }
 
-
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -130,10 +137,10 @@ public class EditFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        LandmarkApi.detachListeneR();
-    }
+       // aLandmark = dataSnapshot.getValue(Landmark.class);
+        }
 
-    @Override
+    //@Override
     public void updateUI(Fragment fragment) {
         ((TextView)v.findViewById(R.id.editLandmarkName)).setText(aLandmark.landmarkName);
 

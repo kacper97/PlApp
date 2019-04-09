@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.io.IOException;
 import java.util.List;
@@ -42,6 +43,7 @@ public class AddFragment extends Fragment implements OnMapReadyCallback {
     private LandmarkApp app;
     private GoogleMap mMap;
     public Home activity;
+    private Query query;
 
     public AddFragment() {
         // Required empty public constructor
@@ -65,14 +67,14 @@ public class AddFragment extends Fragment implements OnMapReadyCallback {
     {
         super.onAttach(context);
         this.activity = (Home) context;
-        LandmarkApi.attachListener(this);
-        LandmarkApi.attachDialog(activity.loader);
+        query = app.FirebaseDB.getAllLandmarks();
+
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        LandmarkApi.detachListener();
+        query = app.FirebaseDB.getAllLandmarks();
     }
 
     @Override
@@ -120,9 +122,9 @@ public class AddFragment extends Fragment implements OnMapReadyCallback {
                     app.googleToken,getAddressFromLocation(app.mCurrentLocation),
                     app.mCurrentLocation.getLatitude(),app.mCurrentLocation.getLongitude());
 
-            LandmarkApi.post("/coffees/" + app.googleToken,l);
+          app.FirebaseDB.addLandmark(l);
             //startActivity(new Intent(this.getActivity(), Home.class));
-            LandmarkApi.get("/coffees/"+ app.googleToken);
+            app.FirebaseDB.getAllLandmarks();
             resetFields();
         } else
             Toast.makeText(
@@ -135,7 +137,7 @@ public class AddFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LandmarkApi.get("/coffees/"+ app.googleToken);
+        app.FirebaseDB.getAllLandmarks();
     }
 
     public void addLandmarks(List<Landmark> list)
@@ -146,7 +148,6 @@ public class AddFragment extends Fragment implements OnMapReadyCallback {
                     .title(l.landmarkName + " €" + l.price)
                     .snippet(l.landmarkName + " " + l.location)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.logoapp)));
-
     }
 
     private void resetFields() {

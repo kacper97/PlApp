@@ -18,28 +18,35 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.Query;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ie.wit.poland.activities.Home;
 import ie.wit.poland.adapters.LandmarkListAdapter;
 import ie.wit.poland.R;
-import ie.wit.poland.activities.Base;
+import ie.wit.poland.main.LandmarkApp;
 import ie.wit.poland.models.Landmark;
-import ie.wit.poland.activities.Favourites;
 import ie.wit.poland.adapters.LandmarkFilter;
+
+import static ie.wit.poland.activities.Home.app;
 
 public class LandmarkFragment  extends Fragment implements
         AdapterView.OnItemClickListener,
         View.OnClickListener,
         AbsListView.MultiChoiceModeListener
 {
-    public Base activity;
     public static LandmarkListAdapter listAdapter;
     public ListView listView;
     public LandmarkFilter landmarkFilter;
     public boolean favourites = false;
     public View v;
+    public Home activity;
+    public LandmarkApp app;
+    private Object query;
+
 
     public LandmarkFragment() {
         // Required empty public constructor
@@ -67,20 +74,21 @@ public class LandmarkFragment  extends Fragment implements
     public void onAttach(Context context)
     {
         super.onAttach(context);
-        this.activity = (Base) context;
-        LandmarkApi.attachListener(this);
-        LandmarkApi.attachDialog(activity.loader);
+        this.activity = (Home) context;
+        query = app.FirebaseDB.getAllLandmarks();
+
     }
     @Override
     public void onDetach() {
         super.onDetach();
-        LandmarkApi.detachListener();
+        query = app.FirebaseDB.getAllLandmarks();
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LandmarkApi.get("/coffees/" + app.googleToken);
+        query = app.FirebaseDB.getAllLandmarks();
     }
 
     @Override
@@ -94,8 +102,7 @@ public class LandmarkFragment  extends Fragment implements
     }
 
     private void updateView() {
-        listAdapter = new LandmarkListAdapter(activity, this, activity.app.landmarkList);
-        landmarkFilter = new LandmarkFilter(activity.app.landmarkList,"all",listAdapter);
+        listAdapter = new LandmarkListAdapter(activity, this, app.landmarkList);
 
         if (favourites) {
             getActivity().setTitle("Favourite Landmark's");
@@ -125,7 +132,8 @@ public class LandmarkFragment  extends Fragment implements
 
     public void onResume() {
         super.onResume();
-        LandmarkApi.attachListener(this);
+        query = app.FirebaseDB.getAllLandmarks();
+
         updateView();
     }
 
@@ -149,8 +157,8 @@ public class LandmarkFragment  extends Fragment implements
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                LandmarkApi.delete("/coffees/" + app.googleToken +
-                        "/" + landmark._id,app.googleToken);
+                 app.FirebaseDB.deleteALandmark(landmark.landmarkId);
+
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener()
         {
@@ -198,13 +206,10 @@ public class LandmarkFragment  extends Fragment implements
         {
             if (listView.isItemChecked(i))
             {
-                LandmarkApi.delete("/coffees/" + app.googleToken
-                        + "/" + listAdapter.getItem(i)._id,app.googleToken);
+              //  app.FirebaseDB.deleteALandmark(listView.getChildAt(i));
             }
         }
-        LandmarkApi.get("/coffees/" + app.googleToken);
         listAdapter.notifyDataSetChanged();  // refresh adapter
-
         actionMode.finish();
     }
 
@@ -219,7 +224,7 @@ public class LandmarkFragment  extends Fragment implements
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Landmark.get("/coffees/" + app.googleToken);
+                app.FirebaseDB.getAllLandmarks();
             }
         });
     }
@@ -238,5 +243,8 @@ public class LandmarkFragment  extends Fragment implements
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listView.setMultiChoiceModeListener(this);
         listView.setEmptyView(view.findViewById(R.id.emptyList));
+    }
+
+    public void updateUI(Query values) {
     }
 }
