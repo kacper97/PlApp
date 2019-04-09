@@ -18,12 +18,15 @@ public class Landmark implements Serializable {
     public double ratingFacility;
     public String dateVisited;
     public boolean favourite;
-
-    public Landmark(){}
+    public String googlephoto;
+    public String usertoken;
+    public String address;
+    public Marker marker = new Marker();
 
     public Landmark(String landmarkName,String landmarkDescription, double price, String location,
-                    double ratingLandmark, double ratingTransport, double ratingFacility, String dateVisited,boolean fav){
-        this.landmarkId=UUID.randomUUID().toString();
+                    double ratingLandmark, double ratingTransport, double ratingFacility, String dateVisited,boolean fav,String photo, String token,
+                    String address,double lat, double lng){
+       // this.landmarkId=UUID.randomUUID().toString();
         this.landmarkName=landmarkName;
         this.landmarkDescription=landmarkDescription;
         this.price=price;
@@ -33,30 +36,38 @@ public class Landmark implements Serializable {
         this.ratingFacility=ratingFacility;
         this.dateVisited=dateVisited;
         this.favourite = fav;
+        this.googlephoto = photo;
+        this.usertoken = token;
+        this.address = address;
+        this.marker.coords.latitude = lat;
+        this.marker.coords.longitude = lng;
+    }
+
+    public Landmark(){
+        this.landmarkName="";
+        this.landmarkDescription ="";
+        this.ratingLandmark =0;
+        this.ratingFacility=0;
+        this.ratingTransport=0;
+        this.favourite=false;
+        this.location="";
+        this.price=0.0;
+        this.dateVisited=""
+        this.googlephoto = "";
+        this.usertoken = "";
+        this.address = "";
+        this.marker.coords.latitude = 0.0;
+        this.marker.coords.longitude = 0.0;
     }
 
     @Override
     public String toString(){
         return landmarkId+" "+landmarkName+","+landmarkDescription+","+price
                 +","+location+","+ ratingLandmark+","+ratingTransport+
-                ","+ratingFacility+","+dateVisited+","+favourite;
+                ","+ratingFacility+","+dateVisited+","+favourite +" "
+                + usertoken + " " + address + " " + marker.coords.latitude
+                + " " + marker.coords.longitude + "]";
     }
 
-    @Exclude
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("uid", landmarkId);
-        result.put("landmarkname", landmarkName);
-        result.put("landmarkdescription", landmarkDescription);
-        result.put("price", price);
-        result.put("location", location);
-        result.put("ratinglandmark", ratingLandmark);
-        result.put("ratingtransport", ratingTransport);
-        result.put("ratingfacility", ratingFacility);
-        result.put("dateVisited", dateVisited);
-        result.put("fav", favourite);
-
-        return result;
-    }
 
 }

@@ -1,7 +1,11 @@
 package ie.wit.poland.fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,22 +17,31 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.IOException;
+import java.util.List;
 
 import ie.wit.poland.R;
 import ie.wit.poland.activities.Home;
 import ie.wit.poland.main.LandmarkApp;
 import ie.wit.poland.models.Landmark;
 
-public class AddFragment extends Fragment {
+public class AddFragment extends Fragment, OnMapReadyCallback {
     private String landmarkName, landmarkDescription, location, dateVisited;
     private double price, ratingLandmark, ratingTransport, ratingFacility;
     private Button save;
     private EditText name, description, priceAdult, date, locate;
     private RatingBar rateLandmark, rateTransport, rateFacility;
     private LandmarkApp app;
-    DatabaseReference databaseLandmarks;
+    private GoogleMap mMap;
+    public Home activity;
 
     public AddFragment() {
         // Required empty public constructor
@@ -44,7 +57,22 @@ public class AddFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = (LandmarkApp) getActivity().getApplication();
+    }
 
+
+    @Override
+    public void onAttach(Context context)
+    {
+        super.onAttach(context);
+        this.activity = (Home) context;
+        LandmarkApi.attachListener(this);
+        LandmarkApi.attachDialog(activity.loader);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        LandmarkApi.detachListener();
     }
 
     @Override
@@ -52,8 +80,6 @@ public class AddFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_add, container, false);
         getActivity().setTitle(R.string.addALandmark);
-        databaseLandmarks = FirebaseDatabase.getInstance().getReference("landmark");
-
         name = v.findViewById(R.id.addLandmarkName);
         description = v.findViewById(R.id.addDescription);
         priceAdult = v.findViewById(R.id.addLandmarkPrice);
@@ -90,20 +116,79 @@ public class AddFragment extends Fragment {
         if ((landmarkName.length() > 0) && (landmarkDescription.length() > 0)
                 && (priceAdult.length() > 0)) {
             Landmark l = new Landmark(landmarkName, landmarkDescription, price, location, ratingLandmark,
-                    ratingTransport, ratingFacility, dateVisited, false);
-            String id = databaseLandmarks.push().getKey();
-            databaseLandmarks.child(id).setValue(l);
-            Toast.makeText(this.getActivity()   ,"Added landmark",Toast.LENGTH_LONG).show();
-            Log.v("Polish Landmark", "Add : " + app.landmarkList);
-            app.landmarkList.add(l);
+                    ratingTransport, ratingFacility, dateVisited, false,app.googlePhotoURL,
+                    app.googleToken,getAddressFromLocation(app.mCurrentLocation),
+                    app.mCurrentLocation.getLatitude(),app.mCurrentLocation.getLongitude());
 
-            startActivity(new Intent(this.getActivity(), Home.class));
+            LandmarkApi.post("/coffees/" + app.googleToken,c);
+            //startActivity(new Intent(this.getActivity(), Home.class));
+            LandmarkApi.get("/coffees/"+ app.googleToken);
+            resetFields();
         } else
             Toast.makeText(
                     this.getActivity(),
                     "You must Enter Something for "
                             + "\'Name\', \'Description\', \'Price\', \'location\', \'dateVisited\'",
                     Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        LandmarkApi.get("/coffees/"+ app.googleToken);
+    }
+
+    public void addLandmarks(List<Landmark> list)
+    {
+        for(Landmark l : list)
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(l.marker.coords.latitude, l.marker.coords.longitude))
+                    .title(l.landmarkName + " €" + l.price)
+                    .snippet(l.landmarkName + " " + l.location)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.logoapp)));
+
+    }
+
+    @Override
+    public void setList(List list) {
+        app.landmarkList = list;
+        mMap.clear();
+        addLandmarks(app.landmarkList);
+    }
+
+    @Override
+    public void setLandmark(Landmark landmark) { }
+
+    @Override
+    public void updateUI(Fragment fragment) { }
+
+    private void resetFields() {
+        name.setText("");
+        description.setText("");
+        priceAdult.setText("");
+        rateLandmark.setRating(1);
+        rateFacility.setRating(1);
+        rateTransport.setRating(1);
+        name.requestFocus();
+        name.setFocusable(true);
+    }
+
+    private String getAddressFromLocation( Location location ) {
+        Geocoder geocoder = new Geocoder( getActivity() );
+
+        String strAddress = "";
+        Address address;
+        try {
+            address = geocoder
+                    .getFromLocation( location.getLatitude(), location.getLongitude(), 1 )
+                    .get( 0 );
+            strAddress = address.getAddressLine(0) +
+                    " " + address.getAddressLine(1) +
+                    " " + address.getAddressLine(2);
+        }
+        catch (IOException e ) {
+        }
+
+        return strAddress;
     }
 }
