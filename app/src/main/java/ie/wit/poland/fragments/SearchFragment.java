@@ -118,10 +118,5 @@ public class SearchFragment extends LandmarkFragment
         super.deleteLandmarks(actionMode);
         checkSelected(selected);
     }
-    @Override
-    public void updateUI(Fragment fragment) {
-        super.updateUI(fragment);
-        checkSwipeRefresh(v);
-    }
 
 }

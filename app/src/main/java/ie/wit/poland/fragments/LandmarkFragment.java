@@ -213,21 +213,6 @@ public class LandmarkFragment  extends Fragment implements
 
     }
 
-    @Override
-    public void setList(List list) {
-        app.coffeeList = list;
-    }
-
-    @Override
-    public void setLandmark(Landmark landmark) {
-    }
-
-    @Override
-    public void updateUI(Fragment fragment) {
-        fragment.onResume();
-        checkSwipeRefresh(v);
-    }
-
     public void setSwipeRefresh(View v)
     {
         SwipeRefreshLayout swipeRefresh = v.findViewById(R.id.swiperefresh);

@@ -97,16 +97,6 @@ public class EditFragment extends Fragment {
             Toast.makeText(getActivity(), "You must Enter Something for Name and Shop", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void setList(List list) {
-        app.landmarkList = list;
-    }
-
-    @Override
-    public void setCoffee(Landmark landmark) {
-        aLandmark = landmark;
-    }
-
 
     public void toggle(View v) {
 

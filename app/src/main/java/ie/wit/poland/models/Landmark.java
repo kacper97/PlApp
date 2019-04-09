@@ -52,7 +52,7 @@ public class Landmark implements Serializable {
         this.favourite=false;
         this.location="";
         this.price=0.0;
-        this.dateVisited=""
+        this.dateVisited="";
         this.googlephoto = "";
         this.usertoken = "";
         this.address = "";

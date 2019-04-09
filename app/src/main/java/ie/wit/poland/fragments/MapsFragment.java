@@ -284,20 +284,4 @@ public class MapsFragment extends SupportMapFragment implements
                     .snippet(l.landmarkName + " " + l.location)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.logoapp)));
     }
-
-    @Override
-    public void setList(List list) {
-        app.landmarkList = list;
-        addCoffees(app.landmarkList);
-    }
-
-    @Override
-    public void setLandmark (Landmark landmark) {
-
-    }
-
-    @Override
-    public void updateUI(Fragment fragment) {
-
-    }
 }

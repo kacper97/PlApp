@@ -33,7 +33,7 @@ import ie.wit.poland.activities.Home;
 import ie.wit.poland.main.LandmarkApp;
 import ie.wit.poland.models.Landmark;
 
-public class AddFragment extends Fragment, OnMapReadyCallback {
+public class AddFragment extends Fragment implements OnMapReadyCallback {
     private String landmarkName, landmarkDescription, location, dateVisited;
     private double price, ratingLandmark, ratingTransport, ratingFacility;
     private Button save;
@@ -120,7 +120,7 @@ public class AddFragment extends Fragment, OnMapReadyCallback {
                     app.googleToken,getAddressFromLocation(app.mCurrentLocation),
                     app.mCurrentLocation.getLatitude(),app.mCurrentLocation.getLongitude());
 
-            LandmarkApi.post("/coffees/" + app.googleToken,c);
+            LandmarkApi.post("/coffees/" + app.googleToken,l);
             //startActivity(new Intent(this.getActivity(), Home.class));
             LandmarkApi.get("/coffees/"+ app.googleToken);
             resetFields();
@@ -148,19 +148,6 @@ public class AddFragment extends Fragment, OnMapReadyCallback {
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.logoapp)));
 
     }
-
-    @Override
-    public void setList(List list) {
-        app.landmarkList = list;
-        mMap.clear();
-        addLandmarks(app.landmarkList);
-    }
-
-    @Override
-    public void setLandmark(Landmark landmark) { }
-
-    @Override
-    public void updateUI(Fragment fragment) { }
 
     private void resetFields() {
         name.setText("");
