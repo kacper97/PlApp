@@ -13,6 +13,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import ie.wit.poland.R;
 import ie.wit.poland.fragments.AddFragment;
@@ -27,6 +29,7 @@ public class Home extends Base
 
 
     FragmentTransaction ft;
+    private ImageView googlePhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,16 @@ public class Home extends Base
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //SetUp GooglePhoto and Email for Drawer here
+        googlePhoto = navigationView.getHeaderView(0).findViewById(R.id.googlephoto);
+        LandmarkApi.getGooglePhoto(app.googlePhotoURL,googlePhoto);
+
+        TextView googleName = navigationView.getHeaderView(0).findViewById(R.id.googlename);
+        googleName.setText(app.googleName);
+
+        TextView googleMail = navigationView.getHeaderView(0).findViewById(R.id.googlemail);
+        googleMail.setText(app.googleMail);
 
         ft = getSupportFragmentManager().beginTransaction();
 
