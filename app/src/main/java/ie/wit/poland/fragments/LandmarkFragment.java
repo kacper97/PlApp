@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import ie.wit.poland.adapters.LandmarkListAdapter;
@@ -37,6 +39,7 @@ public class LandmarkFragment  extends Fragment implements
     public ListView listView;
     public LandmarkFilter landmarkFilter;
     public boolean favourites = false;
+    public View v;
 
     public LandmarkFragment() {
         // Required empty public constructor
@@ -65,11 +68,19 @@ public class LandmarkFragment  extends Fragment implements
     {
         super.onAttach(context);
         this.activity = (Base) context;
+        LandmarkApi.attachListener(this);
+        LandmarkApi.attachDialog(activity.loader);
+    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        LandmarkApi.detachListener();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LandmarkApi.get("/coffees/" + app.googleToken);
     }
 
     @Override
@@ -77,30 +88,33 @@ public class LandmarkFragment  extends Fragment implements
     {
 
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
-        getActivity().setTitle(R.string.recentlyViewedLbl);
+        listView = v.findViewById(R.id.homeList);
+        updateView();
+        return v;
+    }
+
+    private void updateView() {
         listAdapter = new LandmarkListAdapter(activity, this, activity.app.landmarkList);
         landmarkFilter = new LandmarkFilter(activity.app.landmarkList,"all",listAdapter);
-
-
 
         if (favourites) {
             getActivity().setTitle("Favourite Landmark's");
             landmarkFilter.setFilter("favourites"); // Set the filter text field from 'all' to 'favourites'
             landmarkFilter.filter(null); // Filter the data, but don't use any prefix
-            listAdapter.notifyDataSetChanged(); // Update the adapter
+          //  listAdapter.notifyDataSetChanged(); // Update the adapter
         }
-        //setRandomLandmark();
-
-        listView = v.findViewById(R.id.homeList);
         setListView(v);
+        setSwipeRefresh(v);
+        //setRandomLandmark();
+        if(!favourites)
+            getActivity().setTitle(R.string.recentlyViewedLbl);
+        else
+            getActivity().setTitle(R.string.favouriteLandmarkLbl);
 
 
-       // checkEmptyList(v);
-
-
-        return v;
-
+        listAdapter.notifyDataSetChanged(); // Update the adapter
     }
+
 
 
     @Override
@@ -108,6 +122,13 @@ public class LandmarkFragment  extends Fragment implements
     {
         super.onStart();
     }
+
+    public void onResume() {
+        super.onResume();
+        LandmarkApi.attachListener(this);
+        updateView();
+    }
+
 
     @Override
     public void onClick(View view)
@@ -128,10 +149,8 @@ public class LandmarkFragment  extends Fragment implements
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                activity.app.landmarkList.remove(landmark); // remove from our list
-                listAdapter.landmarkList.remove(landmark); // update adapters data
-                setRandomLandmark();
-                listAdapter.notifyDataSetChanged(); // refresh adapter
+                LandmarkApi.delete("/coffees/" + app.googleToken +
+                        "/" + landmark._id,app.googleToken);
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener()
         {
@@ -179,12 +198,11 @@ public class LandmarkFragment  extends Fragment implements
         {
             if (listView.isItemChecked(i))
             {
-                activity.app.landmarkList.remove(listAdapter.getItem(i));
-                if (activity instanceof Favourites)
-                    listAdapter.landmarkList.remove(listAdapter.getItem(i));
+                LandmarkApi.delete("/coffees/" + app.googleToken
+                        + "/" + listAdapter.getItem(i)._id,app.googleToken);
             }
         }
-        setRandomLandmark();
+        LandmarkApi.get("/coffees/" + app.googleToken);
         listAdapter.notifyDataSetChanged();  // refresh adapter
 
         actionMode.finish();
@@ -195,30 +213,36 @@ public class LandmarkFragment  extends Fragment implements
 
     }
 
-    public void setRandomLandmark() {
+    @Override
+    public void setList(List list) {
+        app.coffeeList = list;
+    }
 
-        ArrayList<Landmark> landmarkList = new ArrayList<>();
+    @Override
+    public void setLandmark(Landmark landmark) {
+    }
 
-        for(Landmark l : activity.app.landmarkList)
-            if (l.favourite)
-                landmarkList.add(l);
+    @Override
+    public void updateUI(Fragment fragment) {
+        fragment.onResume();
+        checkSwipeRefresh(v);
+    }
 
-        if (activity instanceof Favourites)
-            if( !landmarkList.isEmpty()) {
-                Landmark randomLandmark = landmarkList.get(new Random()
-                        .nextInt(landmarkList.size()));
-
-                ((TextView) getActivity().findViewById(R.id.favouriteLandmarkName)).setText(randomLandmark.landmarkName);
-                ((TextView) getActivity().findViewById(R.id.favouriteLandmarkDescription)).setText(randomLandmark.landmarkDescription);
-                ((TextView) getActivity().findViewById(R.id.favouritePrice)).setText("€ " + randomLandmark.price);
-                ((TextView) getActivity().findViewById(R.id.favouriteLandmarkRating)).setText(randomLandmark.ratingLandmark + " *");
+    public void setSwipeRefresh(View v)
+    {
+        SwipeRefreshLayout swipeRefresh = v.findViewById(R.id.swiperefresh);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Landmark.get("/coffees/" + app.googleToken);
             }
-            else {
-                ((TextView) getActivity().findViewById(R.id.favouriteLandmarkName)).setText("N/A");
-                ((TextView) getActivity().findViewById(R.id.favouriteLandmarkDescription)).setText("N/A");
-                ((TextView) getActivity().findViewById(R.id.favouritePrice)).setText("N/A");
-                ((TextView) getActivity().findViewById(R.id.favouriteLandmarkRating)).setText("N/A");
-            }
+        });
+    }
+
+    public void checkSwipeRefresh(View v)
+    {
+        SwipeRefreshLayout swipeRefresh = v.findViewById(R.id.swiperefresh);
+        if (swipeRefresh.isRefreshing()) swipeRefresh.setRefreshing(false);
     }
 
 
