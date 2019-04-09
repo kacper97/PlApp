@@ -14,6 +14,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import ie.wit.poland.R;
 import ie.wit.poland.activities.Home;
 import ie.wit.poland.main.LandmarkApp;
@@ -27,7 +29,7 @@ public class EditFragment extends Fragment {
     private EditText editLandmarkName,editDescription,editLandmarkPrice,editLandmarkLocation,editdateVisited;
     private RatingBar editRatingBarLandmark, editRatingBarFacility, editRatingBarTransport;
     public LandmarkApp app;
-
+    public View v;
     private OnFragmentInteractionListener mListener;
 
     public EditFragment() {
@@ -45,58 +47,14 @@ public class EditFragment extends Fragment {
         super.onCreate(savedInstanceState);
         app = (LandmarkApp) getActivity().getApplication();
         if(getArguments() != null)
-            aLandmark = getLandmarkObject(getArguments().getString("landmarkId"));
+            LandmarkApi.get("/coffees/" + app.googleToken + "/" + getArguments().getString("coffeeId"));
         }
-
-    private Landmark getLandmarkObject(String id) {
-
-        for (Landmark l : app.landmarkList)
-            // app.FirebaseDB.getALandmark();
-            if (l.landmarkId.equalsIgnoreCase(id))
-                return l;
-
-
-        return null;
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_edit,container,false);
-
-        ((TextView)v.findViewById(R.id.editLandmarkName)).setText(aLandmark.landmarkName);
-
-         editLandmarkName = v.findViewById(R.id.editLandmarkName);
-        editDescription =  v.findViewById(R.id.editDescription);
-         editLandmarkPrice = v.findViewById(R.id.editLandmarkPrice);
-         editLandmarkLocation =  v.findViewById(R.id.editLandmarkLocation);
-        editdateVisited =  v.findViewById(R.id.editLandmarkDate);
-         editRatingBarLandmark = v.findViewById(R.id.editRatingBarLandmark);
-         editRatingBarTransport = v.findViewById(R.id.editRatingBarTransport);
-         editRatingBarFacility =v.findViewById(R.id.editRatingBarFacilities);
-
-        editLandmarkName.setText(aLandmark.landmarkName);
-        editDescription.setText(aLandmark.landmarkDescription);
-        editLandmarkPrice.setText(""+ aLandmark.price);
-        editLandmarkLocation.setText(aLandmark.location);
-        editdateVisited.setText(aLandmark.location);
-        editRatingBarLandmark.setRating((float)aLandmark.ratingLandmark);
-        editRatingBarTransport.setRating((float)aLandmark.ratingFacility);
-        editRatingBarFacility.setRating((float)aLandmark.ratingTransport);
-
-        editFavourite = v.findViewById(R.id.editFavourite);
-
-        if (aLandmark.favourite==true) {
-            editFavourite.setImageResource(R.drawable.favourites_72_on);
-            isFavourite = true;
-        } else {
-            editFavourite.setImageResource(R.drawable.favourites_72);
-            isFavourite = false;
-        }
-
-
         return v;
     }
 
@@ -127,13 +85,26 @@ public class EditFragment extends Fragment {
                 aLandmark.ratingFacility = ratingFacility;
                 aLandmark.ratingTransport = ratingTransport;
 
+                LandmarkApi.put("/coffees/" + app.googleToken + "/" + aLandmark._id, aLandmark,app.googleToken);
+
+
                 if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                    getFragmentManager().popBackStack();
+                    getActivity().getSupportFragmentManager().popBackStack();
                     return;
                 }
             }
         } else
             Toast.makeText(getActivity(), "You must Enter Something for Name and Shop", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setList(List list) {
+        app.landmarkList = list;
+    }
+
+    @Override
+    public void setCoffee(Landmark landmark) {
+        aLandmark = landmark;
     }
 
 
@@ -169,8 +140,42 @@ public class EditFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        LandmarkApi.detachListeneR();
     }
 
+    @Override
+    public void updateUI(Fragment fragment) {
+        ((TextView)v.findViewById(R.id.editLandmarkName)).setText(aLandmark.landmarkName);
+
+        editLandmarkName = v.findViewById(R.id.editLandmarkName);
+        editDescription =  v.findViewById(R.id.editDescription);
+        editLandmarkPrice = v.findViewById(R.id.editLandmarkPrice);
+        editLandmarkLocation =  v.findViewById(R.id.editLandmarkLocation);
+        editdateVisited =  v.findViewById(R.id.editLandmarkDate);
+        editRatingBarLandmark = v.findViewById(R.id.editRatingBarLandmark);
+        editRatingBarTransport = v.findViewById(R.id.editRatingBarTransport);
+        editRatingBarFacility =v.findViewById(R.id.editRatingBarFacilities);
+
+        editLandmarkName.setText(aLandmark.landmarkName);
+        editDescription.setText(aLandmark.landmarkDescription);
+        editLandmarkPrice.setText(""+ aLandmark.price);
+        editLandmarkLocation.setText(aLandmark.location);
+        editdateVisited.setText(aLandmark.location);
+        editRatingBarLandmark.setRating((float)aLandmark.ratingLandmark);
+        editRatingBarTransport.setRating((float)aLandmark.ratingFacility);
+        editRatingBarFacility.setRating((float)aLandmark.ratingTransport);
+
+        editFavourite = v.findViewById(R.id.editFavourite);
+
+        if (aLandmark.favourite==true) {
+            editFavourite.setImageResource(R.drawable.favourites_72_on);
+            isFavourite = true;
+        } else {
+            editFavourite.setImageResource(R.drawable.favourites_72);
+            isFavourite = false;
+        }
+
+    }
     public interface OnFragmentInteractionListener {
         void toggle(View v);
         void editLandmark(View v);

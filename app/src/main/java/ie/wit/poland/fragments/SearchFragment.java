@@ -22,6 +22,7 @@ public class SearchFragment extends LandmarkFragment
 
     String selected;
     SearchView searchView;
+    View v;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -39,9 +40,10 @@ public class SearchFragment extends LandmarkFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View v = inflater.inflate(R.layout.fragment_search,container,false);
+        v = inflater.inflate(R.layout.fragment_search,container,false);
         listView = v.findViewById(R.id.searchList);
         setListView(v);
+        setSwipeRefresh(v);
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
                 .createFromResource(getActivity(), R.array.landmarkTypes,
                         android.R.layout.simple_spinner_item);
@@ -115,6 +117,11 @@ public class SearchFragment extends LandmarkFragment
     public void deleteLandmarks(ActionMode actionMode) {
         super.deleteLandmarks(actionMode);
         checkSelected(selected);
+    }
+    @Override
+    public void updateUI(Fragment fragment) {
+        super.updateUI(fragment);
+        checkSwipeRefresh(v);
     }
 
 }
