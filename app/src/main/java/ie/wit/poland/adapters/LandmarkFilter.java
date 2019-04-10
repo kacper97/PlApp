@@ -16,16 +16,15 @@ public class LandmarkFilter extends Filter {
     private Query                query;
     public LandmarkFragment        fragment;
 
-    public LandmarkFilter(Query landmarkList, String filterText
-            , LandmarkListAdapter adapter, LandmarkFragment fragment) {
+    public LandmarkFilter(Query landmarkQuery, String filterText
+            ,LandmarkListAdapter adapter,LandmarkFragment fragment) {
         super();
-        this.query = landmarkList;
+        this.query = landmarkQuery;
         this.filterText = filterText;
         this.adapter = adapter;
         this.fragment = fragment;
+
     }
-
-
     public void setFilter(String filterText) {
         this.filterText = filterText;
     }

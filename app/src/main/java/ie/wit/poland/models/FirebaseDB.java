@@ -39,9 +39,9 @@ public class FirebaseDB {
 
     //Check to see if the Firebase User exists in the Database
     //if not, create a new User
-    public void checkUser(final String userid,final String username,final String email) {
-        Log.v(TAG, "checkUser ID == " + userid);
-        mFirebaseDatabase.child("users").child(userid).addListenerForSingleValueEvent(
+    public void checkUser(final String email) {
+        Log.v(TAG, "checkUser ID == " + email);
+        mFirebaseDatabase.child("users").child(email).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

@@ -14,6 +14,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.view.ActionMode;
 
+import com.google.firebase.database.Query;
+
 import ie.wit.poland.R;
 import ie.wit.poland.adapters.LandmarkFilter;
 
@@ -23,6 +25,7 @@ public class SearchFragment extends LandmarkFragment
     String selected;
     SearchView searchView;
     View v;
+    private Query query;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -85,10 +88,13 @@ public class SearchFragment extends LandmarkFragment
         super.onStart();
     }
 
-   // @Override
-  //  public void onResume(){
-    //    landmarkFilter = new LandmarkFilter(query, "all", listAdapter,listAdapter);
-  //  }
+   @Override
+    public void onResume() {
+       super.onResume();
+
+       query = app.FirebaseDB.getFavouriteLandmarks();
+     //  landmarkFilter = new LandmarkFilter(query, "all", listAdapter,frag);
+   }
 
 
 

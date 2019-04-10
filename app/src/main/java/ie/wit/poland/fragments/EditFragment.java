@@ -108,7 +108,7 @@ public class EditFragment extends Fragment {
 
 
     public void toggle(View v) {
-
+            app.FirebaseDB.toggleFavourite(aLandmark.landmarkId,isFavourite);
         if (isFavourite) {
             aLandmark.favourite = false;
             Toast.makeText(getActivity(), "Removed From Favourites", Toast.LENGTH_SHORT).show();

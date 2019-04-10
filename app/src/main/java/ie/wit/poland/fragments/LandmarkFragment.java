@@ -28,6 +28,7 @@ import ie.wit.poland.activities.Home;
 import ie.wit.poland.adapters.LandmarkListAdapter;
 import ie.wit.poland.R;
 import ie.wit.poland.main.LandmarkApp;
+import ie.wit.poland.models.FirebaseListener;
 import ie.wit.poland.models.Landmark;
 import ie.wit.poland.adapters.LandmarkFilter;
 
@@ -45,8 +46,7 @@ public class LandmarkFragment  extends Fragment implements
     public View v;
     public Home activity;
     public LandmarkApp app;
-    private Object query;
-
+    public FirebaseListener mFBDBListener;
 
     public LandmarkFragment() {
         // Required empty public constructor
@@ -75,20 +75,18 @@ public class LandmarkFragment  extends Fragment implements
     {
         super.onAttach(context);
         this.activity = (Home) context;
-        query = app.FirebaseDB.getAllLandmarks();
+        app.FirebaseDB.attachListener( mFBDBListener );
 
     }
     @Override
     public void onDetach() {
         super.onDetach();
-        query = app.FirebaseDB.getAllLandmarks();
-
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        query = app.FirebaseDB.getAllLandmarks();
+        app.FirebaseDB.getAllLandmarks();
     }
 
     @Override
@@ -132,7 +130,7 @@ public class LandmarkFragment  extends Fragment implements
 
     public void onResume() {
         super.onResume();
-        query = app.FirebaseDB.getAllLandmarks();
+         app.FirebaseDB.getAllLandmarks();
 
         updateView();
     }
