@@ -32,6 +32,7 @@ import java.util.List;
 import ie.wit.poland.R;
 import ie.wit.poland.activities.Home;
 import ie.wit.poland.main.LandmarkApp;
+import ie.wit.poland.models.FirebaseListener;
 import ie.wit.poland.models.Landmark;
 
 public class AddFragment extends Fragment implements OnMapReadyCallback {
@@ -43,8 +44,7 @@ public class AddFragment extends Fragment implements OnMapReadyCallback {
     private LandmarkApp app;
     private GoogleMap mMap;
     public Home activity;
-    private Query query;
-
+    public FirebaseListener mFBDBListener;
     public AddFragment() {
         // Required empty public constructor
     }
@@ -67,14 +67,14 @@ public class AddFragment extends Fragment implements OnMapReadyCallback {
     {
         super.onAttach(context);
         this.activity = (Home) context;
-        query = app.FirebaseDB.getAllLandmarks();
+      app.FirebaseDB.attachListener(mFBDBListener);
 
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        query = app.FirebaseDB.getAllLandmarks();
+         app.FirebaseDB.getAllLandmarks();
     }
 
     @Override
@@ -148,6 +148,7 @@ public class AddFragment extends Fragment implements OnMapReadyCallback {
                     .title(l.landmarkName + " €" + l.price)
                     .snippet(l.landmarkName + " " + l.location)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.logoapp)));
+        app.FirebaseDB.getAllLandmarksSnapshot();
     }
 
     private void resetFields() {

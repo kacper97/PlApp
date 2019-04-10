@@ -75,7 +75,7 @@ public class LandmarkFragment  extends Fragment implements
     {
         super.onAttach(context);
         this.activity = (Home) context;
-        app.FirebaseDB.attachListener( mFBDBListener );
+//        app.FirebaseDB.attachListener( mFBDBListener );
 
     }
     @Override
@@ -86,7 +86,7 @@ public class LandmarkFragment  extends Fragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        app.FirebaseDB.getAllLandmarks();
+//        app.FirebaseDB.getAllLandmarksSnapshot();
     }
 
     @Override
@@ -100,7 +100,7 @@ public class LandmarkFragment  extends Fragment implements
     }
 
     private void updateView() {
-        listAdapter = new LandmarkListAdapter(activity, this, app.landmarkList);
+       // listAdapter = new LandmarkListAdapter(activity, this, app.landmarkList);
 
         if (favourites) {
             getActivity().setTitle("Favourite Landmark's");
