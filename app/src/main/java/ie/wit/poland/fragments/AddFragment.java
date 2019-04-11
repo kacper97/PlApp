@@ -155,11 +155,4 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
         return strAddress;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        titleBar = (TextView) getActivity().findViewById(R.id.searchBarTV);
-        titleBar.setText(R.string.addALandmark);
-    }
 }
