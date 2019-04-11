@@ -35,7 +35,7 @@ import ie.wit.poland.main.LandmarkApp;
 import ie.wit.poland.models.FirebaseListener;
 import ie.wit.poland.models.Landmark;
 
-public class AddFragment extends Fragment implements OnMapReadyCallback {
+public class AddFragment extends Fragment implements OnMapReadyCallback ,View.OnClickListener {
     private String landmarkName, landmarkDescription, location, dateVisited;
     private double price, ratingLandmark, ratingTransport, ratingFacility;
     private Button save;
@@ -179,5 +179,10 @@ public class AddFragment extends Fragment implements OnMapReadyCallback {
         }
 
         return strAddress;
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

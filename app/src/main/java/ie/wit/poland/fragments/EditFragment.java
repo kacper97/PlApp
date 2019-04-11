@@ -14,58 +14,41 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Attr;
-import org.xml.sax.helpers.AttributeListImpl;
+import com.google.firebase.database.DataSnapshot;
 
-import java.security.KeyStore;
-import java.security.cert.Extension;
-import java.time.Month;
-import java.time.chrono.Era;
-import java.util.List;
-import java.util.Map;
-import java.util.zip.Checksum;
 
 import ie.wit.poland.R;
 import ie.wit.poland.activities.Home;
 import ie.wit.poland.main.LandmarkApp;
+import ie.wit.poland.models.FirebaseListener;
 import ie.wit.poland.models.Landmark;
 
-public class EditFragment extends Fragment {
+public class EditFragment extends Fragment implements FirebaseListener {
 
     public Landmark aLandmark;
     public boolean isFavourite;
     public ImageView editFavourite;
     private EditText editLandmarkName,editDescription,editLandmarkPrice,editLandmarkLocation,editdateVisited;
     private RatingBar editRatingBarLandmark, editRatingBarFacility, editRatingBarTransport;
-    public LandmarkApp app;
-    public View v;
+    public LandmarkApp app = LandmarkApp.getInstance();
+
     private OnFragmentInteractionListener mListener;
+   public String      landmarkKey;
 
 
     public EditFragment() {
         // Required empty public constructor
     }
 
-    public static EditFragment newInstance(Bundle coffeeBundle) {
+    public static EditFragment newInstance(Bundle landmarkBundle) {
         EditFragment fragment = new EditFragment();
-        fragment.setArguments(coffeeBundle);
+        fragment.setArguments(landmarkBundle);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        app = (LandmarkApp) getActivity().getApplication();
-        if(getArguments() != null)
-            app.FirebaseDB.getALandmark(aLandmark.landmarkId);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_edit,container,false);
-        return v;
     }
 
     public void editLandmark(View v) {
@@ -89,26 +72,23 @@ public class EditFragment extends Fragment {
                 aLandmark.landmarkName = landmarkName;
                 aLandmark.landmarkDescription = landmarkDescritpion;
                 aLandmark.price = price;
-                aLandmark.location =location;
-                aLandmark.dateVisited=dateVisited;
+                aLandmark.location = location;
+                aLandmark.dateVisited = dateVisited;
                 aLandmark.ratingLandmark = ratingLandmark;
                 aLandmark.ratingFacility = ratingFacility;
                 aLandmark.ratingTransport = ratingTransport;
 
-                app.FirebaseDB.updateALandmark(aLandmark.landmarkId,aLandmark);
-
-                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                    getActivity().getSupportFragmentManager().popBackStack();
-                    return;
-                }
             }
+                app.FirebaseDB.updateALandmark(landmarkKey,aLandmark);
+
+
         } else
             Toast.makeText(getActivity(), "You must Enter Something for Name and Shop", Toast.LENGTH_SHORT).show();
     }
 
 
     public void toggle(View v) {
-            app.FirebaseDB.toggleFavourite(aLandmark.landmarkId,isFavourite);
+            app.FirebaseDB.toggleFavourite(landmarkKey,isFavourite);
         if (isFavourite) {
             aLandmark.favourite = false;
             Toast.makeText(getActivity(), "Removed From Favourites", Toast.LENGTH_SHORT).show();
@@ -125,6 +105,7 @@ public class EditFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        app.FirebaseDB.attachListener(this);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
@@ -133,6 +114,26 @@ public class EditFragment extends Fragment {
         }
     }
 
+    public void updateUI() {
+        editLandmarkName.setText(aLandmark.landmarkName);
+        editDescription.setText(aLandmark.landmarkDescription);
+        editLandmarkLocation.setText(aLandmark.location);
+        editdateVisited.setText(aLandmark.dateVisited);
+        editLandmarkPrice.setText(""+aLandmark.price);
+        editRatingBarLandmark.setRating((float)aLandmark.ratingLandmark);
+        editRatingBarTransport.setRating((float)aLandmark.ratingTransport);
+        editRatingBarFacility.setRating((float)aLandmark.ratingFacility);
+
+        if (aLandmark.favourite == true) {
+            editFavourite.setImageResource(R.drawable.favourites_72_on);
+            isFavourite = true;
+        } else {
+            editFavourite.setImageResource(R.drawable.favourites_72);
+            isFavourite = false;
+        }
+    }
+
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -140,10 +141,10 @@ public class EditFragment extends Fragment {
        // aLandmark = dataSnapshot.getValue(Landmark.class);
         }
 
-    //@Override
-    public void updateUI(Fragment fragment) {
-        ((TextView)v.findViewById(R.id.editLandmarkName)).setText(aLandmark.landmarkName);
-
+        @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_edit, container, false);
         editLandmarkName = v.findViewById(R.id.editLandmarkName);
         editDescription =  v.findViewById(R.id.editDescription);
         editLandmarkPrice = v.findViewById(R.id.editLandmarkPrice);
@@ -171,8 +172,19 @@ public class EditFragment extends Fragment {
             editFavourite.setImageResource(R.drawable.favourites_72);
             isFavourite = false;
         }
+        return v;
+    }
+
+    @Override
+    public void onSuccess(DataSnapshot dataSnapshot) {
 
     }
+
+    @Override
+    public void onFailure() {
+
+    }
+
     public interface OnFragmentInteractionListener {
         void toggle(View v);
         void editLandmark(View v);

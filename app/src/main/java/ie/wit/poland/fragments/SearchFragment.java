@@ -61,7 +61,7 @@ public class SearchFragment extends LandmarkFragment
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(this);
 
-        EditText nameText = (EditText) v.findViewById(R.id.searchCoffeeNameEditText);
+        EditText nameText = (EditText) v.findViewById(R.id.searchLandmarkNameEditText);
         nameText.addTextChangedListener(this);
 
         listView = (ListView) v.findViewById(R.id.landmarkList); //Bind to the list on our Search layout
