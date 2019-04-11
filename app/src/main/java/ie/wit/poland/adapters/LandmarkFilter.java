@@ -1,4 +1,5 @@
 package ie.wit.poland.adapters;
+
 import android.widget.Filter;
 
 import com.google.firebase.database.Query;
