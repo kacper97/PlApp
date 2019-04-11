@@ -20,5 +20,13 @@ Polish landmarks is a mobile app connected to firebase, allowing users to do sev
 - Splash Screen functionality
 - User can change password
 - User can delete account
+- User has now a list from firebase
+- User can search the list
+- User can edit the firebase list 
+- User can add onto the firebase list
+- User can delete from the firebase list
+- User can see where the landmark is on the google maps api
+- User can sign in with google
+
 
 References : DDrohan.github.io/ 
