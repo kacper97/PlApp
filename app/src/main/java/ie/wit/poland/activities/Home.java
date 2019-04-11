@@ -113,10 +113,9 @@ public class Home extends AppCompatActivity
         // http://stackoverflow.com/questions/32944798/switch-between-fragments-with-onnavigationitemselected-in-new-navigation-drawer
 
         int id = item.getItemId();
-
+        Fragment fragment;
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        Fragment fragment;
         if (id == R.id.nav_home) {
             fragment = LandmarkFragment.newInstance();
             ((LandmarkFragment) fragment).favourites = false;
