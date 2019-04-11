@@ -68,10 +68,10 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
         // Inflate the layout for this fragment
         View v = null;
         v = inflater.inflate(R.layout.fragment_home, container, false);
-        listView = (ListView) v.findViewById(R.id.landmarkList);
+        listView = (ListView) v.findViewById(R.id.homeList);
 
-        mSwipeRefreshLayout =   (SwipeRefreshLayout) v.findViewById(R.id.landmark_swipe_refresh_layout);
-        setSwipeRefreshLayout();
+     //   mSwipeRefreshLayout =   (SwipeRefreshLayout) v.findViewById(R.id.landmark_swipe_refresh_layout);
+     //   setSwipeRefreshLayout();
 
         deleteListener = new View.OnClickListener() {
             @Override
@@ -112,7 +112,7 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
 
     public void updateUI(Query query) {
 
-        titleBar = (TextView)getActivity().findViewById(R.id.recentAddedBarTextView);
+        titleBar = (TextView)getActivity().findViewById(R.id.recentlyAdded);
         titleBar.setText(R.string.recentlyViewedLbl);
 
         listAdapter = new LandmarkListAdapter(getActivity(), deleteListener, query);
