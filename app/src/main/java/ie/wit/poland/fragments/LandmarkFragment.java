@@ -22,6 +22,8 @@ import android.widget.TextView;
 
 import com.google.firebase.database.Query;
 
+import java.util.Objects;
+
 import ie.wit.poland.R;
 import ie.wit.poland.adapters.LandmarkFilter;
 import ie.wit.poland.adapters.LandmarkListAdapter;
@@ -70,8 +72,8 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
         v = inflater.inflate(R.layout.fragment_home, container, false);
         listView = (ListView) v.findViewById(R.id.homeList);
 
-     //   mSwipeRefreshLayout =   (SwipeRefreshLayout) v.findViewById(R.id.landmark_swipe_refresh_layout);
-     //   setSwipeRefreshLayout();
+        mSwipeRefreshLayout =   (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
+        setSwipeRefreshLayout();
 
         deleteListener = new View.OnClickListener() {
             @Override
@@ -112,8 +114,8 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
 
     public void updateUI(Query query) {
 
-        titleBar = (TextView)getActivity().findViewById(R.id.recentlyAdded);
-        titleBar.setText(R.string.recentlyViewedLbl);
+     //   titleBar = (TextView)getActivity().findViewById(R.id.recentlyAdded);
+     //   titleBar.setText(R.string.recentlyViewedLbl);
 
         listAdapter = new LandmarkListAdapter(getActivity(), deleteListener, query);
         setListView(listView);
@@ -137,7 +139,7 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
         listview.setMultiChoiceModeListener(this);
         listview.setAdapter (listAdapter);
         listview.setOnItemClickListener(this);
-        listview.setEmptyView(getActivity().findViewById(R.id.emptyList));
+        listview.setEmptyView(Objects.requireNonNull(getActivity()).findViewById(R.id.emptyList));
     }
 
     @Override
