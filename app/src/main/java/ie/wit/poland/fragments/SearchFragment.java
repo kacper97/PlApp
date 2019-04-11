@@ -3,9 +3,14 @@ package ie.wit.poland.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,12 +25,9 @@ import ie.wit.poland.R;
 import ie.wit.poland.adapters.LandmarkFilter;
 
 public class SearchFragment extends LandmarkFragment
-        implements AdapterView.OnItemSelectedListener  {
+        implements AdapterView.OnItemSelectedListener, TextWatcher {
 
     String selected;
-    SearchView searchView;
-    View v;
-    private Query query;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -42,11 +44,12 @@ public class SearchFragment extends LandmarkFragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        v = inflater.inflate(R.layout.fragment_search,container,false);
-        listView = v.findViewById(R.id.searchList);
-        setListView(v);
-        setSwipeRefresh(v);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        super.onCreateView(inflater, container, savedInstanceState);
+
+        View v = inflater.inflate(R.layout.fragment_search, container, false);
+
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
                 .createFromResource(getActivity(), R.array.landmarkTypes,
                         android.R.layout.simple_spinner_item);
@@ -54,31 +57,22 @@ public class SearchFragment extends LandmarkFragment
         spinnerAdapter
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        Spinner spinner = v.findViewById(R.id.searchSpinner);
+        Spinner spinner = ((Spinner) v.findViewById(R.id.searchSpinner));
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(this);
 
-        searchView = v.findViewById(R.id.searchView);
-        searchView.setQueryHint("Search your Landmarks Here");
+        EditText nameText = (EditText) v.findViewById(R.id.searchCoffeeNameEditText);
+        nameText.addTextChangedListener(this);
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        listView = (ListView) v.findViewById(R.id.landmarkList); //Bind to the list on our Search layout
 
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                landmarkFilter.filter(query);
-                return false;
-            }
+        setListView(listView);
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                landmarkFilter.filter(newText);
-                return false;
-            }
-        });
+        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.landmark_swipe_refresh_layout);
+        setSwipeRefreshLayout();
 
         return v;
     }
-
 
     @Override
     public void onAttach(Context c) { super.onAttach(c); }
@@ -92,8 +86,10 @@ public class SearchFragment extends LandmarkFragment
     public void onResume() {
        super.onResume();
 
-       query = app.FirebaseDB.getFavouriteLandmarks();
-     //  landmarkFilter = new LandmarkFilter(query, "all", listAdapter,frag);
+       titleBar = (TextView)getActivity().findViewById(R.id.recentAddedBarTextView);
+       titleBar.setText(R.string.searchLandmarksLbl);
+
+       landmarkFilter = new LandmarkFilter(query,"all",listAdapter,this);
    }
 
 
@@ -107,7 +103,7 @@ public class SearchFragment extends LandmarkFragment
                 landmarkFilter.setFilter("favourites");
             }
 
-            String filterText = ((SearchView)activity
+            String filterText = ((SearchView)getActivity()
                     .findViewById(R.id.searchView)).getQuery().toString();
 
             if(filterText.length() > 0)
@@ -131,4 +127,18 @@ public class SearchFragment extends LandmarkFragment
         super.deleteLandmarks(actionMode);
         checkSelected(selected);}
 
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
+    }
 }

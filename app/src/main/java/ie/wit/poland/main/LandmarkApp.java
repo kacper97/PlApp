@@ -19,7 +19,6 @@ public class LandmarkApp extends Application
 {
     public FirebaseUser FirebaseUser ;
     public FirebaseAuth mFirebaseAuth;
-    private static final String TAG =LandmarkApp.class.getName();
     public List <Landmark>  landmarkList = new ArrayList<>();
     public FirebaseDB FirebaseDB;
     /* Client used to interact with Google APIs. */

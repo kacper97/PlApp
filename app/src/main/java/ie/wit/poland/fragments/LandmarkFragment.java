@@ -76,7 +76,7 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
         deleteListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onCoffeeDelete (view.getTag().toString());
+                onLandmarkDelete (view.getTag().toString());
             }
         };
 
@@ -151,10 +151,10 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
         super.onStart();
     }
 
-    public void onCoffeeDelete(final String landmarkKey)
+    public void onLandmarkDelete(final String landmarkKey)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Are you sure you want to Delete this Coffee ?");
+        builder.setMessage("Are you sure you want to Delete this Landmark ?");
         builder.setCancelable(false);
 
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
@@ -177,7 +177,7 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Bundle activityInfo = new Bundle();
-        activityInfo.putString("coffeeKey", (String) view.getTag());
+        activityInfo.putString("landmarkKey", (String) view.getTag());
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         Fragment fragment = EditFragment.newInstance(activityInfo);
@@ -207,14 +207,14 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
         switch (menuItem.getItemId())
         {
             case R.id.menu_item_delete_landmark:
-                deleteCoffees(actionMode);
+                deleteLandmarks(actionMode);
                 return true;
             default:
                 return false;
         }
     }
 
-    public void deleteCoffees(ActionMode actionMode)
+    public void deleteLandmarks(ActionMode actionMode)
     {
         for (int i = listAdapter.getCount() - 1; i >= 0; i--) {
             if (listView.isItemChecked(i))
