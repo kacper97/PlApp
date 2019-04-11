@@ -6,18 +6,18 @@ import com.google.firebase.database.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-import ie.wit.poland.fragments.LandmarkFragment;
-import ie.wit.poland.models.FirebaseDB;
-import ie.wit.poland.models.Landmark;
+import ie.wit.poland.activities.LandmarkFragment;
+
 
 public class LandmarkFilter extends Filter {
+
     private String                 filterText;
     public LandmarkListAdapter     adapter;
     private Query                query;
     public LandmarkFragment        fragment;
 
     public LandmarkFilter(Query landmarkQuery, String filterText
-            ,LandmarkListAdapter adapter,LandmarkFragment fragment) {
+            , LandmarkListAdapter adapter, LandmarkFragment fragment) {
         super();
         this.query = landmarkQuery;
         this.filterText = filterText;
@@ -31,6 +31,7 @@ public class LandmarkFilter extends Filter {
 
     @Override
     protected FilterResults performFiltering(CharSequence prefix) {
+
         FilterResults results = new FilterResults();
 
         if(prefix != null)

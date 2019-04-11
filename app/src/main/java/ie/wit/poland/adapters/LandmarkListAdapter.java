@@ -1,18 +1,16 @@
 package ie.wit.poland.adapters;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.view.View.OnClickListener;
+
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.database.Query;
 
 import java.text.DecimalFormat;
@@ -22,19 +20,21 @@ import ie.wit.poland.models.Landmark;
 
 
 public class LandmarkListAdapter extends FirebaseListAdapter<Landmark> {
-    public Query query ;
 
+    private OnClickListener deleteListener;
+    public Query query;
 
-    public LandmarkListAdapter(@NonNull FirebaseListOptions<Landmark> options) {
-        super(options);
-       // int landmarkrow = R.layout.landmarkrow;
-       // Log.v("coffeemate","Creating Adapter with :" + query);
-      //  this.query = query;
+    public LandmarkListAdapter(Activity context, OnClickListener deleteListener,
+                               Query query) {
+        super(context, Landmark.class, R.layout.landmarkrow, query);
+        Log.v("landmark", "Creating Adapter with :" + query);
+        this.deleteListener = deleteListener;
+        this.query = query;
     }
 
     @Override
-    protected void populateView(View row, Landmark landmark,int position) {
-        Log.v("coffeemate","Populating View Adapter with :" + landmark);
+    protected void populateView(View row, Landmark landmark, int position) {
+        Log.v("coffeemate", "Populating View Adapter with :" + landmark);
         //Set the rows TAG to the coffee 'key'
         row.setTag(getRef(position).getKey());
 
@@ -50,10 +50,5 @@ public class LandmarkListAdapter extends FirebaseListAdapter<Landmark> {
             imgIcon.setImageResource(R.drawable.favourites_72);
         else
             imgIcon.setImageResource(R.drawable.favourites_72_on);
-
-
-        //ImageView imgDelete = (ImageView) row.findViewById(R.id.rowFavouriteImg);
-      //  imgDelete.setTag(getRef(position).getKey());
-        //imgDelete.setOnClickListener(imgDelete);
     }
 }

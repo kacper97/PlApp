@@ -12,9 +12,13 @@ import android.util.Log;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LandmarkApp extends Application
 {
+    public FirebaseUser FirebaseUser ;
+    public FirebaseAuth mFirebaseAuth;
     private static final String TAG =LandmarkApp.class.getName();
     public List <Landmark>  landmarkList = new ArrayList<>();
     public FirebaseDB FirebaseDB;
@@ -32,7 +36,6 @@ public class LandmarkApp extends Application
     private static LandmarkApp mInstance;
 
 
-    @Override
     public void onCreate()
     {
         super.onCreate();

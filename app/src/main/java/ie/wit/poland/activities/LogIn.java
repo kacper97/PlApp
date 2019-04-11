@@ -146,7 +146,7 @@ public class LogIn extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             String email = loginemail.getText().toString();
-                            //app.FirebaseDB.checkUser(email);
+                            validateFirebaseUser();
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             Intent i = new Intent(getApplicationContext(),Home.class);
@@ -162,6 +162,16 @@ public class LogIn extends AppCompatActivity {
                         // ...
                     }
                 });
+    }
+
+    private void validateFirebaseUser() {
+        if(app.FirebaseUser == null)
+            app.FirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        final String userName = app.FirebaseUser.getDisplayName();
+        final String userId = app.FirebaseUser.getUid();
+        final String email = app.FirebaseUser.getEmail();
+
     }
 
 

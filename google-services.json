@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "623407042204",
+    "firebase_url": "https://poland-1fc9e.firebaseio.com",
+    "project_id": "poland-1fc9e",
+    "storage_bucket": "poland-1fc9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623407042204:android:c5b98f6cdffcea10",
+        "android_client_info": {
+          "package_name": "ie.wit.poland"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "623407042204-2pflohififhmivc61ht8arsccv3vru7e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ie.wit.poland",
+            "certificate_hash": "975a7ae2ea287f947840f2cbd43d886564162fd6"
+          }
+        },
+        {
+          "client_id": "623407042204-kvnp5lljr7utp79p1np2vfed5gv5mh6o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBegn1bdZ0Jn3tM9xgM97x8aX9kkgEmGPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "623407042204-kvnp5lljr7utp79p1np2vfed5gv5mh6o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

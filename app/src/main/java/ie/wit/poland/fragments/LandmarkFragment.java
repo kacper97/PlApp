@@ -1,11 +1,12 @@
-package ie.wit.poland.fragments;
+package ie.wit.poland.activities.
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,21 +17,18 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.database.Query;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import ie.wit.poland.activities.Home;
-import ie.wit.poland.adapters.LandmarkListAdapter;
 import ie.wit.poland.R;
+import ie.wit.poland.adapters.LandmarkFilter;
+import ie.wit.poland.adapters.LandmarkListAdapter;
+import ie.wit.poland.fragments.EditFragment;
 import ie.wit.poland.main.LandmarkApp;
 import ie.wit.poland.models.FirebaseListener;
 import ie.wit.poland.models.Landmark;
-import ie.wit.poland.adapters.LandmarkFilter;
 
 import static ie.wit.poland.activities.Home.app;
 
@@ -39,14 +37,13 @@ public class LandmarkFragment  extends Fragment implements
         View.OnClickListener,
         AbsListView.MultiChoiceModeListener
 {
+    public Home activity;
     public static LandmarkListAdapter listAdapter;
     public ListView listView;
-    public LandmarkFilter landmarkFilter;
+    public LandmarkFilter coffeeFilter;
     public boolean favourites = false;
     public View v;
-    public Home activity;
     public LandmarkApp app;
-    public FirebaseListener mFBDBListener;
 
     public LandmarkFragment() {
         // Required empty public constructor
@@ -55,10 +52,12 @@ public class LandmarkFragment  extends Fragment implements
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Bundle activityInfo = new Bundle(); // Creates a new Bundle object
-        activityInfo.putString("landmarkId", (String) view.getTag());
+        activityInfo.putString("landmarkKey", (String) view.getTag());
+
         Fragment fragment = EditFragment.newInstance(activityInfo);
         getActivity().setTitle(R.string.editALandmark);
-        getFragmentManager().beginTransaction()
+
+        getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.homeFrame, fragment)
                 .addToBackStack(null)
                 .commit();
@@ -75,52 +74,40 @@ public class LandmarkFragment  extends Fragment implements
     {
         super.onAttach(context);
         this.activity = (Home) context;
-//        app.FirebaseDB.attachListener( mFBDBListener );
-
+      //  aLandmark = dataSnapshot.getValue(Landmark.class);
     }
+
     @Override
     public void onDetach() {
         super.onDetach();
+     //   aLandmark = dataSnapshot.getValue(Landmark.class);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        app.FirebaseDB.getAllLandmarksSnapshot();
-    }
-
-    @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState)
+    public void onCreate(Bundle savedInstanceState)
     {
+        super.onCreate(savedInstanceState);
+        app.FirebaseDB.getAllLandmarks();
+    }
 
-        View v = inflater.inflate(R.layout.fragment_home, parent, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+
+        // Inflate the layout for this fragment
+        v = inflater.inflate(R.layout.fragment_home, parent, false);
         listView = v.findViewById(R.id.homeList);
         updateView();
         return v;
     }
 
-    private void updateView() {
-       // listAdapter = new LandmarkListAdapter(activity, this, app.landmarkList);
-
-        if (favourites) {
-            getActivity().setTitle("Favourite Landmark's");
-            landmarkFilter.setFilter("favourites"); // Set the filter text field from 'all' to 'favourites'
-            landmarkFilter.filter(null); // Filter the data, but don't use any prefix
-          //  listAdapter.notifyDataSetChanged(); // Update the adapter
-        }
-        setListView(v);
-        setSwipeRefresh(v);
-        //setRandomLandmark();
-        if(!favourites)
-            getActivity().setTitle(R.string.recentlyViewedLbl);
-        else
-            getActivity().setTitle(R.string.favouriteLandmarkLbl);
-
-
-        listAdapter.notifyDataSetChanged(); // Update the adapter
+    public void setListView(View view)
+    {
+        listView.setAdapter (listAdapter);
+        listView.setOnItemClickListener(this);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        listView.setMultiChoiceModeListener(this);
+        listView.setEmptyView(view.findViewById(R.id.emptyList));
     }
-
-
 
     @Override
     public void onStart()
@@ -130,22 +117,45 @@ public class LandmarkFragment  extends Fragment implements
 
     public void onResume() {
         super.onResume();
-         app.FirebaseDB.getAllLandmarks();
-
+        FirebaseListener listener;
+        app.FirebaseDB.attachListener(listener);
         updateView();
+        app.FirebaseDB.getALandmark("landmarkKey");
     }
 
+    public void updateView() {
+        listAdapter = new LandmarkListAdapter( );
+       // landmarkFilter = new LandmarkFilter(app.landmarkList,"all",listAdapter);
+
+        if(favourites){
+            Query query = app.FirebaseDB.getFavouriteLandmarks();
+            landmarkFilter.setFilter("favourites"); // Set the filter text field from 'all' to 'favourites'
+            landmarkFilter.filter(null); // Filter the data, but don't use any prefix
+            //  listAdapter.notifyDataSetChanged(); // Update the adapter
+        }
+        setListView(v);
+
+        if(!favourites)
+
+    {
+        getActivity().setTitle(R.string.recentlyViewedLbl);
+    }else
+
+     {
+        getActivity().setTitle(R.string.favouriteLandmarkLbl);
+     }
+        listAdapter.notifyDataSetChanged(); // Update the adapter
+        }
 
     @Override
-    public void onClick(View view)
-    {
-        if (view.getTag() instanceof Landmark)
-        {
+    public void onClick(View view) {
+        if (view.getTag() instanceof Landmark) {
             onLandmarkDelete ((Landmark) view.getTag());
         }
     }
 
-    private void onLandmarkDelete(final Landmark landmark) {
+    public void onLandmarkDelete(final Landmark landmark)
+    {
         String stringName = landmark.landmarkName;
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setMessage("Are you sure you want to Delete the \'Landmark\' " + stringName + "?");
@@ -155,8 +165,7 @@ public class LandmarkFragment  extends Fragment implements
         {
             public void onClick(DialogInterface dialog, int id)
             {
-                 app.FirebaseDB.deleteALandmark(landmark.landmarkId);
-
+                app.FirebaseDB.deleteALandmark("landmarkKey");
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener()
         {
@@ -169,14 +178,12 @@ public class LandmarkFragment  extends Fragment implements
         alert.show();
     }
 
+    /* ************ MultiChoiceModeListener methods (begin) *********** */
     @Override
-    public void onItemCheckedStateChanged(ActionMode actionMode, int position, long id, boolean checked) {
-    }
-
-    @Override
-    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+    public boolean onCreateActionMode(ActionMode actionMode, Menu menu)
+    {
         MenuInflater inflater = actionMode.getMenuInflater();
-        inflater.inflate(R.menu.delete_list_context,menu);
+        inflater.inflate(R.menu.delete_list_context, menu);
         return true;
     }
 
@@ -186,63 +193,45 @@ public class LandmarkFragment  extends Fragment implements
     }
 
     @Override
-    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem)
+    {
+        switch (menuItem.getItemId())
         {
-            switch(menuItem.getItemId())
-            {
-                case R.id.menu_item_delete_landmark:
-                    deleteLandmarks(actionMode);
-                    return true;
-                default:
-                    return false;
-            }
+            case R.id.menu_item_delete_landmark:
+                deleteLandmarks(actionMode);
+                return true;
+            default:
+                return false;
         }
     }
 
-    public void deleteLandmarks(ActionMode actionMode) {
-        for (int i = listAdapter.getCount() - 1; i >= 0; i--)
+    public void deleteLandmarks(ActionMode actionMode)
+    {
+        for (int i = listAdapter.getCount() -1 ; i >= 0; i--)
         {
             if (listView.isItemChecked(i))
             {
-              //  app.FirebaseDB.deleteALandmark(listView.getChildAt(i));
+                app.FirebaseDB.deleteALandmark("landmarkKey");
+
             }
         }
-        listAdapter.notifyDataSetChanged();  // refresh adapter
+        app.FirebaseDB.getAllLandmarks();
+        listAdapter.notifyDataSetChanged(); // refresh adapter
         actionMode.finish();
     }
 
+
     @Override
-    public void onDestroyActionMode(ActionMode actionMode) {
+    public void onDestroyActionMode(ActionMode actionMode)
+    {}
 
-    }
-
-    public void setSwipeRefresh(View v)
-    {
-        SwipeRefreshLayout swipeRefresh = v.findViewById(R.id.swiperefresh);
-        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                app.FirebaseDB.getAllLandmarks();
-            }
-        });
-    }
-
-    public void checkSwipeRefresh(View v)
-    {
-        SwipeRefreshLayout swipeRefresh = v.findViewById(R.id.swiperefresh);
-        if (swipeRefresh.isRefreshing()) swipeRefresh.setRefreshing(false);
-    }
-
-
-    public void setListView(View view)
-    {
-        listView.setAdapter (listAdapter);
-        listView.setOnItemClickListener(this);
-        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        listView.setMultiChoiceModeListener(this);
-        listView.setEmptyView(view.findViewById(R.id.emptyList));
+    @Override
+    public void onItemCheckedStateChanged(ActionMode actionMode, int i, long l, boolean b) {
     }
 
     public void updateUI(Query values) {
     }
+    /* ************ MultiChoiceModeListener methods (end) *********** */
+
+
 }
