@@ -1,6 +1,7 @@
 package ie.wit.poland.activities;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -36,15 +37,16 @@ import ie.wit.poland.fragments.LandmarkFragment;
 import ie.wit.poland.fragments.MapsFragment;
 import ie.wit.poland.fragments.SearchFragment;
 import ie.wit.poland.main.LandmarkApp;
+import ie.wit.poland.models.FirebaseDB;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         EditFragment.OnFragmentInteractionListener {
 
-
-    FragmentTransaction ft;
     public static LandmarkApp app = LandmarkApp.getInstance();
-    public AlertDialog loader;
+    private ImageView googlePhoto;
+    public ProgressDialog dialog;
+    FragmentTransaction ft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,7 @@ public class Home extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =(DrawerLayout)findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -75,13 +77,22 @@ public class Home extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //SetUp GooglePhoto and Email for Drawer here
+        googlePhoto = (ImageView)navigationView.getHeaderView(0).findViewById(R.id.googlephoto);
+        //method to get google photo
+
+        TextView googleName = (TextView)navigationView.getHeaderView(0).findViewById(R.id.googlename);
+        googleName.setText(app.googleName);
+
+        TextView googleMail = (TextView)navigationView.getHeaderView(0).findViewById(R.id.googlemail);
+        googleMail.setText(app.googleMail);
+
+
         ft = getSupportFragmentManager().beginTransaction();
 
         LandmarkFragment fragment = LandmarkFragment.newInstance();
         ft.replace(R.id.homeFrame, fragment);
         ft.commit();
-
-        this.setTitle(R.string.recentlyViewedLbl);
     }
 
     @Override
@@ -103,7 +114,7 @@ public class Home extends AppCompatActivity
 
         int id = item.getItemId();
 
-        ft = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         Fragment fragment;
         if (id == R.id.nav_home) {
@@ -127,7 +138,6 @@ public class Home extends AppCompatActivity
             ft.commit();
 
         } else if (id == R.id.nav_search) {
-
             fragment = SearchFragment.newInstance();
             ((LandmarkFragment) fragment).favourites = false;
             ft.replace(R.id.homeFrame, fragment);
@@ -220,7 +230,7 @@ public class Home extends AppCompatActivity
                         @Override
                         public void onResult(@NonNull Status status) {
                             if (status.isSuccess()) {
-                                //Log.v("coffeemate", "User Logged out");
+
                                 Intent intent = new Intent(Home.this, LogIn.class);
                                 startActivity(intent);
                                 finish();

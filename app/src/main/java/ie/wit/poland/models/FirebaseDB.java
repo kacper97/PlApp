@@ -1,6 +1,8 @@
 package ie.wit.poland.models;
 
+import android.graphics.Bitmap;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +24,6 @@ public class FirebaseDB {
     public DatabaseReference mFirebaseDatabase;
     public static String mFBUserId;
     public FirebaseListener mFBDBListener;
-
 
     public void open() {
         //Set up local caching

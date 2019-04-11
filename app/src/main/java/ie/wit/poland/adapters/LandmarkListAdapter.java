@@ -26,7 +26,7 @@ public class LandmarkListAdapter extends FirebaseListAdapter<Landmark> {
 
     public LandmarkListAdapter(Activity context, OnClickListener deleteListener,
                                Query query) {
-        super(context, Landmark.class, R.layout.landmarkrow, query);
+        super(context, Landmark.class,R.layout.landmarkrow, query);
         Log.v("landmark", "Creating Adapter with :" + query);
         this.deleteListener = deleteListener;
         this.query = query;
@@ -34,7 +34,7 @@ public class LandmarkListAdapter extends FirebaseListAdapter<Landmark> {
 
     @Override
     protected void populateView(View row, Landmark landmark, int position) {
-        Log.v("coffeemate", "Populating View Adapter with :" + landmark);
+        Log.v("Landmark", "Populating View Adapter with :" + landmark);
         //Set the rows TAG to the coffee 'key'
         row.setTag(getRef(position).getKey());
 
@@ -50,5 +50,10 @@ public class LandmarkListAdapter extends FirebaseListAdapter<Landmark> {
             imgIcon.setImageResource(R.drawable.favourites_72);
         else
             imgIcon.setImageResource(R.drawable.favourites_72_on);
+
+        ImageView imgDelete = (ImageView) row.findViewById(R.id.menu_item_delete_landmark);
+        imgDelete.setTag(getRef(position).getKey());
+        imgDelete.setOnClickListener(deleteListener);
+
     }
 }
