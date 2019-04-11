@@ -60,15 +60,15 @@ public class SearchFragment extends LandmarkFragment
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(this);
 
-        EditText nameText = (EditText) v.findViewById(R.id.searchLandmarkNameEditText);
+        TextView nameText = (TextView) v.findViewById(R.id.searchBarTV);
         nameText.addTextChangedListener(this);
 
-        listView = (ListView) v.findViewById(R.id.landmarkList); //Bind to the list on our Search layout
+        listView = (ListView) v.findViewById(R.id.searchList); //Bind to the list on our Search layout
 
         setListView(listView);
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.landmark_swipe_refresh_layout);
-        setSwipeRefreshLayout();
+      //  mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.landmark_swipe_refresh_layout);
+       // setSwipeRefreshLayout();
 
         return v;
     }
@@ -85,7 +85,7 @@ public class SearchFragment extends LandmarkFragment
     public void onResume() {
        super.onResume();
 
-       titleBar = (TextView)getActivity().findViewById(R.id.recentAddedBarTextView);
+       titleBar = (TextView)getActivity().findViewById(R.id.recentlyAdded);
        titleBar.setText(R.string.searchLandmarksLbl);
 
        landmarkFilter = new LandmarkFilter(query,"all",listAdapter,this);

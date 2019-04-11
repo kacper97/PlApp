@@ -5,10 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-
 import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.Query;
