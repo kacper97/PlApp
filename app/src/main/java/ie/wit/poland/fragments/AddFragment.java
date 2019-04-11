@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -39,12 +40,10 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
     private String landmarkName, landmarkDescription, location, dateVisited;
     private double price, ratingLandmark, ratingTransport, ratingFacility;
     private Button save;
+    private TextView    titleBar;
     private EditText name, description, priceAdult, date, locate;
     private RatingBar rateLandmark, rateTransport, rateFacility;
-    private LandmarkApp app;
-    private GoogleMap mMap;
-    public Home activity;
-    public FirebaseListener mFBDBListener;
+    private LandmarkApp app = LandmarkApp.getInstance();
     public AddFragment() {
         // Required empty public constructor
     }
@@ -58,23 +57,6 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        app = (LandmarkApp) getActivity().getApplication();
-    }
-
-
-    @Override
-    public void onAttach(Context context)
-    {
-        super.onAttach(context);
-        this.activity = (Home) context;
-      app.FirebaseDB.attachListener(mFBDBListener);
-
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-         app.FirebaseDB.getAllLandmarks();
     }
 
     @Override
@@ -91,17 +73,12 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
         rateFacility = v.findViewById(R.id.addRatingBarFacilities);
         locate = v.findViewById(R.id.addLandmarkLocation);
         save = v.findViewById(R.id.addALandmarkBtn);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addLandmark();
-            }
-        });
+        save.setOnClickListener(this);
 
         return v;
 
     }
-    public void addLandmark() {
+    public void onClick(View v) {
         landmarkName = name.getText().toString();
         landmarkDescription = description.getText().toString();
         try {
@@ -117,14 +94,13 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
 
         if ((landmarkName.length() > 0) && (landmarkDescription.length() > 0)
                 && (priceAdult.length() > 0)) {
-            Landmark l = new Landmark(landmarkName, landmarkDescription, price, location, ratingLandmark,
+            Landmark l = new Landmark(app.FirebaseDB.mFBUserId,landmarkName, landmarkDescription, price, location, ratingLandmark,
                     ratingTransport, ratingFacility, dateVisited, false,app.googlePhotoURL,
                     app.googleToken,getAddressFromLocation(app.mCurrentLocation),
                     app.mCurrentLocation.getLatitude(),app.mCurrentLocation.getLongitude());
 
-          app.FirebaseDB.addLandmark(l);
+            app.FirebaseDB.addLandmark(l);
             //startActivity(new Intent(this.getActivity(), Home.class));
-            app.FirebaseDB.getAllLandmarks();
             resetFields();
         } else
             Toast.makeText(
@@ -136,11 +112,11 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        app.FirebaseDB.getAllLandmarks();
+        googleMap.clear();
+        addLandmarks(app.landmarkList,googleMap);
     }
 
-    public void addLandmarks(List<Landmark> list)
+    public void addLandmarks(List<Landmark> list,GoogleMap mMap)
     {
         for(Landmark l : list)
             mMap.addMarker(new MarkerOptions()
@@ -148,7 +124,6 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
                     .title(l.landmarkName + " €" + l.price)
                     .snippet(l.landmarkName + " " + l.location)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.logoapp)));
-        app.FirebaseDB.getAllLandmarksSnapshot();
     }
 
     private void resetFields() {
@@ -163,26 +138,28 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
     }
 
     private String getAddressFromLocation( Location location ) {
-        Geocoder geocoder = new Geocoder( getActivity() );
+        Geocoder geocoder = new Geocoder(getActivity());
 
         String strAddress = "";
         Address address;
         try {
             address = geocoder
-                    .getFromLocation( location.getLatitude(), location.getLongitude(), 1 )
-                    .get( 0 );
+                    .getFromLocation(location.getLatitude(), location.getLongitude(), 1)
+                    .get(0);
             strAddress = address.getAddressLine(0) +
                     " " + address.getAddressLine(1) +
                     " " + address.getAddressLine(2);
-        }
-        catch (IOException e ) {
+        } catch (IOException e) {
         }
 
         return strAddress;
     }
 
     @Override
-    public void onClick(View view) {
+    public void onResume() {
+        super.onResume();
 
+        titleBar = (TextView) getActivity().findViewById(R.id.recentAddedBarTextView);
+        titleBar.setText(R.string.addALandmark);
     }
 }
