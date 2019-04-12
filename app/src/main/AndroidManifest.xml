@@ -8,7 +8,7 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="ie.wit.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="ie.wit.poland.activities.permission.MAPS_RECEIVE" />
 
     <application
         android:name=".main.LandmarkApp"

@@ -49,9 +49,9 @@ public class LandmarkListAdapter extends FirebaseListAdapter<Landmark> {
         else
             imgIcon.setImageResource(R.drawable.favourites_72_on);
 
-        ImageView imgDelete = (ImageView) row.findViewById(R.id.menu_item_delete_landmark);
-    imgDelete.setTag(getRef(position).getKey());
-      imgDelete.setOnClickListener(deleteListener);
+      //  ImageView imgDelete = (ImageView) row.findViewById(R.id.menu_item_delete_landmark);
+  //  imgDelete.setTag(getRef(position).getKey());
+   //   imgDelete.setOnClickListener(deleteListener);
 
     }
 }
