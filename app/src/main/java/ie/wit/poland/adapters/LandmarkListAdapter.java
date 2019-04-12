@@ -33,7 +33,7 @@ public class LandmarkListAdapter extends FirebaseListAdapter<Landmark> {
     @Override
     protected void populateView(View row, Landmark landmark, int position) {
         Log.v("Landmark", "Populating View Adapter with :" + landmark);
-        //Set the rows TAG to the coffee 'key'
+        //Set the rows TAG to the landmark 'key'
         row.setTag(getRef(position).getKey());
 
         ((TextView) row.findViewById(R.id.rowLandmarkName)).setText(landmark.landmarkName);
@@ -49,9 +49,9 @@ public class LandmarkListAdapter extends FirebaseListAdapter<Landmark> {
         else
             imgIcon.setImageResource(R.drawable.favourites_72_on);
 
-  //      ImageView imgDelete = (ImageView) row.findViewById(R.id.menu_item_delete_landmark);
-//        imgDelete.setTag(getRef(position).getKey());
-//        imgDelete.setOnClickListener(deleteListener);
+        ImageView imgDelete = (ImageView) row.findViewById(R.id.menu_item_delete_landmark);
+    imgDelete.setTag(getRef(position).getKey());
+      imgDelete.setOnClickListener(deleteListener);
 
     }
 }
