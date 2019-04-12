@@ -18,10 +18,6 @@
             android:id="@+id/nav_favourites"
             android:icon="@drawable/favourites_72"
             android:title="@string/favouriteLandmarkLbl" />
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@android:drawable/ic_menu_camera"
-            android:title="Take a Photo" />
     </group>
 
     <item android:title="Communicate &amp; Locate">

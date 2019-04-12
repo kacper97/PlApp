@@ -37,9 +37,8 @@
 
     <item
         android:id="@+id/menuSignOut"
-        android:icon="?android:attr/actionModeCloseDrawable"
         android:onClick="menuSignOut"
         android:orderInCategory="100"
-        android:title="@string/home"
-        app:showAsAction="ifRoom" />
+        android:title="@string/signOut"
+        app:showAsAction="never" />
 </menu>
