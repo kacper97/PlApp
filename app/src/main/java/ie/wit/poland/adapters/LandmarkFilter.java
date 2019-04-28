@@ -4,9 +4,6 @@ import android.widget.Filter;
 
 import com.google.firebase.database.Query;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ie.wit.poland.fragments.LandmarkFragment;
 
 

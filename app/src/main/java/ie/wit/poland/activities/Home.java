@@ -29,6 +29,7 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import ie.wit.poland.R;
 import ie.wit.poland.fragments.AddFragment;
@@ -241,7 +242,7 @@ public class Home extends AppCompatActivity
 
             @Override
             public void onConnectionSuspended(int i) {
-                Toast.makeText(Home.this, "Google API Client Connection Suspended",Toast.LENGTH_SHORT).show();
+                FancyToast.makeText(Home.this, "Google API Client Connection Suspended",Toast.LENGTH_SHORT,FancyToast.ERROR,true).show();
             }
             });
 

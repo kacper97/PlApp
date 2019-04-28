@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import ie.wit.poland.R;
 
@@ -36,14 +37,14 @@ public class Deactivate extends AppCompatActivity{
                 public void onComplete(Task<Void> task) {
                     if(task.isSuccessful())
                     {
-                        Toast.makeText(getApplicationContext(),"ACCOUNT DELETED \n   HOPE TO SEE YOU SOON",Toast.LENGTH_LONG).show();
+                        FancyToast.makeText(getApplicationContext(),"ACCOUNT DELETED \n   HOPE TO SEE YOU SOON",Toast.LENGTH_LONG, FancyToast.INFO,true).show();
                         finish();
                         Intent i = new Intent(Deactivate.this,LogIn.class);
                         startActivity(i);
                     }
                     else
                     {
-                        Toast.makeText(getApplicationContext(),"Account Could not be deactivated",Toast.LENGTH_SHORT).show();
+                        FancyToast.makeText(getApplicationContext(),"Account Could not be deactivated",Toast.LENGTH_SHORT,FancyToast.ERROR,true).show();
                     }
                 }
             });

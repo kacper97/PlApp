@@ -40,6 +40,7 @@ android {
         implementation "com.android.support:recyclerview-v7:28.0.0"
         implementation "com.android.support:cardview-v7:28.0.0"
         implementation "com.firebaseui:firebase-ui-database:2.1.0"
+        implementation "com.github.Shashank02051997:FancyToast-Android:0.1.3"
     }
 
 

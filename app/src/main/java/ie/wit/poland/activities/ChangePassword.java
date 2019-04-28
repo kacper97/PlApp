@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import ie.wit.poland.R;
 
@@ -41,7 +42,7 @@ public class ChangePassword extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(getApplicationContext(), "Your password has been changed",Toast.LENGTH_SHORT).show();
+                                FancyToast.makeText(getApplicationContext(), "Your password has been changed",Toast.LENGTH_SHORT,FancyToast.INFO,true).show();
                                 auth.signOut();
                                 finish();
                                 Intent l = new Intent(ChangePassword.this, LogIn.class);
@@ -49,7 +50,7 @@ public class ChangePassword extends AppCompatActivity {
                             }
 
                             else{
-                                Toast.makeText(getApplicationContext(),"Password inputed incorrectly",Toast.LENGTH_SHORT).show();
+                                FancyToast.makeText(getApplicationContext(),"Password inputed incorrectly",Toast.LENGTH_SHORT,FancyToast.ERROR,true).show();
                             }
                         }
                     });

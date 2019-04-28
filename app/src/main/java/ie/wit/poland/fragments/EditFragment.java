@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 
 import ie.wit.poland.R;
@@ -97,7 +98,7 @@ public class EditFragment extends Fragment implements FirebaseListener {
 
 
         } else
-            Toast.makeText(getActivity(), "You must Enter Something for Name and Shop", Toast.LENGTH_SHORT).show();
+            FancyToast.makeText(getActivity(), "You must Enter Something for Name and Description", Toast.LENGTH_SHORT,FancyToast.INFO,true).show();
     }
 
 
@@ -105,12 +106,12 @@ public class EditFragment extends Fragment implements FirebaseListener {
             app.FirebaseDB.toggleFavourite(landmarkKey,isFavourite);
         if (isFavourite) {
             aLandmark.favourite = false;
-            Toast.makeText(getActivity(), "Removed From Favourites", Toast.LENGTH_SHORT).show();
+            FancyToast.makeText(getActivity(), "Removed From Favourites", Toast.LENGTH_SHORT,FancyToast.INFO,true).show();
             isFavourite = false;
         //    editFavourite.setImageResource(R.drawable.favourites_72);
         } else {
             aLandmark.favourite = true;
-            Toast.makeText(getActivity(), "Added to Favourites !!", Toast.LENGTH_SHORT).show();
+            FancyToast.makeText(getActivity(), "Added to Favourites !!", Toast.LENGTH_SHORT,FancyToast.INFO,true).show();
             isFavourite = true;
       //      editFavourite.setImageResource(R.drawable.favourites_72_on);
         }
@@ -180,7 +181,7 @@ public class EditFragment extends Fragment implements FirebaseListener {
 
     @Override
     public void onFailure() {
-        Toast.makeText(getActivity(),"Some Error Occurred, please retry ",Toast.LENGTH_LONG).show();
+        FancyToast.makeText(getActivity(),"Some Error Occurred, please retry ",Toast.LENGTH_LONG,FancyToast.ERROR,true).show();
     }
 
     public interface OnFragmentInteractionListener {

@@ -29,6 +29,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.Query;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class MapsFragment extends SupportMapFragment implements
             createLocationRequest();
         }
         catch(SecurityException se) {
-            Toast.makeText(getActivity(),"Check Your Permissions",Toast.LENGTH_SHORT).show();
+            FancyToast.makeText(getActivity(),"Check Your Permissions",Toast.LENGTH_SHORT,FancyToast.WARNING,true).show();
         }
     }
 
@@ -234,12 +235,12 @@ public class MapsFragment extends SupportMapFragment implements
         Query query = app.FirebaseDB.getAllLandmarks();
         if (checkPermission()) {
             if (app.mCurrentLocation != null) {
-                Toast.makeText(getActivity(), "GPS location was found!", Toast.LENGTH_SHORT).show();
+                FancyToast.makeText(getActivity(), "GPS location was found!", Toast.LENGTH_SHORT,FancyToast.INFO,false).show();
             } else {
-                Toast.makeText(getActivity(), "Current location was null, Setting Default Values!", Toast.LENGTH_SHORT).show();
-                app.mCurrentLocation = new Location("Waterford City Default (WIT)");
-                app.mCurrentLocation.setLatitude(52.2462);
-                app.mCurrentLocation.setLongitude(-7.1202);
+                FancyToast.makeText(getActivity(), "Current location was null, Setting Default Values!", Toast.LENGTH_SHORT,FancyToast.WARNING,true).show();
+                app.mCurrentLocation = new Location("Poland  Default ");
+                app.mCurrentLocation.setLatitude(51.9194);
+                app.mCurrentLocation.setLongitude(19.1451);
             }
             if(mMap != null) {
                 initCamera(app.mCurrentLocation);
@@ -272,7 +273,7 @@ public class MapsFragment extends SupportMapFragment implements
                     mLocationCallback, Looper.myLooper());
         }
         catch(SecurityException se) {
-            Toast.makeText(getActivity(),"Check Your Permissions on Location Updates",Toast.LENGTH_SHORT).show();
+            FancyToast.makeText(getActivity(),"Check Your Permissions on Location Updates",Toast.LENGTH_SHORT,FancyToast.WARNING,true).show();
         }
     }
 

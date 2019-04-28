@@ -27,6 +27,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import ie.wit.poland.R;
 import ie.wit.poland.main.LandmarkApp;
@@ -141,10 +142,10 @@ public class LogIn extends FragmentActivity implements
 
             firebaseAuthWithGoogle(acct);
             // Show a message to the user that we are signing in.
-            Toast.makeText(this, "Signing in " + app.googleName +" with " + app.googleMail , Toast.LENGTH_SHORT).show();
+            FancyToast.makeText(this, "Signing in " + app.googleName +" with " + app.googleMail , Toast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
             //startHomeScreen();
         } else
-            Toast.makeText(this, "Please Sign in " , Toast.LENGTH_SHORT).show();
+            FancyToast.makeText(this, "Please Sign in " , Toast.LENGTH_SHORT,FancyToast.INFO,true).show();
     }
     // [END handleSignInResult]
 
@@ -195,7 +196,7 @@ public class LogIn extends FragmentActivity implements
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Toast.makeText(this, "Error Signing in to Google " + connectionResult, Toast.LENGTH_LONG).show();
+        FancyToast.makeText(this, "Error Signing in to Google " + connectionResult, Toast.LENGTH_LONG,FancyToast.ERROR,true).show();
         Log.v(TAG, "ConnectionResult : " + connectionResult);
     }
 
@@ -215,8 +216,8 @@ public class LogIn extends FragmentActivity implements
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.v(TAG, "signInWithCredential", task.getException());
-                            Toast.makeText(LogIn.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            FancyToast.makeText(LogIn.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT,FancyToast.CONFUSING,true).show();
                         }
                     }
                 });
@@ -255,7 +256,7 @@ public class LogIn extends FragmentActivity implements
     @Override
     public void onFailure() {
         Log.v(TAG, "Unable to Validate Existing Firebase User: ");
-        Toast.makeText(this,"Unable to Validate Existing Firebase User:",Toast.LENGTH_LONG).show();
+        FancyToast.makeText(this,"Unable to Validate Existing Firebase User:",Toast.LENGTH_LONG,FancyToast.ERROR,true).show();
     }
 
     public void signUp(View v) {

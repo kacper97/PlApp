@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.io.IOException;
 import java.util.List;
@@ -103,11 +104,11 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
             //startActivity(new Intent(this.getActivity(), Home.class));
             resetFields();
         } else
-            Toast.makeText(
+            FancyToast.makeText(
                     this.getActivity(),
                     "You must Enter Something for "
                             + "\'Name\', \'Description\', \'Price\', \'location\', \'dateVisited\'",
-                    Toast.LENGTH_SHORT).show();
+                    Toast.LENGTH_SHORT,FancyToast.INFO,true).show();
     }
 
     @Override

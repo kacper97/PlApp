@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import ie.wit.poland.R;
 
@@ -85,16 +86,16 @@ public class Register extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(GONE);
                 if(task.isSuccessful()){
-                    Toast.makeText(getApplicationContext(),"User Registered Successfully", Toast.LENGTH_SHORT).show();
+                    FancyToast.makeText(getApplicationContext(),"User Registered Successfully", Toast.LENGTH_SHORT,FancyToast.SUCCESS,true).show();
                   //goes back to login screen after completed
                     startActivity(new Intent(Register.this,LogIn.class));
                 }
                 else{
                   if(task.getException() instanceof FirebaseAuthUserCollisionException){
-                      Toast.makeText(getApplicationContext(),"You already registered", Toast.LENGTH_SHORT).show();
+                      FancyToast.makeText(getApplicationContext(),"You're already registered", Toast.LENGTH_SHORT,FancyToast.INFO,true).show();
                   }
                   else{
-                      Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                      FancyToast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT,FancyToast.ERROR,true).show();
                   }
                 }
             }
