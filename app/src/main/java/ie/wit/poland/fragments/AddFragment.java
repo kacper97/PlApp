@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,8 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -22,6 +24,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.shashank.sony.fancytoastlib.FancyToast;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -32,9 +35,10 @@ import ie.wit.poland.main.LandmarkApp;
 import ie.wit.poland.models.Landmark;
 
 public class AddFragment extends Fragment implements OnMapReadyCallback ,View.OnClickListener {
+
     private String landmarkName, landmarkDescription, location, dateVisited;
     private double price, ratingLandmark, ratingTransport, ratingFacility;
-    private Button save, addAnImage, uploadImage;
+    private Button save;
     private EditText name, description, priceAdult, date, locate;
     private RatingBar rateLandmark, rateTransport, rateFacility;
     private LandmarkApp app = LandmarkApp.getInstance();
@@ -67,8 +71,6 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
         rateFacility = v.findViewById(R.id.addRatingBarFacilities);
         locate = v.findViewById(R.id.addLandmarkLocation);
         save = v.findViewById(R.id.addALandmarkBtn);
-        addAnImage = v.findViewById(R.id.addAnImage);
-        uploadImage = v.findViewById(R.id.uploadImage);
         save.setOnClickListener(this);
 
         return v;
@@ -140,14 +142,6 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
         }
 
         return strAddress;
-    }
-
-    public void addImage(View v){
-
-    }
-
-    public void uploadImage(View v){
-
     }
 
 }

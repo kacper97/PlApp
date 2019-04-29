@@ -121,13 +121,12 @@
 
             <RatingBar
                 android:id="@+id/addRatingBarLandmark"
-                android:layout_width="match_parent"
+                android:layout_width="240dp"
                 android:layout_height="43dp"
                 android:layout_marginStart="-2dp"
                 android:layout_marginEnd="4dp"
                 android:rating="0"
-                android:stepSize="0.5"
- />
+                android:stepSize="0.5" />
 
             <TextView
                 android:id="@+id/addRatingFacilitiesLbl"
@@ -143,7 +142,7 @@
 
             <RatingBar
                 android:id="@+id/addRatingBarFacilities"
-                android:layout_width="match_parent"
+                android:layout_width="240dp"
                 android:layout_height="44dp"
                 android:layout_marginStart="-2dp"
                 android:layout_marginTop="8dp"
@@ -164,7 +163,7 @@
 
             <RatingBar
                 android:id="@+id/addRatingBarTransport"
-                android:layout_width="match_parent"
+                android:layout_width="240dp"
                 android:layout_height="46dp"
                 android:layout_marginStart="-2dp"
                 android:layout_marginTop="8dp"
@@ -205,31 +204,6 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 tools:layout="@layout/activity_map" />
-
-            <Button
-                android:id="@+id/addAnImage"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/colorFontOffWhite"
-                android:onClick="addImage"
-                android:text="@string/addImageBtn" />
-
-            <Button
-                android:id="@+id/uploadImage"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/colorFontOffWhite"
-                android:onClick="uploadImage"
-                android:text="@string/upload" />
-
             <Button
                 android:id="@+id/addALandmarkBtn"
                 android:layout_width="match_parent"

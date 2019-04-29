@@ -148,8 +148,10 @@ public class Home extends AppCompatActivity
             ft.replace(R.id.homeFrame, fragment);
             ft.addToBackStack(null);
             ft.commit();
+        } else if (id == R.id.nav_images){
+            Intent intent = new Intent(this, ImageActivity.class);
+            startActivity(intent);
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
