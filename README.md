@@ -33,5 +33,6 @@ Polish landmarks is a mobile app connected to firebase, allowing users to do sev
 - Additional UI Features
 - Image using Picasso Library
 - Searching extended by 3 methods
+- ListView and Scroll View
 
 References : DDrohan.github.io/ 
