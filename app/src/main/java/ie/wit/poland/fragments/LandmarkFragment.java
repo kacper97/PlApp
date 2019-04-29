@@ -22,12 +22,14 @@ import android.widget.TextView;
 
 import com.google.firebase.database.Query;
 
+import java.util.List;
 import java.util.Objects;
 
 import ie.wit.poland.R;
 import ie.wit.poland.adapters.LandmarkFilter;
 import ie.wit.poland.adapters.LandmarkListAdapter;
 import ie.wit.poland.main.LandmarkApp;
+import ie.wit.poland.models.Landmark;
 
 
 public class LandmarkFragment  extends Fragment implements AdapterView.OnItemClickListener,
@@ -204,16 +206,15 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
     }
 
     @Override
-    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem)
-    {
-        switch (menuItem.getItemId())
-        {
+    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
             case R.id.menu_item_delete_landmark:
                 deleteLandmarks(actionMode);
                 return true;
             default:
                 return false;
         }
+
     }
 
     public void deleteLandmarks(ActionMode actionMode)

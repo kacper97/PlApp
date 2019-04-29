@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -28,13 +29,16 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Query;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ie.wit.poland.R;
 import ie.wit.poland.main.LandmarkApp;
+import ie.wit.poland.models.FirebaseListener;
 import ie.wit.poland.models.Landmark;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -44,12 +48,11 @@ public class MapsFragment extends SupportMapFragment implements
         GoogleMap.OnInfoWindowClickListener,
         GoogleMap.OnMapClickListener,
         GoogleMap.OnMarkerClickListener,
-        OnMapReadyCallback{
+        OnMapReadyCallback , FirebaseListener {
 
     private LocationRequest mLocationRequest;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationCallback mLocationCallback;
-    private List<Landmark> mLandmarkList;
     private long                        UPDATE_INTERVAL = 5000; /* 5 secs */
     private long                        FASTEST_INTERVAL = 1000; /* 1 sec */
     private GoogleMap                   mMap;
@@ -232,7 +235,9 @@ public class MapsFragment extends SupportMapFragment implements
     public void onResume() {
         super.onResume();
         getMapAsync(this);
-        Query query = app.FirebaseDB.getAllLandmarks();
+        //Query query = app.FirebaseDB.getAllLandmarks();
+        app.FirebaseDB.attachListener(this);
+        app.FirebaseDB.getAllLandmarksSnapshot();
         if (checkPermission()) {
             if (app.mCurrentLocation != null) {
                 FancyToast.makeText(getActivity(), "GPS location was found!", Toast.LENGTH_SHORT,FancyToast.INFO,false).show();
@@ -285,4 +290,22 @@ public class MapsFragment extends SupportMapFragment implements
                     .snippet(l.landmarkName + " " + l.location)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.logoapp)));
     }
+
+    @Override
+    public void onSuccess(DataSnapshot dataSnapshot) {
+
+        List <Landmark> landmarkList = new ArrayList<Landmark>();
+        for (DataSnapshot landmarkSnapshot: dataSnapshot.getChildren()) {
+            Landmark l = landmarkSnapshot.getValue(Landmark.class);
+            landmarkList.add(l);
+        }
+        addLandmarks(landmarkList);
+        Log.v("landmark", "List to add to Map is : " + landmarkList);
+    }
+
+    @Override
+    public void onFailure() {
+        Log.v("landmark", "Unable to load landmarks");
+    }
 }
+
