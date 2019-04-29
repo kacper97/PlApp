@@ -79,8 +79,14 @@ public class ImageActivity extends AppCompatActivity {
         mTextViewShowUploads.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                openImagesView();
             }
         });
+    }
+
+    private void openImagesView() {
+        Intent intent = new Intent(this,ImageView.class);
+        startActivity(intent);
     }
 
     //get the file extansion for the image
