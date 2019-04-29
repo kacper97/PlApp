@@ -29,12 +29,13 @@ public class EditFragment extends Fragment implements FirebaseListener {
 
     public Landmark aLandmark;
     public boolean isFavourite;
+    public ImageView editFavourite;
     private EditText editLandmarkName,editDescription,editLandmarkPrice,editLandmarkLocation,editdateVisited;
     private RatingBar editRatingBarLandmark, editRatingBarFacility, editRatingBarTransport;
     public LandmarkApp app = LandmarkApp.getInstance();
 
     private OnFragmentInteractionListener mListener;
-   public String      landmarkKey;
+    public String      landmarkKey;
 
 
     public EditFragment() {
@@ -70,10 +71,10 @@ public class EditFragment extends Fragment implements FirebaseListener {
             String landmarkName  = editLandmarkName.getText().toString();
             String landmarkDescritpion = editDescription.getText().toString();
             String priceAdult = editLandmarkPrice.getText().toString();
-           String location = editLandmarkLocation.getText().toString();
-           double ratingLandmark = editRatingBarLandmark.getRating();
-           double ratingTransport = editRatingBarTransport.getRating();
-           double ratingFacility = editRatingBarFacility.getRating();
+            String location = editLandmarkLocation.getText().toString();
+            double ratingLandmark = editRatingBarLandmark.getRating();
+            double ratingTransport = editRatingBarTransport.getRating();
+            double ratingFacility = editRatingBarFacility.getRating();
             String dateVisited = editdateVisited.getText().toString();
 
             double price;
@@ -103,19 +104,18 @@ public class EditFragment extends Fragment implements FirebaseListener {
 
 
     public void toggle(View v) {
-
+        app.FirebaseDB.toggleFavourite(landmarkKey,isFavourite);
         if (isFavourite) {
             aLandmark.favourite = false;
             FancyToast.makeText(getActivity(), "Removed From Favourites", Toast.LENGTH_SHORT,FancyToast.INFO,true).show();
             isFavourite = false;
-          //  editFavourite.setImageResource(R.drawable.favourites_72);
+           //  editFavourite.setImageResource(R.drawable.favourites_72);
         } else {
             aLandmark.favourite = true;
             FancyToast.makeText(getActivity(), "Added to Favourites !!", Toast.LENGTH_SHORT,FancyToast.INFO,true).show();
             isFavourite = true;
 //            editFavourite.setImageResource(R.drawable.favourites_72_on);
         }
-        app.FirebaseDB.toggleFavourite(landmarkKey,isFavourite);
     }
 
     @Override
@@ -141,10 +141,10 @@ public class EditFragment extends Fragment implements FirebaseListener {
         editRatingBarFacility.setRating((float)aLandmark.ratingFacility);
 
         if (aLandmark.favourite == true) {
-          //  editFavourite.setImageResource(R.drawable.favourites_72_on);
+        //    editFavourite.setImageResource(R.drawable.favourites_72_on);
             isFavourite = true;
         } else {
-           //editFavourite.setImageResource(R.drawable.favourites_72);
+           // editFavourite.setImageResource(R.drawable.favourites_72);
             isFavourite = false;
         }
     }
@@ -154,10 +154,10 @@ public class EditFragment extends Fragment implements FirebaseListener {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-       // aLandmark = dataSnapshot.getValue(Landmark.class);
-        }
+        // aLandmark = dataSnapshot.getValue(Landmark.class);
+    }
 
-        @Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_edit, container, false);
