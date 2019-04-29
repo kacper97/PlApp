@@ -144,7 +144,8 @@ public class Home extends AppCompatActivity
             ft.addToBackStack(null);
             ft.commit();
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_images) {
+            startActivity(new Intent(this,Image.class));
 
         } else if (id == R.id.nav_map) {
             fragment = MapsFragment.newInstance();

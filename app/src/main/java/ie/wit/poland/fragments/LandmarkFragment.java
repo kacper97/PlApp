@@ -117,20 +117,15 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
 
     public void updateUI(Query query) {
 
-        //   titleBar = (TextView)getActivity().findViewById(R.id.recentlyAdded);
-        //   titleBar.setText(R.string.recentlyViewedLbl);
-
         listAdapter = new LandmarkListAdapter(getActivity(), deleteListener, query);
         setListView(listView);
 
         if (favourites) {
-            titleBar.setText(R.string.favouriteLandmarkLbl);
-            ((TextView)getActivity().findViewById(R.id.emptyList)).setText(R.string.emptyMessageLbl);
+            if(app.landmarkList.isEmpty())
+                ((TextView)getActivity().findViewById(R.id.emptyList)).setText(R.string.emptyMessageLbl);
         }
 
-        if(app.landmarkList.isEmpty())
-            ((TextView)getActivity().findViewById(R.id.emptyList)).setText(R.string.emptyMessageLbl);
-        else
+
             ((TextView)getActivity().findViewById(R.id.emptyList)).setText("");
 
         listAdapter.notifyDataSetChanged(); // Update the adapter

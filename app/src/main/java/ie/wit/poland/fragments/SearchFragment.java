@@ -80,7 +80,7 @@ View v;
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (TextUtils.isEmpty(newText)) {
-                    listView.clearTextFilter();
+//                    listView.clearTextFilter();
                 } else {
                         listView.setFilterText(newText);
                         landmarkFilter.filter(newText);
@@ -111,6 +111,9 @@ View v;
                 landmarkFilter.setFilter("all");
             } else if (selected.equals("Favourites")) {
                 landmarkFilter.setFilter("favourites");
+            }
+            else if (selected.equals("Cheapest")){
+                landmarkFilter.setFilter("cheapest");
             }
         String filterText = ((SearchView)getActivity()
                 .findViewById(R.id.searchView)).getQuery().toString();

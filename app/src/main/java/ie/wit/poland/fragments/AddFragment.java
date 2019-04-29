@@ -1,14 +1,12 @@
 package ie.wit.poland.fragments;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +21,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.io.IOException;
@@ -34,7 +29,6 @@ import java.util.List;
 import ie.wit.poland.R;
 import ie.wit.poland.activities.Home;
 import ie.wit.poland.main.LandmarkApp;
-import ie.wit.poland.models.FirebaseListener;
 import ie.wit.poland.models.Landmark;
 
 public class AddFragment extends Fragment implements OnMapReadyCallback ,View.OnClickListener {

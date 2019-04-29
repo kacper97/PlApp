@@ -115,6 +115,13 @@ public class FirebaseDB {
         return query;
     }
 
+    public Query getCheapest() {
+
+        Query query = mFirebaseDatabase.child("user-landmarks").child(mFBUserId)
+                .orderByChild("price");
+        return query;
+    }
+
     public void getALandmark(final String landmarkKey)
     {
         mFirebaseDatabase.child("user-landmarks").child(mFBUserId).child(landmarkKey).addValueEventListener(
@@ -203,4 +210,6 @@ public class FirebaseDB {
                             }
                         });
     }
+
+
 }

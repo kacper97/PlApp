@@ -41,6 +41,8 @@ public class LandmarkFilter extends Filter {
                     query = fragment.app.FirebaseDB.getAllLandmarks();
                 } else if (filterText.equals("favourites")) {
                     query = fragment.app.FirebaseDB.getFavouriteLandmarks();
+                } else if(filterText.equals("cheapest")){
+                    query = fragment.app.FirebaseDB.getCheapest();
                 }
             }
         results.values = query;
