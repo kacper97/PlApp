@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +25,11 @@ import ie.wit.poland.R;
 import ie.wit.poland.adapters.LandmarkFilter;
 
 public class SearchFragment extends LandmarkFragment
-        implements AdapterView.OnItemSelectedListener, TextWatcher {
+        implements AdapterView.OnItemSelectedListener{
 
     String selected;
+View v;
+    SearchView searchView;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -47,8 +50,8 @@ public class SearchFragment extends LandmarkFragment
 
         super.onCreateView(inflater, container, savedInstanceState);
 
-        View v = inflater.inflate(R.layout.fragment_search, container, false);
-
+         v = inflater.inflate(R.layout.fragment_search, container, false);
+        setListView(v);
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
                 .createFromResource(getActivity(), R.array.landmarkTypes,
                         android.R.layout.simple_spinner_item);
@@ -60,16 +63,31 @@ public class SearchFragment extends LandmarkFragment
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(this);
 
-        TextView nameText = (TextView) v.findViewById(R.id.searchBarTV);
-        nameText.addTextChangedListener(this);
 
         listView = (ListView) v.findViewById(R.id.searchList); //Bind to the list on our Search layout
 
         setListView(listView);
+        listView.setTextFilterEnabled(true);
+        searchView = v.findViewById(R.id.searchView);
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
-       //SwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.landmark_swipe_refresh_layout);
-        setSwipeRefreshLayout();
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (TextUtils.isEmpty(newText)) {
+                    listView.clearTextFilter();
+                } else {
+                        listView.setFilterText(newText);
+                        landmarkFilter.filter(newText);
+                }
+                return true;
+            }
+        });
         return v;
     }
 
@@ -81,36 +99,28 @@ public class SearchFragment extends LandmarkFragment
         super.onStart();
     }
 
-   @Override
-    public void onResume() {
-       super.onResume();
-
-       titleBar = (TextView)getActivity().findViewById(R.id.recentlyAdded);
-       titleBar.setText(R.string.searchLandmarksLbl);
-
-       landmarkFilter = new LandmarkFilter(query,"all",listAdapter,this);
-   }
-
-
 
     private void checkSelected(String selected)
     {
-        if (selected != null) {
+        if(landmarkFilter == null)
+            landmarkFilter = new LandmarkFilter(query,"all",listAdapter,this);
+
+
+            if (selected !=null)
             if (selected.equals("All Types")) {
                 landmarkFilter.setFilter("all");
             } else if (selected.equals("Favourites")) {
                 landmarkFilter.setFilter("favourites");
             }
+        String filterText = ((SearchView)getActivity()
+                .findViewById(R.id.searchView)).getQuery().toString();
 
-            String filterText = ((SearchView)getActivity()
-                    .findViewById(R.id.searchView)).getQuery().toString();
-
-            if(filterText.length() > 0)
-                landmarkFilter.filter(filterText);
-            else
-                landmarkFilter.filter("");
-        }
+        if(filterText.length() > 0)
+            landmarkFilter.filter(filterText);
+        else
+            landmarkFilter.filter("");
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -125,19 +135,4 @@ public class SearchFragment extends LandmarkFragment
     public void deleteLandmarks(ActionMode actionMode) {
         super.deleteLandmarks(actionMode);
         checkSelected(selected);}
-
-    @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        landmarkFilter.filter(charSequence);
-    }
-
-    @Override
-    public void afterTextChanged(Editable editable) {
-
-    }
 }

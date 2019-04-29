@@ -42,7 +42,9 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
     protected         TextView            titleBar;
     protected         SwipeRefreshLayout  mSwipeRefreshLayout;
     public            Query                 query;
+
     public            View.OnClickListener  deleteListener;
+    public View v;
 
     public LandmarkApp app = LandmarkApp.getInstance();
 
@@ -70,9 +72,8 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = null;
         v = inflater.inflate(R.layout.fragment_home, container, false);
-        listView = (ListView) v.findViewById(R.id.homeList);
+        listView = v.findViewById(R.id.homeList);
 
         mSwipeRefreshLayout =   (SwipeRefreshLayout) v.findViewById(R.id.swiperefresh);
         setSwipeRefreshLayout();
@@ -116,8 +117,8 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
 
     public void updateUI(Query query) {
 
-     //   titleBar = (TextView)getActivity().findViewById(R.id.recentlyAdded);
-     //   titleBar.setText(R.string.recentlyViewedLbl);
+        //   titleBar = (TextView)getActivity().findViewById(R.id.recentlyAdded);
+        //   titleBar.setText(R.string.recentlyViewedLbl);
 
         listAdapter = new LandmarkListAdapter(getActivity(), deleteListener, query);
         setListView(listView);
@@ -135,13 +136,13 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
         listAdapter.notifyDataSetChanged(); // Update the adapter
     }
 
-    public void setListView(ListView listview) {
+    public void setListView(View view) {
 
-        listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        listview.setMultiChoiceModeListener(this);
-        listview.setAdapter (listAdapter);
-        listview.setOnItemClickListener(this);
-        listview.setEmptyView(Objects.requireNonNull(getActivity()).findViewById(R.id.emptyList));
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        listView.setMultiChoiceModeListener(this);
+        listView.setAdapter (listAdapter);
+        listView.setOnItemClickListener(this);
+        listView.setEmptyView(view.findViewById(R.id.emptyList));
     }
 
     @Override
@@ -243,4 +244,3 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
     {}
     /* ************ MultiChoiceModeListener methods (end) *********** */
 }
-

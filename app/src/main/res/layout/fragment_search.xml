@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.SearchFragment">
 
-    <TextView
+    <EditText
         android:id="@+id/searchBarTV"
         android:layout_width="0dp"
         android:layout_height="21dp"
@@ -91,17 +91,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.14" />
-
-
-    <TextView
-        android:id="@+id/recentlyAdded"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/searchLandmarksLbl"
-        android:layout_gravity="center"
-        android:layout_below="@+id/searchSpinner"
-        android:layout_alignParentStart="true"
-        tools:ignore="MissingConstraints" />
 
     <ListView
         android:id="@+id/searchList"
