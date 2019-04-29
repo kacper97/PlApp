@@ -29,7 +29,6 @@ public class EditFragment extends Fragment implements FirebaseListener {
 
     public Landmark aLandmark;
     public boolean isFavourite;
-    public ImageView editFavourite;
     private EditText editLandmarkName,editDescription,editLandmarkPrice,editLandmarkLocation,editdateVisited;
     private RatingBar editRatingBarLandmark, editRatingBarFacility, editRatingBarTransport;
     public LandmarkApp app = LandmarkApp.getInstance();
@@ -94,8 +93,9 @@ public class EditFragment extends Fragment implements FirebaseListener {
                 aLandmark.ratingTransport = ratingTransport;
 
             }
-                app.FirebaseDB.updateALandmark(landmarkKey,aLandmark);
-
+            app.FirebaseDB.updateALandmark(landmarkKey,aLandmark);
+            FancyToast.makeText(getActivity(),"Updated Successfully",Toast.LENGTH_SHORT,FancyToast.INFO,true).show();
+            startActivity(new Intent(this.getActivity(), Home.class));
 
         } else
             FancyToast.makeText(getActivity(), "You must Enter Something for Name and Description", Toast.LENGTH_SHORT,FancyToast.INFO,true).show();
@@ -103,18 +103,19 @@ public class EditFragment extends Fragment implements FirebaseListener {
 
 
     public void toggle(View v) {
-            app.FirebaseDB.toggleFavourite(landmarkKey,isFavourite);
+
         if (isFavourite) {
             aLandmark.favourite = false;
             FancyToast.makeText(getActivity(), "Removed From Favourites", Toast.LENGTH_SHORT,FancyToast.INFO,true).show();
             isFavourite = false;
-        //    editFavourite.setImageResource(R.drawable.favourites_72);
+          //  editFavourite.setImageResource(R.drawable.favourites_72);
         } else {
             aLandmark.favourite = true;
             FancyToast.makeText(getActivity(), "Added to Favourites !!", Toast.LENGTH_SHORT,FancyToast.INFO,true).show();
             isFavourite = true;
-      //      editFavourite.setImageResource(R.drawable.favourites_72_on);
+//            editFavourite.setImageResource(R.drawable.favourites_72_on);
         }
+        app.FirebaseDB.toggleFavourite(landmarkKey,isFavourite);
     }
 
     @Override
@@ -140,10 +141,10 @@ public class EditFragment extends Fragment implements FirebaseListener {
         editRatingBarFacility.setRating((float)aLandmark.ratingFacility);
 
         if (aLandmark.favourite == true) {
-           // editFavourite.setImageResource(R.drawable.favourites_72_on);
+          //  editFavourite.setImageResource(R.drawable.favourites_72_on);
             isFavourite = true;
         } else {
-          //  editFavourite.setImageResource(R.drawable.favourites_72);
+           //editFavourite.setImageResource(R.drawable.favourites_72);
             isFavourite = false;
         }
     }

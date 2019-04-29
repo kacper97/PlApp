@@ -45,9 +45,9 @@ public class LandmarkListAdapter extends FirebaseListAdapter<Landmark> {
         ImageView imgIcon = (ImageView) row.findViewById(R.id.rowFavouriteImg);
 
         if (landmark.favourite == true)
-            imgIcon.setImageResource(R.drawable.favourites_72);
-        else
             imgIcon.setImageResource(R.drawable.favourites_72_on);
+        else
+            imgIcon.setImageResource(R.drawable.favourites_72);
 
         ImageView imgDelete = (ImageView) row.findViewById(R.id.menu_item_delete_landmark);
 //        imgDelete.setTag(getRef(position).getKey());

@@ -3,7 +3,7 @@
     <color name="colorPrimary">#F60707</color>
     <color name="colorPrimaryDark">#C90707</color>
     <color name="colorAccent">#FB2C2C</color>
-    <color name="colorFontWhite">#ffffff</color>
+    <color name="colorFontWhite">#FFFFFF</color>
     <color name="colorFontOffWhite">#f7f7f7</color>
     <color name="colorFontBlack">#000000</color>
     <color name="colorMultiDelete">#e76c80</color>

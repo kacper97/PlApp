@@ -67,8 +67,8 @@ public class SearchFragment extends LandmarkFragment
 
         setListView(listView);
 
-      //  mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.landmark_swipe_refresh_layout);
-       // setSwipeRefreshLayout();
+       //SwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.landmark_swipe_refresh_layout);
+        setSwipeRefreshLayout();
 
         return v;
     }
@@ -133,7 +133,7 @@ public class SearchFragment extends LandmarkFragment
 
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+        landmarkFilter.filter(charSequence);
     }
 
     @Override
