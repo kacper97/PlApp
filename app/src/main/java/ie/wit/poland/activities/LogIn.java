@@ -160,8 +160,6 @@ public class LogIn extends FragmentActivity implements
         if (v.getId() == R.id.disconnect_button) {
             revokeAccess();
         }
-        //  else
-        //      Toast.makeText(this, "No Account to Disconenct....", Toast.LENGTH_SHORT).show();
     }
 
     private void startHomeScreen() {

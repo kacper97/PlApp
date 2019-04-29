@@ -85,7 +85,7 @@ public class ImageActivity extends AppCompatActivity {
     }
 
     private void openImagesView() {
-        Intent intent = new Intent(this,ImageView.class);
+        Intent intent = new Intent(this, ie.wit.poland.activities.ImageView.class);
         startActivity(intent);
     }
 
