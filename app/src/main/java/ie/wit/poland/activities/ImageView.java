@@ -22,7 +22,7 @@ import java.util.List;
 import ie.wit.poland.R;
 import ie.wit.poland.models.Image;
 
-public class ImageView extends AppCompatActivity {
+public class ImageView extends AppCompatActivity implements ImageAdapter.OnItemClickListener {
 
     private RecyclerView mRecyclerView;
     private ImageAdapter mAdapter;
@@ -58,14 +58,27 @@ public class ImageView extends AppCompatActivity {
                 mAdapter = new ImageAdapter(ImageView.this, mImages);
 
                 mRecyclerView.setAdapter(mAdapter);
+
+                mAdapter.setOnItemClickListener(ImageView.this);
+
                 mProgressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 FancyToast.makeText(ImageView.this,databaseError.getMessage(), Toast.LENGTH_LONG,FancyToast.ERROR,true).show();;
-                mProgressBar.setVisibility(View.VISIBLEg);
+                mProgressBar.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        FancyToast.makeText(this,"Image clicked, at postiion " + position, Toast.LENGTH_LONG ,FancyToast.INFO,true).show();
+    }
+
+    @Override
+    public void onDeleteClick(int position) {
+
     }
 }
