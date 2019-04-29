@@ -9,11 +9,14 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.ArrayList;
@@ -27,15 +30,20 @@ public class ImageView extends AppCompatActivity implements ImageAdapter.OnItemC
     private RecyclerView mRecyclerView;
     private ImageAdapter mAdapter;
     private DatabaseReference mDatabaseRef;
+    private FirebaseStorage mStorage;
     private ProgressBar mProgressBar;
 
+    private ValueEventListener mDBListener;
+
     private List<Image> mImages;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_view);
 
-        mRecyclerView  = findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true); //quicker
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -43,30 +51,38 @@ public class ImageView extends AppCompatActivity implements ImageAdapter.OnItemC
 
         mImages = new ArrayList<>();
 
+        mAdapter = new ImageAdapter(ImageView.this, mImages);
+
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(ImageView.this);
+
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("images");
 
-        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+        mStorage = FirebaseStorage.getInstance();
+
+
+        mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                mImages.clear(); // to avoid duplicates
+
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Image image = postSnapshot.getValue(Image.class);
+                    Image image = postSnapshot.getValue(Image.class); // get key
+
+                    image.setKey(postSnapshot.getKey()); // unique key to delete entry
+
                     mImages.add(image);
                 }
-
-
-                // Adapter
-                mAdapter = new ImageAdapter(ImageView.this, mImages);
-
-                mRecyclerView.setAdapter(mAdapter);
-
-                mAdapter.setOnItemClickListener(ImageView.this);
-
+                mAdapter.notifyDataSetChanged();
                 mProgressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                FancyToast.makeText(ImageView.this,databaseError.getMessage(), Toast.LENGTH_LONG,FancyToast.ERROR,true).show();;
+                FancyToast.makeText(ImageView.this, databaseError.getMessage(), Toast.LENGTH_LONG, FancyToast.ERROR, true).show();
+                ;
                 mProgressBar.setVisibility(View.VISIBLE);
             }
         });
@@ -74,11 +90,31 @@ public class ImageView extends AppCompatActivity implements ImageAdapter.OnItemC
 
     @Override
     public void onItemClick(int position) {
-        FancyToast.makeText(this,"Image clicked, at postiion " + position, Toast.LENGTH_LONG ,FancyToast.INFO,true).show();
+        FancyToast.makeText(this, "Image clicked, at postiion " + position, Toast.LENGTH_LONG, FancyToast.INFO, true).show();
+    }
+
+    @Override
+    public void OnDestroy(){
+        super.onDestroy();
+        mDatabaseRef.removeEventListener(mDBListener);
     }
 
     @Override
     public void onDeleteClick(int position) {
+        Image selectedItem = mImages.get(position);
+        final String selectedKey = selectedItem.getKey();
 
+
+        StorageReference imageRef = mStorage.getReferenceFromUrl(selectedItem.getImageUrl());
+        imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                mDatabaseRef.child(selectedKey).removeValue(); // to make sure it wont have a database entry if deleted from storage
+                FancyToast.makeText(ImageView.this, "Image deleted successfully", Toast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
+            }
+        });
     }
+
+
 }
+
