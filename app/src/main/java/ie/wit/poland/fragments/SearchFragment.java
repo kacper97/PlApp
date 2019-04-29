@@ -115,6 +115,9 @@ View v;
             else if (selected.equals("Cheapest")){
                 landmarkFilter.setFilter("cheapest");
             }
+            else if (selected.equals("Alphabetically")){
+                landmarkFilter.setFilter("alphabetical");
+            }
         String filterText = ((SearchView)getActivity()
                 .findViewById(R.id.searchView)).getQuery().toString();
 

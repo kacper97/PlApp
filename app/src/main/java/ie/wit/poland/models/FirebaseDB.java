@@ -212,4 +212,9 @@ public class FirebaseDB {
     }
 
 
+    public Query getAlphabetical() {
+        Query query = mFirebaseDatabase.child("user-landmarks").child(mFBUserId)
+                .orderByChild("landmarkName");
+        return query;
+    }
 }
