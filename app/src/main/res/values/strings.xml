@@ -80,7 +80,8 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="title_map">Polands Landmark Map</string>
-    <string name="google_maps_key">AIzaSyCczaNzxL8xbEMr-EZS7XUFBvOMbZeFHMw</string>
     <string name="title_activity_maps">Map</string>
     <string name="disconnect_button">Detach account</string>
+    <string name="upload">Upload Image</string>
+
 </resources>

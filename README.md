@@ -13,7 +13,7 @@ Polish landmarks is a mobile app connected to firebase, allowing users to do sev
 - User can search a landmark
 - User can delete one or more landmarks
 - User can add to favourites
-
+- Only Add works in Firebase
 
 # Features Assignment 2
 
@@ -26,10 +26,12 @@ Polish landmarks is a mobile app connected to firebase, allowing users to do sev
 - User can add onto the firebase list
 - User can delete from the firebase list
 - User can see where the landmark is on the google maps api
+- User can see Favourites
 - User can sign in with Google
 - Fancy Toast added as external API
 - Recycler and Card View added
 - Additional UI Features
 - Image using Picasso Library
+- Searching extended by 3 methods
 
 References : DDrohan.github.io/ 

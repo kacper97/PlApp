@@ -6,5 +6,6 @@
         <item>\> 3\* Rating</item>
         <item>Cheapest</item>
         <item>Alphabetically</item>
+        <item>By Rating</item>
     </string-array>
 </resources>

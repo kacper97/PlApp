@@ -102,7 +102,7 @@ public class FirebaseDB {
     public Query getAllLandmarks()
     {
         Query query = mFirebaseDatabase.child("user-landmarks").child(mFBUserId)
-                .orderByChild("rating");
+                .orderByChild("latitude");
 
         return query;
     }
@@ -215,6 +215,12 @@ public class FirebaseDB {
     public Query getAlphabetical() {
         Query query = mFirebaseDatabase.child("user-landmarks").child(mFBUserId)
                 .orderByChild("landmarkName");
+        return query;
+    }
+
+    public Query getRatingHighest() {
+        Query query = mFirebaseDatabase.child("user-landmarks").child(mFBUserId)
+                .orderByChild("ratingFacility");
         return query;
     }
 }

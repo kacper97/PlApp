@@ -80,7 +80,7 @@ public class SearchFragment extends LandmarkFragment
             @Override
             public boolean onQueryTextChange(String s) {
                 if (TextUtils.isEmpty(s)) {
-                       //listView.clearTextFilter();
+                       listView.clearTextFilter();
                 } else {
                         listView.setFilterText(s);
                         landmarkFilter.filter(s);
@@ -117,6 +117,9 @@ public class SearchFragment extends LandmarkFragment
             }
             else if (selected.equals("Alphabetically")){
                 landmarkFilter.setFilter("alphabetical");
+            }
+            else if (selected.equals("By Rating")){
+                landmarkFilter.setFilter("by");
             }
         String filterText = ((SearchView)getActivity()
                 .findViewById(R.id.searchView)).getQuery().toString();

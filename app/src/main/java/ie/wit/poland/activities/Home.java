@@ -143,10 +143,6 @@ public class Home extends AppCompatActivity
             ft.replace(R.id.homeFrame, fragment);
             ft.addToBackStack(null);
             ft.commit();
-
-        } else if (id == R.id.nav_images) {
-            startActivity(new Intent(this,Image.class));
-
         } else if (id == R.id.nav_map) {
             fragment = MapsFragment.newInstance();
             ft.replace(R.id.homeFrame, fragment);

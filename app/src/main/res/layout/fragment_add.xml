@@ -15,7 +15,7 @@
 
             <TextView
                 android:id="@+id/addName"
-                android:layout_width="127dp"
+                android:layout_width="match_parent"
                 android:layout_height="36dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="20dp"
@@ -27,7 +27,7 @@
 
             <EditText
                 android:id="@+id/addLandmarkName"
-                android:layout_width="240dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="7dp"
@@ -38,7 +38,7 @@
 
             <TextView
                 android:id="@+id/addLandmarkDescription"
-                android:layout_width="127dp"
+                android:layout_width="match_parent"
                 android:layout_height="36dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="10dp"
@@ -50,7 +50,7 @@
 
             <EditText
                 android:id="@+id/addDescription"
-                android:layout_width="240dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="7dp"
@@ -61,7 +61,7 @@
 
             <TextView
                 android:id="@+id/addPrice"
-                android:layout_width="127dp"
+                android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="4dp"
@@ -73,7 +73,7 @@
 
             <EditText
                 android:id="@+id/addLandmarkPrice"
-                android:layout_width="240dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="4dp"
@@ -85,7 +85,7 @@
 
             <TextView
                 android:id="@+id/addLocation"
-                android:layout_width="127dp"
+                android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="4dp"
@@ -98,7 +98,7 @@
 
             <EditText
                 android:id="@+id/addLandmarkLocation"
-                android:layout_width="240dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginEnd="7dp"
@@ -109,7 +109,7 @@
 
             <TextView
                 android:id="@+id/addRatingLandmark"
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="36dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="1dp"
@@ -121,7 +121,7 @@
 
             <RatingBar
                 android:id="@+id/addRatingBarLandmark"
-                android:layout_width="240dp"
+                android:layout_width="match_parent"
                 android:layout_height="43dp"
                 android:layout_marginStart="-2dp"
                 android:layout_marginEnd="4dp"
@@ -131,7 +131,7 @@
 
             <TextView
                 android:id="@+id/addRatingFacilitiesLbl"
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="29dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="1dp"
@@ -143,7 +143,7 @@
 
             <RatingBar
                 android:id="@+id/addRatingBarFacilities"
-                android:layout_width="240dp"
+                android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:layout_marginStart="-2dp"
                 android:layout_marginTop="8dp"
@@ -164,7 +164,7 @@
 
             <RatingBar
                 android:id="@+id/addRatingBarTransport"
-                android:layout_width="240dp"
+                android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_marginStart="-2dp"
                 android:layout_marginTop="8dp"
@@ -174,7 +174,7 @@
 
             <TextView
                 android:id="@+id/addDate"
-                android:layout_width="127dp"
+                android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="2dp"
@@ -186,7 +186,7 @@
 
             <EditText
                 android:id="@+id/addLandmarkDate"
-                android:layout_width="240dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="7dp"
@@ -208,7 +208,7 @@
 
             <Button
                 android:id="@+id/addAnImage"
-                android:layout_width="78dp"
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
@@ -216,20 +216,30 @@
                 android:layout_marginBottom="8dp"
                 android:background="@color/colorFontOffWhite"
                 android:onClick="addImage"
-                android:text="@string/addImageBtn"
-             />
+                android:text="@string/addImageBtn" />
+
+            <Button
+                android:id="@+id/uploadImage"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorFontOffWhite"
+                android:onClick="uploadImage"
+                android:text="@string/upload" />
 
             <Button
                 android:id="@+id/addALandmarkBtn"
-                android:layout_width="78dp"
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="4dp"
                 android:background="@color/colorFontOffWhite"
-                android:text="@string/addALandmarkBtn"
-                />
+                android:text="@string/addALandmarkBtn" />
 
             <TextView
                 android:id="@+id/addfooter"

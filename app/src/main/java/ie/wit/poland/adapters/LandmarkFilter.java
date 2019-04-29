@@ -46,6 +46,10 @@ public class LandmarkFilter extends Filter {
                 } else if (filterText.equals("alphabetical")){
                     query = fragment.app.FirebaseDB.getAlphabetical();
                 }
+                // by rating
+                else if (filterText.equals("by")){
+                    query = fragment.app.FirebaseDB.getRatingHighest();
+                }
             }
         results.values = query;
 

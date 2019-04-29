@@ -34,8 +34,7 @@ import ie.wit.poland.models.Landmark;
 public class AddFragment extends Fragment implements OnMapReadyCallback ,View.OnClickListener {
     private String landmarkName, landmarkDescription, location, dateVisited;
     private double price, ratingLandmark, ratingTransport, ratingFacility;
-    private Button save;
-    private TextView    titleBar;
+    private Button save, addAnImage, uploadImage;
     private EditText name, description, priceAdult, date, locate;
     private RatingBar rateLandmark, rateTransport, rateFacility;
     private LandmarkApp app = LandmarkApp.getInstance();
@@ -68,6 +67,8 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
         rateFacility = v.findViewById(R.id.addRatingBarFacilities);
         locate = v.findViewById(R.id.addLandmarkLocation);
         save = v.findViewById(R.id.addALandmarkBtn);
+        addAnImage = v.findViewById(R.id.addAnImage);
+        uploadImage = v.findViewById(R.id.uploadImage);
         save.setOnClickListener(this);
 
         return v;
@@ -98,7 +99,6 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
             FancyToast.makeText(
                     this.getActivity(),"Added Successfully", Toast.LENGTH_LONG,FancyToast.INFO,true).show();
             startActivity(new Intent(this.getActivity(), Home.class));
-            //resetFields();
         } else
             FancyToast.makeText(
                     this.getActivity(),
@@ -123,16 +123,6 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.logoapp)));
     }
 
-    private void resetFields() {
-        name.setText("");
-        description.setText("");
-        priceAdult.setText("");
-        rateLandmark.setRating(1);
-        rateFacility.setRating(1);
-        rateTransport.setRating(1);
-        name.requestFocus();
-        name.setFocusable(true);
-    }
 
     private String getAddressFromLocation( Location location ) {
         Geocoder geocoder = new Geocoder(getActivity());
@@ -150,6 +140,14 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
         }
 
         return strAddress;
+    }
+
+    public void addImage(View v){
+
+    }
+
+    public void uploadImage(View v){
+
     }
 
 }
