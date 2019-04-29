@@ -193,8 +193,7 @@
                 android:layout_marginBottom="13dp"
                 android:ems="10"
                 android:hint="@string/hintDate"
-                android:inputType="date"
-      />
+                android:inputType="date|datetime" />
 
             <fragment
                 android:id="@+id/addmap"
