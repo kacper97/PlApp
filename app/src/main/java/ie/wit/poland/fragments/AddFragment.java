@@ -122,7 +122,7 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
                     .position(new LatLng(l.marker.coords.latitude, l.marker.coords.longitude))
                     .title(l.landmarkName + " €" + l.price)
                     .snippet(l.landmarkName + " " + l.location)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.logoapp)));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.logoappsmall)));
     }
 
 

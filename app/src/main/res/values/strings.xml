@@ -42,7 +42,7 @@
     <string name="emptyMessageLbl">You have no Landmarks\'s added!</string>
     <string name="deleteLandmarksLbl">Delete Landmark</string>
     <!-- Descriptors of add -->
-    <string name="addALandmark"> Add a Landmark:</string>
+    <string name="addALandmark"> Add a Landmark</string>
     <string name="landmarkLocation">Location:</string>
     <string name="landmarkPrice">Price for adult:</string>
     <string name="landmarkRating">Rate Landmark:</string>

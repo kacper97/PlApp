@@ -241,6 +241,8 @@ public class MapsFragment extends SupportMapFragment implements
         if (checkPermission()) {
             if (app.mCurrentLocation != null) {
                 FancyToast.makeText(getActivity(), "GPS location was found!", Toast.LENGTH_SHORT,FancyToast.INFO,false).show();
+                app.mCurrentLocation.setLatitude(51.9194);
+                app.mCurrentLocation.setLongitude(19.1451);
             } else {
                 FancyToast.makeText(getActivity(), "Current location was null, Setting Default Values!", Toast.LENGTH_SHORT,FancyToast.WARNING,true).show();
                 app.mCurrentLocation = new Location("Poland  Default ");
@@ -288,7 +290,7 @@ public class MapsFragment extends SupportMapFragment implements
                     .position(new LatLng(l.marker.coords.latitude, l.marker.coords.longitude))
                     .title(l.landmarkName + " €" + l.price)
                     .snippet(l.landmarkName + " " + l.location)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.logoapp)));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.logoappsmall)));
     }
 
     @Override
