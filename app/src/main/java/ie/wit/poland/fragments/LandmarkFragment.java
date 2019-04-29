@@ -37,9 +37,8 @@ public class LandmarkFragment  extends Fragment implements AdapterView.OnItemCli
 {
     protected static LandmarkListAdapter listAdapter;
     protected         ListView 			listView;
-    protected LandmarkFilter landmarkFilter;
+    protected           LandmarkFilter landmarkFilter;
     public            boolean             favourites = false;
-    protected         TextView            titleBar;
     protected         SwipeRefreshLayout  mSwipeRefreshLayout;
     public            Query                 query;
 

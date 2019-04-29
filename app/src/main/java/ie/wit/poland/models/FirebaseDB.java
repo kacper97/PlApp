@@ -189,7 +189,7 @@ public class FirebaseDB {
     public Query nameFilter(String s)
     {
         Query query = mFirebaseDatabase.child("user-landmarks").child(mFBUserId)
-                .orderByChild("name").startAt(s).endAt(s+"\uf8ff");
+                .orderByChild("landmarkName").startAt(s).endAt(s+"\uf8ff");
 
         return query;
     }

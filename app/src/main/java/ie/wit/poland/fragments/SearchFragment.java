@@ -28,7 +28,7 @@ public class SearchFragment extends LandmarkFragment
         implements AdapterView.OnItemSelectedListener{
 
     String selected;
-View v;
+    View v;
     SearchView searchView;
 
     public SearchFragment() {
@@ -78,12 +78,12 @@ View v;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                if (TextUtils.isEmpty(newText)) {
-//                    listView.clearTextFilter();
+            public boolean onQueryTextChange(String s) {
+                if (TextUtils.isEmpty(s)) {
+                       //listView.clearTextFilter();
                 } else {
-                        listView.setFilterText(newText);
-                        landmarkFilter.filter(newText);
+                        listView.setFilterText(s);
+                        landmarkFilter.filter(s);
                 }
                 return true;
             }
@@ -141,4 +141,12 @@ View v;
     public void deleteLandmarks(ActionMode actionMode) {
         super.deleteLandmarks(actionMode);
         checkSelected(selected);}
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        landmarkFilter = new LandmarkFilter(query,"all",listAdapter,this);
+    }
+
 }
