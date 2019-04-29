@@ -53,7 +53,7 @@ public class MapsFragment extends SupportMapFragment implements
     private long                        UPDATE_INTERVAL = 5000; /* 5 secs */
     private long                        FASTEST_INTERVAL = 1000; /* 1 sec */
     private GoogleMap                   mMap;
-    private float                       zoom = 13f;
+    private float                       zoom = 1;
 
     public LandmarkApp app = LandmarkApp    .getInstance();
 
@@ -254,7 +254,7 @@ public class MapsFragment extends SupportMapFragment implements
     }
 
     private void initCamera(Location location) {
-        if (zoom != 13f && zoom != mMap.getCameraPosition().zoom)
+        if (zoom != 1 && zoom != mMap.getCameraPosition().zoom)
             zoom = mMap.getCameraPosition().zoom;
 
         CameraPosition position = CameraPosition.builder()

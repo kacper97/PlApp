@@ -20,7 +20,7 @@ public class LandmarkItem {
     {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.landmarkrow, parent, false);
+        view = inflater.inflate(R.layout.landmarkcardview, parent, false);
         view.setTag(landmark.landmarkId);
 
         updateControls(landmark);

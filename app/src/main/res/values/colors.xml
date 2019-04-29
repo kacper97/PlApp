@@ -7,4 +7,5 @@
     <color name="colorFontOffWhite">#f7f7f7</color>
     <color name="colorFontBlack">#000000</color>
     <color name="colorMultiDelete">#e76c80</color>
+    <color name="colorCardShadow">#1616c8</color>
 </resources>

@@ -101,8 +101,10 @@ public class AddFragment extends Fragment implements OnMapReadyCallback ,View.On
                     app.mCurrentLocation.getLatitude(),app.mCurrentLocation.getLongitude());
 
             app.FirebaseDB.addLandmark(l);
-            //startActivity(new Intent(this.getActivity(), Home.class));
-            resetFields();
+            FancyToast.makeText(
+                    this.getActivity(),"Added Successfully", Toast.LENGTH_LONG,FancyToast.INFO,true).show();
+            startActivity(new Intent(this.getActivity(), Home.class));
+            //resetFields();
         } else
             FancyToast.makeText(
                     this.getActivity(),
