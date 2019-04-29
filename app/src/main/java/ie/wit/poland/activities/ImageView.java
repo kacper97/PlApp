@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +27,7 @@ public class ImageView extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ImageAdapter mAdapter;
     private DatabaseReference mDatabaseRef;
+    private ProgressBar mProgressBar;
 
     private List<Image> mImages;
     @Override
@@ -35,6 +38,8 @@ public class ImageView extends AppCompatActivity {
         mRecyclerView  = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true); //quicker
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mProgressBar = findViewById(R.id.progress_bar);
 
         mImages = new ArrayList<>();
 
@@ -53,11 +58,13 @@ public class ImageView extends AppCompatActivity {
                 mAdapter = new ImageAdapter(ImageView.this, mImages);
 
                 mRecyclerView.setAdapter(mAdapter);
+                mProgressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 FancyToast.makeText(ImageView.this,databaseError.getMessage(), Toast.LENGTH_LONG,FancyToast.ERROR,true).show();;
+                mProgressBar.setVisibility(View.VISIBLEg);
             }
         });
     }
